@@ -1,3 +1,12 @@
+<script>
+    import { fillTracks } from "../../modules/slider";
+    import { onMount } from "svelte";
+
+    onMount(() => {
+        fillTracks();
+    });
+</script>
+
 <!-- svelte-ignore a11y-invalid-attribute -->
 <a role="button" href="#" class="btns" color="accent">Start sorting!</a>
 <button class="btns" color="primary">Generate new array</button>

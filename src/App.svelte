@@ -1,6 +1,16 @@
 <script>
     import Navbar from "./components/Navbar.svelte";
+
     import SortingSidePanel from "./components/sorting/SidePanel.svelte";
+    import SortingDashboard from "./components/sorting/Dashboard.svelte";
+
+    import { ActiveVisualizer } from "./stores/active-visualizer";
+
+    import { Router, Route } from "svelte-routing";
+
+    function setV(v /* string */) {
+        ActiveVisualizer.set(v);
+    }
 </script>
 
 <Navbar />
@@ -8,7 +18,15 @@
     <!-- svelte-ignore a11y-unknown-role -->
     <aside role="Tools Panel" id="tools-panel">
         <nav>
-            <SortingSidePanel />
+            {#if $ActiveVisualizer == "sorting"}
+                <SortingSidePanel />
+            {:else if $ActiveVisualizer == "searching"}
+                <button color="primary">Search now</button>
+            {:else if $ActiveVisualizer == "searching"}
+                <button color="primary">Find the path</button>
+            {:else}
+                <h3>Tutorial</h3>
+            {/if}
         </nav>
         <!-- svelte-ignore a11y-unknown-role -->
         <!-- svelte-ignore a11y-invalid-attribute -->
@@ -17,6 +35,9 @@
     </aside>
     <main>
         <a href="#tools-panel" role="button" id="open-panel">OPEN PANEL</a>
+        <Router>
+            <Route path="sorting"><SortingDashboard /></Route>
+        </Router>
     </main>
 </div>
 
@@ -60,7 +81,7 @@
     }
     #close-panel {
         position: fixed;
-        will-change: visibility;
+        will-change: display;
         width: calc(100vw - var(--panel-width));
         height: 100%;
         transform: translateX(var(--panel-width));
