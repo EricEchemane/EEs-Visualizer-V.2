@@ -5,6 +5,9 @@
     import { createEventDispatcher } from "svelte";
 
     export let indexNumber;
+    export let color;
+    export let algo;
+
     const dispatch = createEventDispatcher();
 
     $: nums = $Sorting.array;
@@ -15,16 +18,16 @@
     }
 </script>
 
-<section in:slide out:fly>
+<section in:slide out:fly={{ x: 500 }}>
     <div class="options">
         <select
             name="algo"
             id="algo"
             bind:value={$Sorting.windows[indexNumber].algo.name}
         >
-            {#each SortingAlgortihms as { name, algo }, i (name)}
-                <option value={name}>
-                    {name}
+            {#each SortingAlgortihms as algo}
+                <option value={algo.name}>
+                    {algo.name}
                 </option>
             {/each}
         </select>
@@ -48,8 +51,7 @@
         {#each nums as num, i (i)}
             <div
                 class="bar {barClass}"
-                style="background-color: {$Sorting.windows[indexNumber]
-                    .color}; height: {num}px"
+                style="background-color: {color}; height: {num}px"
             />
         {/each}
     </div>

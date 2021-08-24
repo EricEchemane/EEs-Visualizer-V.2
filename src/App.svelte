@@ -89,6 +89,7 @@
         z-index: 1;
         max-width: 100%;
         overflow-y: auto;
+        overflow-x: hidden;
         max-height: 100%;
         scroll-behavior: smooth;
     }

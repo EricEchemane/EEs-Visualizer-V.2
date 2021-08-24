@@ -19,11 +19,12 @@
 
     async function addWindow() {
         Sorting.addWindow();
+
         await tick();
         styleSelect();
         setTimeout(() => {
             scrollTheMainToBottom();
-        }, 200);
+        }, 300);
     }
 
     function scrollTheMainToBottom() {

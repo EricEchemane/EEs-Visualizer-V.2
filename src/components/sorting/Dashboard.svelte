@@ -12,8 +12,6 @@
         ActiveVisualizer.set("");
     });
 
-    $: windows = $Sorting.windows;
-
     function handleRemove(event) {
         Sorting.removeOne(event.detail);
     }
@@ -23,10 +21,10 @@
     <h2>Sorting Dashboard</h2>
     <!-- this is the container of the bars -->
 
-    {#each windows as window, i (i)}
-        <SortingWindows indexNumber={i} on:remove={handleRemove} />
+    {#each $Sorting.windows as window, i (window)}
+        <SortingWindows indexNumber={i} on:remove={handleRemove} {...window} />
     {:else}
-        <p transiton:fade>Add window !</p>
+        <p in:fade={{ duration: 500 }}>Add window !</p>
     {/each}
 </main>
 
