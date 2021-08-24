@@ -51,6 +51,7 @@
         --panel-width: 300px;
     }
     #open-panel {
+        margin: 1rem;
         display: none;
     }
     #main-parts-container {
@@ -77,7 +78,11 @@
         height: 100%;
     }
     main {
-        padding: 1rem;
+        padding: 1.5rem 1rem;
+        z-index: 1;
+    }
+    aside {
+        z-index: 2;
     }
     #close-panel {
         position: fixed;
@@ -111,5 +116,6 @@
         display: flex;
         flex-direction: column;
         gap: 1ch;
+        background-color: inherit;
     }
 </style>

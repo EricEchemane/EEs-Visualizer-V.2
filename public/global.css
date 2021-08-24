@@ -455,13 +455,12 @@ select:hover {
 button,
 a[role="button"] {
     width: auto;
-    padding: 0.25rem 0.4rem;
+    padding: 0.5rem !important;
     outline: none;
     border: none;
     border-radius: 0.25rem;
     font-size: 1rem;
     width: auto;
-    padding: 0.25rem 0.4rem;
     outline: none;
     border: none;
     border-radius: 0.25rem;
@@ -508,7 +507,7 @@ a[role="button"]:active {
 button[color="primary"],
 a[role="button"][color="primary"] {
     width: auto;
-    padding: 0.25rem 0.4rem;
+    padding: 0.5rem !important;
     outline: none;
     border: none;
     border-radius: 0.25rem;
@@ -531,7 +530,7 @@ a[role="button"][color="primary"]:hover {
 button[color="accent"],
 a[role="button"][color="accent"] {
     width: auto;
-    padding: 0.2rem 0.4rem;
+    padding: 0.5rem !important;
     outline: none;
     border: none;
     border-radius: 0.25rem;

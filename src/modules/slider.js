@@ -18,4 +18,10 @@ export function fillTracks() {
             );
         });
     });
+
+    const selects = document.querySelectorAll("select");
+    selects.forEach((s) => {
+        s.style.backgroundImage = `url(./assets/down-white.svg)`;
+        s.style.backgroundRepeat = `no-repeat`;
+    });
 }
