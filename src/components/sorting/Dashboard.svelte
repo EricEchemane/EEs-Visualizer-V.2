@@ -13,6 +13,10 @@
     });
 
     $: windows = $Sorting.windows;
+
+    function handleRemove(event) {
+        Sorting.removeOne(event.detail);
+    }
 </script>
 
 <main transition:fade>
@@ -20,7 +24,9 @@
     <!-- this is the container of the bars -->
 
     {#each windows as window, i (i)}
-        <SortingWindows indexNumber={i} />
+        <SortingWindows indexNumber={i} on:remove={handleRemove} />
+    {:else}
+        <p transiton:fade>Add window !</p>
     {/each}
 </main>
 

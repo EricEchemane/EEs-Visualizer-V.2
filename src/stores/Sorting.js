@@ -26,10 +26,24 @@ function create() {
         addWindow: () => {
             update((prev) => {
                 const windows = [...prev.windows];
+
+                if (windows.length == 7) return prev;
+
                 windows.push({
                     algo: SortingAlgortihms[windows.length],
                     color: "#00FFFF",
                 });
+                return {
+                    ...prev,
+                    windows: windows,
+                };
+            });
+        },
+        removeOne: (indexNumber) => {
+            update((prev) => {
+                const windows = prev.windows.filter(
+                    (prev, index) => index != indexNumber
+                );
                 return {
                     ...prev,
                     windows: windows,

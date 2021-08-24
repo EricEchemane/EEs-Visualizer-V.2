@@ -1,36 +1,46 @@
 <script>
     import { Sorting } from "../../stores/Sorting";
     import { SortingAlgortihms } from "../../modules/SortingAlgorithms";
-    import { slide } from "svelte/transition";
+    import { slide, fly } from "svelte/transition";
+    import { createEventDispatcher } from "svelte";
 
     export let indexNumber;
+    const dispatch = createEventDispatcher();
 
     $: nums = $Sorting.array;
     $: barClass = `bar-${indexNumber}`;
+
+    function removeWindow() {
+        dispatch("remove", indexNumber);
+    }
 </script>
 
-<section transition:slide>
+<section in:slide out:fly>
     <div class="options">
         <select
             name="algo"
             id="algo"
             bind:value={$Sorting.windows[indexNumber].algo.name}
         >
-            {#each SortingAlgortihms as { name, algo }, i (i)}
+            {#each SortingAlgortihms as { name, algo }, i (name)}
                 <option value={name}>
                     {name}
                 </option>
             {/each}
         </select>
 
-        <div>
-            <label for="color">Color </label>
+        <div style="display: flex; align-items: center; gap: .7rem;">
+            <label for="color">Choose color </label>
             <input
                 type="color"
                 id="color"
                 bind:value={$Sorting.windows[indexNumber].color}
             />
         </div>
+        <div style="flex: 1 1 auto;" />
+        <button title="Close this window" on:click={removeWindow}
+            >&times;</button
+        >
     </div>
 
     <div class="bars-container">
@@ -47,7 +57,7 @@
 
 <style>
     section {
-        background-image: linear-gradient(var(--surface2), rgba(0, 0, 0, 0.2));
+        background-image: linear-gradient(var(--surface2), var(--surface1));
         border-radius: 0.5rem;
         overflow: hidden;
         box-shadow: 0 0 0 0.5px var(--text3);
@@ -56,11 +66,11 @@
     }
     .options {
         display: flex;
-        gap: 1rem;
+        gap: 1.5rem;
         align-items: center;
     }
     .bars-container {
-        height: 220px;
+        height: 230px;
         display: flex;
         align-items: flex-end;
         margin: auto;

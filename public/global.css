@@ -382,6 +382,24 @@ input[type="range"][color="accent"] {
     --thumb-color: var(--accent);
 }
 
+input[type="color"] {
+    -webkit-appearance: none;
+    border: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 0 3px var(--text3);
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+    border-radius: 50%;
+    padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+}
+
 select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -619,4 +637,22 @@ nav .links a:hover {
 
 #desktop-nav a:hover {
     text-decoration: none;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--surface3);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--accent);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
