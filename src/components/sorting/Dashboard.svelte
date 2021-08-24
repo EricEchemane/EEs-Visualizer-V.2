@@ -3,6 +3,7 @@
     import { ActiveVisualizer } from "../../stores/active-visualizer";
     import { Sorting } from "../../stores/Sorting";
     import SortingWindows from "./Window.svelte";
+    import { fade } from "svelte/transition";
 
     onMount(() => {
         ActiveVisualizer.set("sorting");
@@ -14,7 +15,7 @@
     $: windows = $Sorting.windows;
 </script>
 
-<main>
+<main transition:fade>
     <h2>Sorting Dashboard</h2>
     <!-- this is the container of the bars -->
 

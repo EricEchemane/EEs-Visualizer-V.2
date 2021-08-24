@@ -33,7 +33,7 @@
         <!-- svelte-ignore a11y-missing-content -->
         <a href="#" role="Close Panel" id="close-panel" title="Close panel" />
     </aside>
-    <main>
+    <main id="main">
         <a href="#tools-panel" role="button" id="open-panel">OPEN PANEL</a>
         <Router>
             <Route path="sorting"><SortingDashboard /></Route>
@@ -57,8 +57,7 @@
     #main-parts-container {
         display: grid;
         grid: [stack] 1fr / min-content [stack] 1fr;
-        overflow-y: auto;
-        max-height: 100%;
+        overflow: hidden;
     }
     @media (max-width: 900px) {
         aside,
@@ -90,6 +89,8 @@
         z-index: 1;
         max-width: 100%;
         overflow-y: auto;
+        max-height: 100%;
+        scroll-behavior: smooth;
     }
     aside {
         z-index: 2;

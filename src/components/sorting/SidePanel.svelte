@@ -2,6 +2,7 @@
     import { fillTracks, styleSelect } from "../../modules/slider";
     import { onMount, tick } from "svelte";
     import { Sorting } from "../../stores/Sorting";
+    import { fade } from "svelte/transition";
 
     let arraySize = 100;
     let devWidth;
@@ -20,6 +21,14 @@
         Sorting.addWindow();
         await tick();
         styleSelect();
+        setTimeout(() => {
+            scrollTheMainToBottom();
+        }, 200);
+    }
+
+    function scrollTheMainToBottom() {
+        const main = document.getElementById("main");
+        main.scrollTo(0, main.scrollHeight);
     }
 
     onMount(() => {
@@ -30,19 +39,19 @@
 
 <svelte:window bind:innerWidth={devWidth} />
 
-<button class="btns" color="accent">
+<button class="btns" color="accent" transition:fade>
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#">Start Sorting!</a>
 </button>
-<button class="btns" color="primary" on:click={addWindow}>
+<button class="btns" color="primary" on:click={addWindow} transition:fade>
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#" style="color: var(--surface4);">Add window</a>
 </button>
-<button class="btns" color="primary" on:click={generate}
+<button class="btns" color="primary" on:click={generate} transition:fade
     >Generate new array</button
 >
 
-<div title="Change array size" class="not-btn">
+<div title="Change array size" class="not-btn" transition:fade>
     <label for="array-size-slider"> Array size </label>
     <input
         type="range"
@@ -55,7 +64,7 @@
         id="array-size-slider"
     />
 </div>
-<div title="Change sorting speed" class="not-btn">
+<div title="Change sorting speed" class="not-btn" transition:fade>
     <label for="sorting-speed-slider"> Speed </label>
     <input
         type="range"
@@ -67,7 +76,7 @@
         id="sorting-speed-slider"
     />
 </div>
-<div title="Change sorting order" class="not-btn">
+<div title="Change sorting order" class="not-btn" transition:fade>
     <label for="sort-order">Ascending</label>
     <input type="checkbox" role="switch" bind:checked={$Sorting.ascending} />
 </div>

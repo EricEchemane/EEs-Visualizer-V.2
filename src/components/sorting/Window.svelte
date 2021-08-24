@@ -1,6 +1,7 @@
 <script>
     import { Sorting } from "../../stores/Sorting";
     import { SortingAlgortihms } from "../../modules/SortingAlgorithms";
+    import { slide } from "svelte/transition";
 
     export let indexNumber;
 
@@ -8,7 +9,7 @@
     $: barClass = `bar-${indexNumber}`;
 </script>
 
-<section>
+<section transition:slide>
     <div class="options">
         <select
             name="algo"
