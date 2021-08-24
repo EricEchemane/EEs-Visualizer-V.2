@@ -1,9 +1,12 @@
 <script>
-    import { fillTracks } from "../../modules/slider";
-    import { onMount } from "svelte";
+    import { fillTracks, styleSelect } from "../../modules/slider";
+    import { onMount, tick } from "svelte";
     import { Sorting } from "../../stores/Sorting";
 
     let arraySize = 100;
+    let devWidth;
+
+    $: arrayMaxSize = devWidth <= 500 ? 100 : 200;
 
     $: {
         Sorting.generateNewArray(arraySize);
@@ -13,16 +16,25 @@
         Sorting.generateNewArray(arraySize);
     }
 
+    async function addWindow() {
+        Sorting.addWindow();
+        await tick();
+        styleSelect();
+    }
+
     onMount(() => {
         fillTracks();
+        styleSelect();
     });
 </script>
+
+<svelte:window bind:innerWidth={devWidth} />
 
 <button class="btns" color="accent">
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#">Start Sorting!</a>
 </button>
-<button class="btns" color="primary"> Add window </button>
+<button class="btns" color="primary" on:click={addWindow}> Add window </button>
 <button class="btns" color="primary" on:click={generate}
     >Generate new array</button
 >
@@ -34,7 +46,7 @@
         role="slider"
         min="10"
         step="1"
-        max="200"
+        max={arrayMaxSize}
         bind:value={arraySize}
         color="accent"
         id="array-size-slider"

@@ -51,12 +51,14 @@
         --panel-width: 300px;
     }
     #open-panel {
-        margin: 1rem;
+        margin: 2rem 1rem;
         display: none;
     }
     #main-parts-container {
         display: grid;
         grid: [stack] 1fr / min-content [stack] 1fr;
+        overflow-y: auto;
+        max-height: 100%;
     }
     @media (max-width: 900px) {
         aside,
@@ -70,7 +72,13 @@
             display: block;
         }
         #open-panel {
-            display: inline;
+            display: inline-block;
+            margin: 1rem;
+        }
+    }
+    @media (max-width: 500px) {
+        #open-panel {
+            margin: 1rem 0rem;
         }
     }
     aside,
@@ -80,6 +88,8 @@
     main {
         padding: 1.5rem 1rem;
         z-index: 1;
+        max-width: 100%;
+        overflow-y: auto;
     }
     aside {
         z-index: 2;

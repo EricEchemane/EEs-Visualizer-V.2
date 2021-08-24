@@ -27,6 +27,11 @@
     main {
         padding: 1rem;
     }
+    @media (max-width: 500px) {
+        main {
+            padding: 0;
+        }
+    }
     h2 {
         font-weight: 500;
         margin-bottom: 2rem;

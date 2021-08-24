@@ -18,7 +18,9 @@ export function fillTracks() {
             );
         });
     });
+}
 
+export function styleSelect() {
     const selects = document.querySelectorAll("select");
     selects.forEach((s) => {
         s.style.backgroundImage = `url(./assets/down-white.svg)`;

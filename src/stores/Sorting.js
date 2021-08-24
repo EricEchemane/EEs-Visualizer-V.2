@@ -11,8 +11,7 @@ function create() {
         windows: [
             {
                 algo: SortingAlgortihms[0],
-                color: "cyan",
-                // timer: () => {}
+                color: "#00FFFF",
             },
         ],
     });
@@ -23,6 +22,19 @@ function create() {
         set,
         generateNewArray: (size) => {
             update((prev) => ({ ...prev, array: generateArray(size) }));
+        },
+        addWindow: () => {
+            update((prev) => {
+                const windows = [...prev.windows];
+                windows.push({
+                    algo: SortingAlgortihms[windows.length],
+                    color: "cyan",
+                });
+                return {
+                    ...prev,
+                    windows: windows,
+                };
+            });
         },
     };
 }
