@@ -5,6 +5,7 @@
     export let indexNumber;
 
     $: nums = $Sorting.array;
+    $: barClass = `bar-${indexNumber}`;
 </script>
 
 <section>
@@ -35,7 +36,7 @@
         <!--  -->
         {#each nums as num, i (i)}
             <div
-                class="bar"
+                class="bar {barClass}"
                 style="background-color: {$Sorting.windows[indexNumber]
                     .color}; height: {num}px"
             />
@@ -44,17 +45,18 @@
 </section>
 
 <style>
-    .options {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-    }
     section {
         background-image: linear-gradient(var(--surface2), rgba(0, 0, 0, 0.2));
         border-radius: 0.5rem;
         overflow: hidden;
         box-shadow: 0 0 0 0.5px var(--text3);
         padding: 1rem;
+        margin: 2rem 0;
+    }
+    .options {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
     }
     .bars-container {
         height: 220px;

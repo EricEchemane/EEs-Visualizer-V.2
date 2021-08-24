@@ -34,7 +34,10 @@
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#">Start Sorting!</a>
 </button>
-<button class="btns" color="primary" on:click={addWindow}> Add window </button>
+<button class="btns" color="primary" on:click={addWindow}>
+    <!-- svelte-ignore a11y-invalid-attribute -->
+    <a href="#" style="color: var(--surface4);">Add window</a>
+</button>
 <button class="btns" color="primary" on:click={generate}
     >Generate new array</button
 >

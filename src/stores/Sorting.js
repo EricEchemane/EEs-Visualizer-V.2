@@ -28,7 +28,7 @@ function create() {
                 const windows = [...prev.windows];
                 windows.push({
                     algo: SortingAlgortihms[windows.length],
-                    color: "cyan",
+                    color: "#00FFFF",
                 });
                 return {
                     ...prev,

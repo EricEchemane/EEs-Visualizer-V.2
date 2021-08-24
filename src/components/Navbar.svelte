@@ -41,7 +41,7 @@
 <style>
     nav {
         background-color: var(--surface3);
-        padding: 0.5rem;
+        padding: 0.5rem 1rem;
     }
     #desktop-nav {
         display: flex;
