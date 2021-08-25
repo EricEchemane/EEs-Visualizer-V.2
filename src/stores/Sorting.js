@@ -1,17 +1,12 @@
 import { writable } from "svelte/store";
-import { generateArray } from "../modules/numberGenerator";
-
-import { SortingAlgortihms } from "../modules/SortingAlgorithms";
-
-function algoIsUsed(algoName /* string */, windowsArray /* window[] */) {
-    for (let i = 0; i < windowsArray.length; i++) {
-        const window = windowsArray[i];
-        if (window.algo.name == algoName) return true;
-    }
-    return false;
-}
 
 function create() {
+    import { generateArray } from "../modules/numberGenerator";
+
+    import { SortingAlgortihms } from "../modules/SortingAlgorithms";
+    import { algoIsUsed } from "../modules/algoIsUsed-identifier";
+    import { generateRandomHexColor } from "../modules/randomColorGenerator";
+
     const { subscribe, set, update } = writable({
         array: [],
         speed: 9,
@@ -53,7 +48,7 @@ function create() {
 
                 windows.push({
                     algo: nextAlgo,
-                    color: "#00FFFF",
+                    color: generateRandomHexColor(),
                 });
 
                 return {
