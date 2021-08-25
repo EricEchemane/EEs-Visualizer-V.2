@@ -4,11 +4,11 @@ export const SortingAlgortihms = [
         algo: () => {},
     },
     {
-        name: "Heap Sort",
+        name: "Quick Sort",
         algo: () => {},
     },
     {
-        name: "Quick Sort",
+        name: "Heap Sort",
         algo: () => {},
     },
     {

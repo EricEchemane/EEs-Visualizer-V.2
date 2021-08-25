@@ -23,10 +23,10 @@
         <select
             name="algo"
             id="algo"
-            bind:value={$Sorting.windows[indexNumber].algo.name}
+            bind:value={$Sorting.windows[indexNumber].algo}
         >
-            {#each SortingAlgortihms as algo}
-                <option value={algo.name}>
+            {#each SortingAlgortihms as algo (algo)}
+                <option value={algo}>
                     {algo.name}
                 </option>
             {/each}

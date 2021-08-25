@@ -656,3 +656,7 @@ nav .links a:hover {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+a.activeRoute {
+    color: var(--brand) !important;
+}

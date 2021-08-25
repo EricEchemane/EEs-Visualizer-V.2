@@ -3,6 +3,14 @@ import { generateArray } from "../modules/numberGenerator";
 
 import { SortingAlgortihms } from "../modules/SortingAlgorithms";
 
+function algoIsUsed(algoName /* string */, windowsArray /* window[] */) {
+    for (let i = 0; i < windowsArray.length; i++) {
+        const window = windowsArray[i];
+        if (window.algo.name == algoName) return true;
+    }
+    return false;
+}
+
 function create() {
     const { subscribe, set, update } = writable({
         array: [],
@@ -29,22 +37,22 @@ function create() {
 
                 if (windows.length == 7) return prev;
 
-                /* the current index that is available */
-                let x;
+                let nextAlgo;
+                const algo = [...SortingAlgortihms];
 
-                for (let i = 0; i < SortingAlgortihms.length; i++) {
-                    const used = windows.find((w) => {
-                        console.log(w.algo.name);
-                        return w.algo.name == SortingAlgortihms[i].name;
-                    });
-                    if (!used) {
-                        x = i;
+                for (let i = 0; i < algo.length; i++) {
+                    const currentAlgo = algo[i];
+                    /* check if currentAlgo is present in the windows
+                    if present: continue
+                    else current algo will be use then break */
+                    if (!algoIsUsed(currentAlgo.name, windows)) {
+                        nextAlgo = currentAlgo;
                         break;
                     }
                 }
 
                 windows.push({
-                    algo: SortingAlgortihms[x],
+                    algo: nextAlgo,
                     color: "#00FFFF",
                 });
 

@@ -1,22 +1,38 @@
 <script>
-    import { Link, Router } from "svelte-routing";
+    import { Router, link } from "svelte-routing";
+    import { ActiveVisualizer } from "../stores/active-visualizer";
 </script>
 
 <nav>
     <div id="desktop-nav">
         <Router>
-            <Link to="/">
+            <a href="/" use:link>
                 <h3>
                     EEs Visualizer <span class="animate-text-gradient">2.0</span
                     >
                 </h3>
-            </Link>
+            </a>
         </Router>
         <Router>
             <div class="links" id="desktop-links">
-                <Link to="sorting">Sorting</Link>
-                <Link to="searching">Searching</Link>
-                <Link to="path-finding">Path Finding</Link>
+                <a
+                    use:link
+                    href="sorting"
+                    class:activeRoute={$ActiveVisualizer == "sorting"}
+                    >Sorting</a
+                >
+                <a
+                    use:link
+                    href="searching"
+                    class:activeRoute={$ActiveVisualizer == "searching"}
+                    >Searching</a
+                >
+                <a
+                    use:link
+                    href="path-finding"
+                    class:activeRoute={$ActiveVisualizer == "path-finding"}
+                    >Path Finding</a
+                >
             </div>
         </Router>
         <a href="https://github.com/ericechemane">
@@ -30,9 +46,14 @@
     <div id="mobile-nav">
         <Router>
             <div class="links">
-                <Link to="sorting">Sorting</Link>
-                <Link to="searching">Searching</Link>
-                <Link to="path-finding">Path Finding</Link>
+                <a
+                    use:link
+                    href="sorting"
+                    class:activeRoute={$ActiveVisualizer == "sorting"}
+                    >Sorting</a
+                >
+                <a use:link href="searching">Searching</a>
+                <a use:link href="path-finding">Path Finding</a>
             </div>
         </Router>
     </div>
