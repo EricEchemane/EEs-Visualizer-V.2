@@ -3,6 +3,7 @@
 
     import SortingSidePanel from "./components/sorting/SidePanel.svelte";
     import SortingDashboard from "./components/sorting/Dashboard.svelte";
+    import UserInputFeedback from "./components/user-input-feedback.svelte";
 
     import { ActiveVisualizer } from "./stores/active-visualizer";
 
@@ -30,12 +31,13 @@
         <a href="#" role="Close Panel" id="close-panel" title="Close panel" />
     </aside>
     <main id="main">
-        <a href="#tools-panel" role="button" id="open-panel">OPEN PANEL</a>
+        <a href="#tools-panel" id="open-panel" role="button">OPEN PANEL</a>
         <Router>
             <Route path="sorting"><SortingDashboard /></Route>
         </Router>
     </main>
 </div>
+<UserInputFeedback />
 
 <style>
     :global(body) {
@@ -49,6 +51,13 @@
     #open-panel {
         margin: 2rem 1rem;
         display: none;
+        position: fixed;
+        right: 1rem;
+        bottom: 0.5rem;
+        z-index: 2;
+    }
+    #open-panel:hover {
+        text-decoration: none;
     }
     #main-parts-container {
         display: grid;
@@ -88,6 +97,7 @@
         overflow-x: hidden;
         max-height: 100%;
         scroll-behavior: smooth;
+        position: relative;
     }
     aside {
         z-index: 2;

@@ -13,9 +13,15 @@
     }
 </script>
 
-<section in:slide out:fly={{ x: 500 }}>
+<section in:slide out:fly={{ x: 300 }}>
     <div class="options">
-        <select name="algo" id="algo" bind:value={window.algo}>
+        <select
+            name="algo"
+            id="algo"
+            bind:value={window.algo}
+            title="Choose which sorting algorithm to use in this window. Current: {window
+                .algo.name}"
+        >
             {#each SortingAlgortihms as algo (algo)}
                 <option value={algo}>
                     {algo.name}
@@ -23,10 +29,13 @@
             {/each}
         </select>
 
-        <div style="display: flex; align-items: center; gap: .7rem;">
-            <label for="color">Choose color </label>
-            <input type="color" id="color" bind:value={window.color} />
-        </div>
+        <input
+            type="color"
+            id="color"
+            bind:value={window.color}
+            title="Choose color"
+        />
+
         <div style="flex: 1 1 auto;" />
         <button title="Close this window" on:click={removeWindow}
             >&times;</button

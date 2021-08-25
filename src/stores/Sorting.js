@@ -1,7 +1,7 @@
 import { writable } from "svelte/store";
 import { generateArray } from "../modules/numberGenerator";
 
-import { SortingAlgortihms } from "../modules/SortingAlgorithms";
+import { SortingAlgortihms as algos } from "../modules/SortingAlgorithms";
 import { algoIsUsed } from "../modules/algoIsUsed-identifier";
 import { generateRandomHexColor } from "../modules/randomColorGenerator";
 
@@ -12,7 +12,7 @@ function create() {
         ascending: true,
         windows: [
             {
-                algo: SortingAlgortihms[0],
+                algo: algos[0],
                 color: "#00FFFF",
             },
         ],
@@ -27,65 +27,37 @@ function create() {
         },
         addWindow: () => {
             update((prev) => {
-                const windows = [...prev.windows];
+                /* limit the activeWindows base on how many algorithms */
+                const activeWindows = [...prev.windows];
 
-                if (windows.length == 7) return prev;
+                if (activeWindows.length == algos.length) return prev;
 
-                let nextAlgo;
-                const algo = [...SortingAlgortihms];
+                let nextAlgo; /* will be assigned to new window */
 
-                for (let i = 0; i < algo.length; i++) {
-                    const currentAlgo = algo[i];
-                    /* check if currentAlgo is present in the windows
-                    if present: continue
-                    else current algo will be use then break */
-                    if (!algoIsUsed(currentAlgo.name, windows)) {
+                /* Responsible in assigning algorithm to new window */
+                for (let i = 0; i < algos.length; i++) {
+                    const currentAlgo = algos[i];
+                    /* if the currentAlgo is not used, use it */
+                    if (!algoIsUsed(currentAlgo.name, activeWindows)) {
                         nextAlgo = currentAlgo;
                         break;
                     }
                 }
 
-                windows.push({
+                activeWindows.push({
                     algo: nextAlgo,
                     color: generateRandomHexColor(),
                 });
 
                 return {
                     ...prev,
-                    windows: windows,
+                    windows: activeWindows,
                 };
             });
         },
         removeOne: (window) => {
             update((prev) => {
-                if (prev.windows.length == 1) return prev;
                 const windows = prev.windows.filter((w) => w != window);
-                return {
-                    ...prev,
-                    windows: windows,
-                };
-            });
-        },
-        updateColor: (color, index) => {
-            update((prev) => {
-                const windows = [...prev.windows];
-                for (let i = 0; i <= index; i++) {
-                    if (i == index) {
-                        windows[i].color = color;
-                        break;
-                    }
-                }
-                return {
-                    ...prev,
-                    windows: windows,
-                };
-            });
-        },
-        changeAlgo: (index, algoName) => {
-            const algo = SortingAlgortihms.filter((a) => a.name == algoName);
-            update((prev) => {
-                const windows = [...prev.windows];
-                windows[index].algo = algo;
                 return {
                     ...prev,
                     windows: windows,

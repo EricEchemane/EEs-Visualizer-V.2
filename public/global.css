@@ -406,6 +406,7 @@ select {
     appearance: none;
     background-size: 10%;
     background-position: 95% 55%;
+    cursor: pointer;
     /* NOTE: 
         the dropdown icon is not visible 
         until you assign it in javascript

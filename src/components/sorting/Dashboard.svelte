@@ -13,14 +13,18 @@
     });
 </script>
 
-<main transition:fade>
+<main transition:fade={{ duration: 100 }}>
     <h2>Sorting Dashboard</h2>
-    <!-- this is the container of the bars -->
 
     {#each $Sorting.windows as window, i (window)}
         <SortingWindows {window} />
     {:else}
-        <p in:fade={{ duration: 500 }}>Add window !</p>
+        <h1
+            style="text-align: center; margin: auto;"
+            in:fade={{ duration: 500 }}
+        >
+            Add Window !
+        </h1>
     {/each}
 </main>
 
