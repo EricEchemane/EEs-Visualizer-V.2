@@ -11,10 +11,6 @@
     onDestroy(() => {
         ActiveVisualizer.set("");
     });
-
-    function handleRemove(event) {
-        Sorting.removeOne(event.detail);
-    }
 </script>
 
 <main transition:fade>
@@ -22,7 +18,7 @@
     <!-- this is the container of the bars -->
 
     {#each $Sorting.windows as window, i (window)}
-        <SortingWindows on:remove={handleRemove} {window} />
+        <SortingWindows {window} />
     {:else}
         <p in:fade={{ duration: 500 }}>Add window !</p>
     {/each}

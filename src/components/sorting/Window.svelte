@@ -2,17 +2,14 @@
     import { Sorting } from "../../stores/Sorting";
     import { SortingAlgortihms } from "../../modules/SortingAlgorithms";
     import { slide, fly } from "svelte/transition";
-    import { createEventDispatcher } from "svelte";
 
     export let window;
-
-    const dispatch = createEventDispatcher();
 
     $: nums = $Sorting.array;
     $: barClass = `bar-sorting-${window.algo.name.trim()}`;
 
     function removeWindow() {
-        dispatch("remove", window);
+        Sorting.removeOne(window);
     }
 </script>
 
