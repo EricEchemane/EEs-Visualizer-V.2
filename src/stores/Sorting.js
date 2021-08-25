@@ -1,12 +1,11 @@
 import { writable } from "svelte/store";
+import { generateArray } from "../modules/numberGenerator";
+
+import { SortingAlgortihms } from "../modules/SortingAlgorithms";
+import { algoIsUsed } from "../modules/algoIsUsed-identifier";
+import { generateRandomHexColor } from "../modules/randomColorGenerator";
 
 function create() {
-    import { generateArray } from "../modules/numberGenerator";
-
-    import { SortingAlgortihms } from "../modules/SortingAlgorithms";
-    import { algoIsUsed } from "../modules/algoIsUsed-identifier";
-    import { generateRandomHexColor } from "../modules/randomColorGenerator";
-
     const { subscribe, set, update } = writable({
         array: [],
         speed: 9,
@@ -57,13 +56,10 @@ function create() {
                 };
             });
         },
-        removeOne: (indexNumber) => {
+        removeOne: (window) => {
             update((prev) => {
                 if (prev.windows.length == 1) return prev;
-                const windows = [];
-                for (let i = 0; i < prev.windows.length; i++) {
-                    if (i != indexNumber) windows.push(prev.windows[i]);
-                }
+                const windows = prev.windows.filter((w) => w != window);
                 return {
                     ...prev,
                     windows: windows,

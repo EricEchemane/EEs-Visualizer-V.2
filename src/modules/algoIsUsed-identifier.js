@@ -1,7 +1,6 @@
-/* checks if an algo is present on the array */
-export function algoIsUsed(algoName /* string */, array) {
-    for (let i = 0; i < array.length; i++) {
-        const window = array[i];
+export function algoIsUsed(algoName /* string */, windowsArray /* window[] */) {
+    for (let i = 0; i < windowsArray.length; i++) {
+        const window = windowsArray[i];
         if (window.algo.name == algoName) return true;
     }
     return false;

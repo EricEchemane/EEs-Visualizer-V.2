@@ -22,7 +22,7 @@
     <!-- this is the container of the bars -->
 
     {#each $Sorting.windows as window, i (window)}
-        <SortingWindows indexNumber={i} on:remove={handleRemove} {...window} />
+        <SortingWindows on:remove={handleRemove} {window} />
     {:else}
         <p in:fade={{ duration: 500 }}>Add window !</p>
     {/each}

@@ -7,10 +7,6 @@
     import { ActiveVisualizer } from "./stores/active-visualizer";
 
     import { Router, Route } from "svelte-routing";
-
-    function setV(v /* string */) {
-        ActiveVisualizer.set(v);
-    }
 </script>
 
 <Navbar />

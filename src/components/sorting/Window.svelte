@@ -4,27 +4,21 @@
     import { slide, fly } from "svelte/transition";
     import { createEventDispatcher } from "svelte";
 
-    export let indexNumber;
-    export let color;
-    export let algo;
+    export let window;
 
     const dispatch = createEventDispatcher();
 
     $: nums = $Sorting.array;
-    $: barClass = `bar-${indexNumber}`;
+    $: barClass = `bar-sorting-${window.algo.name.trim()}`;
 
     function removeWindow() {
-        dispatch("remove", indexNumber);
+        dispatch("remove", window);
     }
 </script>
 
 <section in:slide out:fly={{ x: 500 }}>
     <div class="options">
-        <select
-            name="algo"
-            id="algo"
-            bind:value={$Sorting.windows[indexNumber].algo}
-        >
+        <select name="algo" id="algo" bind:value={window.algo}>
             {#each SortingAlgortihms as algo (algo)}
                 <option value={algo}>
                     {algo.name}
@@ -34,11 +28,7 @@
 
         <div style="display: flex; align-items: center; gap: .7rem;">
             <label for="color">Choose color </label>
-            <input
-                type="color"
-                id="color"
-                bind:value={$Sorting.windows[indexNumber].color}
-            />
+            <input type="color" id="color" bind:value={window.color} />
         </div>
         <div style="flex: 1 1 auto;" />
         <button title="Close this window" on:click={removeWindow}
@@ -51,7 +41,7 @@
         {#each nums as num, i (i)}
             <div
                 class="bar {barClass}"
-                style="background-color: {color}; height: {num}px"
+                style="background-color: {window.color}; height: {num}px"
             />
         {/each}
     </div>

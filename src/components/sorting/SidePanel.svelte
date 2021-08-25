@@ -20,10 +20,6 @@
     async function addWindow() {
         Sorting.addWindow();
 
-        $Sorting.windows.forEach((w) => {
-            console.log(w.algo.name);
-        });
-
         await tick();
         styleSelect();
         setTimeout(() => {
