@@ -19,15 +19,6 @@
 1. Since we can have more than 1 windows, we will have an array of animation frames which is an *array of arrays*. 
 
 2. We will then create an array of set intervals for each animation frames.
-    ## The shape of intervals
-    - intervals = [
-        {
-            currentFramePosition: number, // index of animation frames array
-            interval: setInterval(() => {
-                // logic for animation
-            }, 1100 - (speed * 100))
-        }
-    ]
 
 3. Pausing and resuming the animations
     - To pause the animation we just have to traverse the intervals array and clear the setintervals. But we can't resume the animations anymore.

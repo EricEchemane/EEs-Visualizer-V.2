@@ -1,30 +1,32 @@
+import { mergeSort } from '../components/sorting/algorithms/merge'
+
 export const SortingAlgortihms = [
     {
         name: "Merge Sort",
-        algo: () => {},
+        algo: mergeSort,
     },
     {
         name: "Quick Sort",
-        algo: () => {},
+        algo: mergeSort,
     },
     {
         name: "Heap Sort",
-        algo: () => {},
+        algo: mergeSort,
     },
     {
         name: "Shell Sort",
-        algo: () => {},
+        algo: mergeSort,
     },
     {
         name: "Insertion Sort",
-        algo: () => {},
+        algo: mergeSort,
     },
     {
         name: "Selection Sort",
-        algo: () => {},
+        algo: mergeSort,
     },
     {
         name: "Bubble Sort",
-        algo: () => {},
+        algo: mergeSort,
     },
 ];

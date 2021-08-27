@@ -4,14 +4,91 @@
     import { Sorting } from "../../stores/Sorting";
     import { fade } from "svelte/transition";
     import { UserInputFeedback } from "../../stores/user-input-feedback";
+    import { changeColor, changeHeight } from '../../modules/animation-functions'
 
     let arraySize = 100;
+    let paused;
+
+    /* Array of objects */
+    let animationFrames = [];
+    let iterators = {};
+    let animationIntervals = {};
 
     $: {
         /* These expressions will run every time arraySize is changed */
         Sorting.generateNewArray(arraySize);
     }
 
+    async function animate() {
+        
+        await tick();
+
+        for (let i = 0; i < animationFrames.length; i++) {
+            const frames = animationFrames[i];
+            const algoName = $Sorting.windows[i].algo.name;
+            const color = $Sorting.windows[i].color;
+            const className = `bar-sorting-${algoName}`;
+            const barNodes = document.getElementsByClassName(className);
+
+            iterators[i] = iterators[i] ? iterators[i]: 0;
+            animationIntervals[i] = [];
+                
+            let interval = setInterval(() => {
+                const type = frames[iterators[i]].type;
+                const v1 = frames[iterators[i]].value1;
+                const v2 = frames[iterators[i]].value2;
+
+                if(type == 'change-height') {
+                    if(barNodes[v1]) changeHeight(v2, barNodes[v1]);
+                }
+                else {
+                    const invert = type == 'invert-color';
+                    if(barNodes[v1]) changeColor(color, barNodes[v1], invert);
+                    if(barNodes[v2]) changeColor(color, barNodes[v2], invert);
+                }
+
+                iterators[i] += 1;
+
+            }, 1000 - ($Sorting.speed * 110));
+
+            animationIntervals[i].push(interval);
+
+        }
+
+        for (let i = 0; i < animationFrames.length; i++) {
+            const frames = animationFrames[i];
+            setTimeout(() => {
+                clearIntervals(animationIntervals[i]);
+            }, (1000 - ($Sorting.speed * 110)) * frames.length);
+        }
+    }
+
+    function clearIntervals(intervals) {
+        intervals.forEach(interval => clearInterval(interval));
+    }
+
+    function stopAnimations() {
+        for(const key in animationIntervals) {
+            if(animationIntervals[key]) clearIntervals(animationIntervals[key]);
+        }
+    }
+
+    async function pause(){
+        await tick();
+        if(!paused) stopAnimations();
+        else animate();
+    }
+
+    function sort() {
+        animationFrames = [];
+        animationIntervals = {};
+        iterators = {};
+        $Sorting.windows.forEach(each => {
+            animationFrames.push(each.algo.algo($Sorting.array, $Sorting.ascending))
+        })
+        animate();
+    }
+    /* ==================================================================== */
     function hideFeedback() {
         setTimeout(() => UserInputFeedback.hide(), 1000);
     }
@@ -63,7 +140,7 @@
     });
 </script>
 
-<button class="btns" color="accent" transition:fade>
+<button class="btns" color="accent" transition:fade on:click={sort}>
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#" style="width: 100%; height: 100%; display: block;"
         >Start Sorting!</a
@@ -102,7 +179,6 @@
         type="range"
         role="slider"
         min="1"
-        step=".1"
         max="10"
         bind:value={$Sorting.speed}
         on:change={hideFeedback}
@@ -120,14 +196,15 @@
         on:input={onSortOrderInput}
     />
 </div>
-<div title="Pause sorting" class="not-btn" transition:fade disabled>
+<div title="Pause sorting" class="not-btn" transition:fade>
     <label for="pause-sorting">Pause</label>
     <input
         id="pause-sorting"
         type="checkbox"
         role="switch"
         color="accent"
-        disabled
+        on:click={pause}
+        bind:checked={paused}
     />
 </div>
 
