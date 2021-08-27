@@ -22,7 +22,8 @@
         padding: 0.5rem 1rem;
         box-shadow: 0 0 24px 8px rgba(0, 0, 0, 0.3);
         border-radius: 0.25rem;
-        background-color: var(--surface4);
+        background-color: var(--text1);
+        color: var(--surface1);
         z-index: 10;
         font-weight: 500;
     }

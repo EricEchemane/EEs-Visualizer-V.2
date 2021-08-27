@@ -65,7 +65,7 @@
 
 <button class="btns" color="accent" transition:fade>
     <!-- svelte-ignore a11y-invalid-attribute -->
-    <a href="#" style="width: 100%; heih: 100%; display: block;"
+    <a href="#" style="width: 100%; height: 100%; display: block;"
         >Start Sorting!</a
     >
 </button>
@@ -73,7 +73,7 @@
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a
         href="#"
-        style="color: var(--surface4); width: 100%; heih: 100%; display: block;"
+        style="color: var(--surface4); width: 100%; height: 100%; display: block;"
         >Add window</a
     >
 </button>
