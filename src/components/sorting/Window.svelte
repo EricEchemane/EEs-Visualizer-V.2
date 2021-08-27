@@ -6,6 +6,7 @@
     export let window;
 
     $: nums = $Sorting.array;
+    /* This class will be used to target the bar nodes in each window */
     $: barClass = `bar-sorting-${window.algo.name.trim()}`;
 
     function removeWindow() {
