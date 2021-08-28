@@ -145,17 +145,17 @@
         />
     </div>
 </a>
-    <div title="Pause sorting" class="not-btn" transition:fade>
-    <label for="pause-sorting">Pause</label>
-    <input
-        id="pause-sorting"
-        type="checkbox"
-        role="switch"
-        color="accent"
-        on:click={togglePause}
-        disabled={!playing}
-    />
-</div>
+
+<button class="btns" color={paused ? "primary":"accent"} on:click={togglePause} transition:fade disabled={!playing}>
+    <!-- svelte-ignore a11y-invalid-attribute -->
+    <a
+        href="#"
+        style="color: { paused ? 'var(--surface4)':''}; width: 100%; height: 100%; display: block;"
+        >{!paused ? 'Pause':'Play'}</a
+    >
+</button>
+
+
 
 <style>
     *[disabled] {

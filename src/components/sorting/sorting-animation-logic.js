@@ -8,8 +8,11 @@ let animationFrames;
 
 let speed;
 
-let iterators = {}; /* mapping for tracking and caching the current animation position */
-let animationIntervals = {}; /* map: key: indexNumber, value: array of setIntervals */
+/* mapping for caching the current animation position */
+let iterators = {}; 
+
+/* mapping: key: indexNumber, value: array of setIntervals */
+let animationIntervals = {}; 
 
 export function recieveAnimationData(
     windowsAnimationFrames,
@@ -41,14 +44,14 @@ export function animate() {
             const type = Frames[iterators[i]].type;
             const v1 = Frames[iterators[i]].value1;
             const v2 = Frames[iterators[i]].value2;
+            const node1 = barNodes[v1];
+            const node2 = barNodes[v2];
 
-            if(type == 'change-height') {
-                if(barNodes[v1]) changeHeight(v2, barNodes[v1]);
-            }
+            if(type == 'change-height' && node1) changeHeight(v2, node1);
             else {
                 const invert = type == 'invert-color';
-                if(barNodes[v1]) changeColor(color, barNodes[v1], invert);
-                if(barNodes[v2]) changeColor(color, barNodes[v2], invert);
+                if(node1) changeColor(color, node1, invert);
+                if(node2) changeColor(color, node2, invert);
             }
 
             iterators[i] += 1;
