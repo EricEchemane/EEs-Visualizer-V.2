@@ -3,7 +3,7 @@ let descending;
 let arr;
 
 export function mergeSort(array, _descending) {
-    descending = !_descending;
+    descending = _descending;
     animationFrames = [];
     arr = [...array];
 

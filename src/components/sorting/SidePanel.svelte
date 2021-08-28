@@ -14,8 +14,11 @@
 
     function sort() {
         const animationFrames = [];
+        const array = $Sorting.array;
+        const ascending = !$Sorting.ascending;
+        
         $Sorting.windows.forEach(window => {
-            const frames = window.algo.algo($Sorting.array, !$Sorting.ascending);
+            const frames = window.algo.algo(array, ascending);
             animationFrames.push(frames);
         })
         recieveAnimationData(animationFrames, $Sorting);

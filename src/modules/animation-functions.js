@@ -1,6 +1,6 @@
 import invert from 'invert-color';
 
-export function changeColor(color, barNodeElement /* reference to bar node */, invertColor = false) {
+export function changeColor(color, barNodeElement /* reference to bar node */, invertColor ) {
     color = invertColor ? invert(color) : color;
     barNodeElement.style.transition = '0ms';
     barNodeElement.style.backgroundColor = color;
