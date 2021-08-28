@@ -10,10 +10,3 @@ export function changeHeight(newHeight, barNodeElement) {
     barNodeElement.style.transition = '200ms ease';
     barNodeElement.style.height = `${newHeight}px`;
 }
-
-// export function animate(
-//     windows,
-//     windowsAnimationFrames
-//     ) {
-
-// }
