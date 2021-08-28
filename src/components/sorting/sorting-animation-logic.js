@@ -1,5 +1,5 @@
 import { changeColor, changeHeight } from '../../modules/animation-functions';
-
+import { AnimationObserver } from '../../stores/animations-observer'
 /* the array containing information about each window color and algo */
 let windowsArray; 
 
@@ -33,6 +33,10 @@ export function animate() {
         /* this is the animation frame for each window */
         const Frames = animationFrames[i];
 
+        /* this line is important to prevent finished
+        animation from animating while others are not yet finished */
+        if(iterators[i] == Frames.length) continue;
+
         iterators[i] = iterators[i] | 0;
         animationIntervals[i] = [];
 
@@ -61,6 +65,10 @@ export function animate() {
             if(iterators[i] == Frames.length) {
                 clearArrayOfIntervals(animationIntervals[i]);
                 iterators[i] = 0;
+
+                /* here it doesn't matter what type of data to push.
+                We just need to populate the array */
+                AnimationObserver.push({i:'done'});
             };
 
         }, 1000 - (speed * 110));

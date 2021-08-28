@@ -5,20 +5,28 @@
     import { fade } from "svelte/transition";
     import { UserInputFeedback } from "../../stores/user-input-feedback";
     import { recieveAnimationData, pause, animate } from './sorting-animation-logic';
+    import { AnimationObserver } from '../../stores/animations-observer'
 
     let arraySize = 100;
     let paused = false;
     let playing = false;
 
     /* These expressions will run every time arraySize is changed */
-    $: Sorting.generateNewArray(arraySize)
+    $: Sorting.generateNewArray(arraySize);
+    $: {
+        const completed = $AnimationObserver.length == $Sorting.windows.length;
+        if(completed) playing = false;
+    }
 
     function togglePause(){
         paused = !paused;
         paused ? pause() : animate();
+        UserInputFeedback.set(true, paused ? 'Paused':'Play');
+        setTimeout(() => UserInputFeedback.hide(), 1000);
     }
 
     function sort() {
+        AnimationObserver.set([]);
         playing = true;
         const animationFrames = [];
         const array = $Sorting.array;
@@ -107,7 +115,7 @@
         role="slider"
         min="10"
         step="1"
-        max="200"
+        max="150"
         bind:value={arraySize}
         on:change={hideFeedback}
         on:input={onSizeInput}
