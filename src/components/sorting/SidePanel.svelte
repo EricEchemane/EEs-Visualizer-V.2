@@ -4,6 +4,7 @@
     import { Sorting } from "../../stores/Sorting";
     import { fade } from "svelte/transition";
     import { UserInputFeedback } from "../../stores/user-input-feedback";
+    import { recieveAnimationData } from './sorting-animation-logic';
 
     let arraySize = 100;
     let paused;
@@ -12,7 +13,12 @@
     $: Sorting.generateNewArray(arraySize)
 
     function sort() {
-        alert('sort called')
+        const animationFrames = [];
+        $Sorting.windows.forEach(window => {
+            const frames = window.algo.algo($Sorting.array, !$Sorting.ascending);
+            animationFrames.push(frames);
+        })
+        recieveAnimationData(animationFrames, $Sorting);
     }
 
     function hideFeedback() {
