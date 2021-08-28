@@ -25,7 +25,7 @@ export function recieveAnimationData(
     animate();
 }
 
-function animate() {
+export function animate() {
     for (let i = 0; i < animationFrames.length; i++) {
         /* this is the animation frame for each window */
         const Frames = animationFrames[i];
@@ -55,7 +55,10 @@ function animate() {
 
             /* prevent from doing infinite.
             If the iterator is at the end of the array, stop it the animation */
-            if(iterators[i] == Frames.length) clearArrayOfIntervals(animationIntervals[i]);
+            if(iterators[i] == Frames.length) {
+                clearArrayOfIntervals(animationIntervals[i]);
+                iterators[i] = 0;
+            };
 
         }, 1000 - (speed * 110));
 
@@ -63,7 +66,12 @@ function animate() {
     }
 }
 
-
 function clearArrayOfIntervals(intervals) {
     intervals.forEach(interval => clearInterval(interval));
+}
+
+export function pause() {
+    for(const key in animationIntervals) {
+        clearArrayOfIntervals(animationIntervals[key]);
+    }
 }

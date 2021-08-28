@@ -4,15 +4,22 @@
     import { Sorting } from "../../stores/Sorting";
     import { fade } from "svelte/transition";
     import { UserInputFeedback } from "../../stores/user-input-feedback";
-    import { recieveAnimationData } from './sorting-animation-logic';
+    import { recieveAnimationData, pause, animate } from './sorting-animation-logic';
 
     let arraySize = 100;
-    let paused;
+    let paused = false;
+    let playing = false;
 
     /* These expressions will run every time arraySize is changed */
     $: Sorting.generateNewArray(arraySize)
 
+    function togglePause(){
+        paused = !paused;
+        paused ? pause() : animate();
+    }
+
     function sort() {
+        playing = true;
         const animationFrames = [];
         const array = $Sorting.array;
         const ascending = !$Sorting.ascending;
@@ -75,13 +82,13 @@
     });
 </script>
 
-<button class="btns" color="accent" transition:fade on:click={sort}>
+<button class="btns" color="accent" transition:fade on:click={sort} disabled={paused || playing}>
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#" style="width: 100%; height: 100%; display: block;"
         >Start Sorting!</a
     >
 </button>
-<button class="btns" color="primary" on:click={addWindow} transition:fade>
+<button class="btns" color="primary" on:click={addWindow} transition:fade disabled={playing}>
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a
         href="#"
@@ -89,7 +96,7 @@
         >Add window</a
     >
 </button>
-<button class="btns" color="primary" on:click={generate} transition:fade
+<button class="btns" color="primary" on:click={generate} transition:fade disabled={playing}
     >Generate new array</button
 >
 
@@ -104,6 +111,7 @@
         bind:value={arraySize}
         on:change={hideFeedback}
         on:input={onSizeInput}
+        disabled={playing}
         color="accent"
         id="array-size-slider"
     />
@@ -118,27 +126,34 @@
         bind:value={$Sorting.speed}
         on:change={hideFeedback}
         on:input={onSpeedInput}
+        disabled={playing}
         id="sorting-speed-slider"
     />
 </div>
+<!-- svelte-ignore a11y-invalid-attribute -->
+<a href="#">
 <div title="Change sorting order" class="not-btn" transition:fade>
     <label for="sort-order">Ascending</label>
+
     <input
-        id="sort-order"
+    id="sort-order"
         type="checkbox"
         role="switch"
         bind:checked={$Sorting.ascending}
         on:input={onSortOrderInput}
-    />
-</div>
-<div title="Pause sorting" class="not-btn" transition:fade>
+        disabled={playing}
+        />
+    </div>
+</a>
+    <div title="Pause sorting" class="not-btn" transition:fade>
     <label for="pause-sorting">Pause</label>
     <input
         id="pause-sorting"
         type="checkbox"
         role="switch"
         color="accent"
-        bind:checked={paused}
+        on:click={togglePause}
+        disabled={!playing}
     />
 </div>
 
