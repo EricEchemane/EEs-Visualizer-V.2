@@ -25,6 +25,7 @@
     function stopAndReset() {
         paused = false;
         playing = false;
+        disableCloseButtons(false);
         pause();
         resetTimers();
         stopTimers();

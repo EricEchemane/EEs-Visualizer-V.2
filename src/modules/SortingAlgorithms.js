@@ -1,4 +1,5 @@
 import { mergeSort } from '../components/sorting/algorithms/merge'
+import { bubbleSort } from '../components/sorting/algorithms/bubble'
 
 export const SortingAlgortihms = [
     {
@@ -27,6 +28,6 @@ export const SortingAlgortihms = [
     },
     {
         name: "Bubble Sort",
-        algo: mergeSort,
+        algo: bubbleSort,
     },
 ];

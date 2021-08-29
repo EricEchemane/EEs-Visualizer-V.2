@@ -4,6 +4,7 @@
     import { slide, fly } from "svelte/transition";
 
     export let window;
+
     let timer = "00:00:00";
     let mill_int = 0, sec_int = 0, min_int = 0;
     let mill = '00', sec = '00', min = '00';
@@ -22,7 +23,7 @@
         timer = "00:00:00";
     }
 
-    function startTimer(initialTime = null){
+    function startTimer(){
         stopTimer();
 
         timerInterval = setInterval(() => {
@@ -49,9 +50,7 @@
         },10);
     }
 
-    function removeWindow() {
-        Sorting.removeOne(window);
-    }
+    function removeWindow() { Sorting.removeOne(window); }
 </script>
 
 <section in:slide={{duration: 100}} out:fly={{ x: 300 }}>

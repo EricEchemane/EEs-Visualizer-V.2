@@ -46,13 +46,19 @@ export function animate() {
         const barNodes = document.getElementsByClassName(className);
         
         const interval = setInterval(() => {
-            const type = Frames[iterators[i]].type;
-            const v1 = Frames[iterators[i]].value1;
-            const v2 = Frames[iterators[i]].value2;
+            const type = Frames[iterators[i]]?.type;
+            const v1 = Frames[iterators[i]]?.value1;
+            const v2 = Frames[iterators[i]]?.value2;
             const node1 = barNodes[v1];
             const node2 = barNodes[v2];
 
-            if(type == 'change-height' && node1) changeHeight(v2, node1);
+            if(type == 'swap-height') {
+                const node1 = Frames[iterators[i]]?.node1;
+                const node2 = Frames[iterators[i]]?.node2;
+                if(barNodes[node1.index]) changeHeight(node1.height, barNodes[node1.index]);
+                if(barNodes[node2.index]) changeHeight(node2.height, barNodes[node2.index]);
+            }
+            else if(type == 'change-height' && node1) changeHeight(v2, node1);
             else {
                 const invert = type == 'invert-color';
                 if(node1) changeColor(color, node1, invert);
