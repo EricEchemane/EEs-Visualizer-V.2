@@ -15,7 +15,7 @@
     $: Sorting.generateNewArray(arraySize);
     $: {
         const completed = $AnimationObserver.length == $Sorting.windows.length;
-        if(completed) playing = false;
+        if(completed) playing = false;  
     }
 
     function togglePause(){
@@ -68,7 +68,6 @@
         scrollihg and styling the select drop down arrow */
         await tick();
 
-        styleSelect();
         setTimeout(() => {
             scrollTheMainToBottom();
         }, 300);
@@ -116,7 +115,7 @@
         step="1"
         max="150"
         bind:value={arraySize}
-        on:change={hideFeedback}
+        on:mouseleave={hideFeedback}
         on:input={onSizeInput}
         disabled={playing}
         color="accent"
@@ -130,8 +129,9 @@
         role="slider"
         min="1"
         max="10"
+        step=".1"
         bind:value={$Sorting.speed}
-        on:change={hideFeedback}
+        on:mouseleave={hideFeedback}
         on:input={onSpeedInput}
         disabled={playing}
         id="sorting-speed-slider"
@@ -166,7 +166,7 @@
 
 <style>
     *[disabled] {
-        opacity: 0.5;
+        opacity: 0.2;
         pointer-events: none;
     }
     button[color="accent"] > a {

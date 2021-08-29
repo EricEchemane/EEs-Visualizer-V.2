@@ -68,7 +68,7 @@ export function animate() {
 
                 /* here it doesn't matter what type of data to push.
                 We just need to populate the array */
-                AnimationObserver.push({i:'done'});
+                AnimationObserver.push(i);
             };
 
         }, 1000 - (speed * 110));

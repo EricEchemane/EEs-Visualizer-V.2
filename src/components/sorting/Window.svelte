@@ -44,6 +44,10 @@
         >
     </div>
 
+    <div class="timer">
+        00:00:00
+    </div>
+
     <div class="bars-container">
         <!--  -->
         {#each nums as num, i (i)}
@@ -56,6 +60,10 @@
 </section>  
 
 <style>
+    .timer {
+        margin-top: 1rem;
+        color: var(--text1);
+    }
     section {
         background-image: linear-gradient(var(--surface2), var(--surface1));
         border-radius: 0.5rem;
