@@ -29,6 +29,13 @@
             closeBtns.forEach(each => each.classList.remove('disabled'))
     }
 
+    function resetTimers() {
+        $Sorting.windows.forEach(each => {
+            const resetButtonId = `timer-reset-${each.algo.name}`;
+            document.getElementById(resetButtonId)?.click();
+        })
+    }
+
     function stopTimerOfFinishedAnimation() {
         $AnimationObserver.forEach(each => {
             const stopButtonId = `timer-stop-${each}`;
@@ -77,6 +84,7 @@
             animationFrames.push(frames);
         })
         recieveAnimationData(animationFrames, $Sorting);
+        resetTimers();
         startTimer();
     }
 

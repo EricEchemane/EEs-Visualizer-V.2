@@ -19,6 +19,7 @@
     function resetTimer() {
         mill_int = 0, sec_int = 0, min_int = 0;
         mill = '00', sec = '00', min = '00';
+        timer = "00:00:00";
     }
 
     function startTimer(initialTime = null){
