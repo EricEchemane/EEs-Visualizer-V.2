@@ -1,5 +1,5 @@
 <script>
-    import { fillTracks, styleSelect } from "../../modules/slider";
+    import { fillTracks } from "../../modules/slider";
     import { onMount, tick } from "svelte";
     import { Sorting } from "../../stores/Sorting";
     import { fade } from "svelte/transition";
@@ -85,7 +85,6 @@
         /* fillTracks() is needed when using a slider or input range
         so that the range track progress will react to changes */
 
-        styleSelect();
         UserInputFeedback.set(false, ``);
     });
 </script>

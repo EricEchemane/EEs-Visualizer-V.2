@@ -415,6 +415,7 @@ select {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+    background: url(./assets/down-white.svg) no-repeat;
     background-size: 10%;
     background-position: 95% 55%;
     cursor: pointer;

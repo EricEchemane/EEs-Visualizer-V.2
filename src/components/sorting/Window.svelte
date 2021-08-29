@@ -6,6 +6,7 @@
     export let window;
 
     $: nums = $Sorting.array;
+    
     /* This class will be used to target the bar nodes in each window */
     $: barClass = `bar-sorting-${window.algo.name}`;
 
@@ -38,7 +39,7 @@
         />
 
         <div style="flex: 1 1 auto;" />
-        <button title="Close this window" on:click={removeWindow}
+        <button class="close-window" title="Close this window" on:click={removeWindow}
             >&times;</button
         >
     </div>
@@ -52,14 +53,13 @@
             />
         {/each}
     </div>
-</section>
+</section>  
 
 <style>
     section {
         background-image: linear-gradient(var(--surface2), var(--surface1));
         border-radius: 0.5rem;
         overflow: hidden;
-        box-shadow: 0 0 0 0.5px var(--text3);
         padding: 1rem;
         margin: 2rem 0;
     }
@@ -79,5 +79,13 @@
         flex: 2 1 auto;
         margin: 1px;
         transition: 0.2s ease;
+    }
+    .close-window {
+        width: 1.7rem;
+        height: 1.7rem;
+        padding: 0 !important;
+        border-radius: 50%;
+        line-height: 0;
+        font-size: 1.5rem;
     }
 </style>
