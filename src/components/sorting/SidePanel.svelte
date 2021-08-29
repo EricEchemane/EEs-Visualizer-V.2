@@ -172,7 +172,7 @@
         role="slider"
         min="10"
         step="1"
-        max="150"
+        max="130"
         bind:value={arraySize}
         on:mouseleave={hideFeedback}
         on:input={onSizeInput}

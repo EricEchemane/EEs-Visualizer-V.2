@@ -2,8 +2,11 @@
     import { Sorting } from "../../stores/Sorting";
     import { SortingAlgortihms } from "../../modules/SortingAlgorithms";
     import { slide, fly } from "svelte/transition";
+    import { AnimationObserver } from '../../stores/animations-observer';
 
     export let window;
+
+    let innerWidth;
 
     let timer = "00:00:00";
     let mill_int = 0, sec_int = 0, min_int = 0;
@@ -24,6 +27,11 @@
     }
 
     function startTimer(){
+
+        /* check first if this window is already finished animating */
+        const x = $AnimationObserver.indexOf(window.algo.name);
+        if(x != -1) return;
+
         stopTimer();
 
         timerInterval = setInterval(() => {
@@ -53,6 +61,8 @@
     function removeWindow() { Sorting.removeOne(window); }
 </script>
 
+<svelte:window bind:innerWidth={innerWidth} />
+
 <section in:slide={{duration: 100}} out:fly={{ x: 300 }}>
     <!-- hidden buttons: These will be targeted in side panel -->
     <button on:click={startTimer} hidden id="timer-start-{window.algo.name}">Start</button>
@@ -81,13 +91,15 @@
             title="Choose color"
         />
 
+        <div class="timer" hidden={innerWidth <= 500}>
+            {timer}
+        </div>
+
         <div style="flex: 1 1 auto;" />
-        <button class="sort-close-window" title="Close this window" on:click={removeWindow}
-            >&times;</button
-        >
+        <button class="sort-close-window" title="Close this window" on:click={removeWindow}>&times;</button>
     </div>
 
-    <div class="timer">
+    <div class="timer" hidden={innerWidth > 500}>
         {timer}
     </div>
 

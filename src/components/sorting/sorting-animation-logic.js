@@ -30,6 +30,7 @@ export function recieveAnimationData(
 }
 
 export function animate() {
+
     for (let i = 0; i < animationFrames.length; i++) {
         /* this is the animation frame for each window */
         const Frames = animationFrames[i];
@@ -71,7 +72,6 @@ export function animate() {
             If the iterator is at the end of the array, stop it the animation */
             if(iterators[i] == Frames.length) {
                 clearArrayOfIntervals(animationIntervals[i]);
-                iterators[i] = 0;
 
                 /* here it doesn't matter what type of data to push.
                 We just need to populate the array */
