@@ -187,6 +187,7 @@
         max="130"
         bind:value={arraySize}
         on:mouseleave={hideFeedback}
+        on:change={hideFeedback}
         on:input={onSizeInput}
         disabled={playing}
         color="accent"
@@ -203,6 +204,7 @@
         step=".1"
         bind:value={$Sorting.speed}
         on:mouseleave={hideFeedback}
+        on:change={hideFeedback}
         on:input={onSpeedInput}
         disabled={playing}
         id="sorting-speed-slider" />
