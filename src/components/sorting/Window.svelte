@@ -54,7 +54,7 @@
     }
 </script>
 
-<section in:slide out:fly={{ x: 300 }}>
+<section in:slide={{duration: 100}} out:fly={{ x: 300 }}>
     <!-- hidden buttons: These will be targeted in side panel -->
     <button on:click={startTimer} hidden id="timer-start-{window.algo.name}">Start</button>
     <button on:click={stopTimer} hidden id="timer-stop-{window.algo.name}">Stop</button>

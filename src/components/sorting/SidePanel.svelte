@@ -22,6 +22,15 @@
         stopTimerOfFinishedAnimation();
     }
 
+    function stopAndReset() {
+        paused = false;
+        playing = false;
+        pause();
+        resetTimers();
+        stopTimers();
+        Sorting.generateNewArray(arraySize);
+    }
+
     function disableCloseButtons(disable = true) {
         const closeBtns = document.querySelectorAll('.sort-close-window');
         disable ? 
@@ -119,7 +128,7 @@
 
         setTimeout(() => {
             scrollTheMainToBottom();
-        }, 300);
+        }, 100);
     }
 
     /* react the window container scroll position to incoming windows */
@@ -208,6 +217,15 @@
         href="#"
         style="color: { paused ? 'var(--surface4)':''}; width: 100%; height: 100%; display: block;"
         >{!paused ? 'Pause':'Play'}</a
+    >
+</button>
+
+<button class="btns" color="accent" on:click={stopAndReset} transition:fade disabled={!paused && !playing}>
+    <!-- svelte-ignore a11y-invalid-attribute -->
+    <a
+        href="#"
+        style="width: 100%; height: 100%; display: block;"
+        >Stop and Reset</a
     >
 </button>
 
