@@ -4,11 +4,49 @@
     import { slide, fly } from "svelte/transition";
 
     export let window;
+    let timer = "00:00:00";
+    let mill_int = 0, sec_int = 0, min_int = 0;
+    let mill = '00', sec = '00', min = '00';
+    let timerInterval;
 
     $: nums = $Sorting.array;
     
     /* This class will be used to target the bar nodes in each window */
     $: barClass = `bar-sorting-${window.algo.name}`;
+
+    function stopTimer() { clearInterval(timerInterval) };
+
+    function resetTimer() {
+        mill_int = 0, sec_int = 0, min_int = 0;
+        mill = '00', sec = '00', min = '00';
+    }
+
+    function startTimer(initialTime = null){
+        stopTimer();
+
+        timerInterval = setInterval(() => {
+            mill_int++;
+
+            mill = mill_int <= 9 ? `0${mill_int}` : mill_int;
+
+            if(mill_int > 99) {
+                sec_int++;
+                mill_int = 0;
+                mill = '00';
+            }
+
+            sec = sec_int > 9 ? sec_int : `0${sec_int}`;
+
+            if(sec_int > 59) {
+                min_int++;
+                sec_int = 0;
+                sec = "00";
+                min = `0${min_int}`;
+            }
+
+            timer = `${min}:${sec}:${mill}`;
+        },10);
+    }
 
     function removeWindow() {
         Sorting.removeOne(window);
@@ -16,6 +54,11 @@
 </script>
 
 <section in:slide out:fly={{ x: 300 }}>
+    <!-- hidden buttons: These will be targeted in side panel -->
+    <button on:click={startTimer} hidden id="timer-start-{window.algo.name}">Start</button>
+    <button on:click={stopTimer} hidden id="timer-stop-{window.algo.name}">Stop</button>
+    <button on:click={resetTimer} hidden id="timer-reset-{window.algo.name}">reset</button>
+
     <div class="options">
         <select
             name="algo"
@@ -45,7 +88,7 @@
     </div>
 
     <div class="timer">
-        00:00:00
+        {timer}
     </div>
 
     <div class="bars-container">

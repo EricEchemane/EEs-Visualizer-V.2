@@ -16,7 +16,7 @@
 <main transition:fade={{ duration: 100 }}>
     <h2>Sorting Dashboard</h2>
 
-    {#each $Sorting.windows as window, i (window)}
+    {#each $Sorting.windows as window (window)}
         <SortingWindows {window} />
     {:else}
         <h1

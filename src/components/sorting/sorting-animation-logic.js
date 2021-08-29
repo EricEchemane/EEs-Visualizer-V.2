@@ -1,5 +1,6 @@
 import { changeColor, changeHeight } from '../../modules/animation-functions';
-import { AnimationObserver } from '../../stores/animations-observer'
+import { AnimationObserver } from '../../stores/animations-observer';
+import { Sorting } from '../../stores/Sorting';
 /* the array containing information about each window color and algo */
 let windowsArray; 
 
@@ -68,7 +69,7 @@ export function animate() {
 
                 /* here it doesn't matter what type of data to push.
                 We just need to populate the array */
-                AnimationObserver.push(i);
+                AnimationObserver.push(windowsArray[i].algo.name);
             };
 
         }, 1000 - (speed * 110));

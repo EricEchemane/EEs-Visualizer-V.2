@@ -5,7 +5,7 @@
     import { fade } from "svelte/transition";
     import { UserInputFeedback } from "../../stores/user-input-feedback";
     import { recieveAnimationData, pause, animate } from './sorting-animation-logic';
-    import { AnimationObserver } from '../../stores/animations-observer'
+    import { AnimationObserver } from '../../stores/animations-observer';
 
     let arraySize = 100;
     let paused = false;
@@ -16,17 +16,47 @@
     $: {
         const completed = $AnimationObserver.length == $Sorting.windows.length;
         if(completed) playing = false;  
+        
+        stopTimerOfFinishedAnimation();
+    }
+
+    function stopTimerOfFinishedAnimation() {
+        $AnimationObserver.forEach(each => {
+            const stopButtonId = `timer-stop-${each}`;
+            document.getElementById(stopButtonId)?.click();
+        })
+    }
+
+    function startTimer() {
+        $Sorting.windows.forEach(window => {
+            const startButtonId = `timer-start-${window.algo.name}`;
+            document.getElementById(startButtonId).click();
+        })
+    }
+
+    function stopTimers() {
+        $Sorting.windows.forEach(window => {
+            const stopButtonId = `timer-stop-${window.algo.name}`;
+            document.getElementById(stopButtonId).click();
+        })
     }
 
     function togglePause(){
         paused = !paused;
-        paused ? pause() : animate();
+        if(paused) {
+            pause();
+            stopTimers();
+        } else {
+            startTimer();
+            animate();
+        }
         UserInputFeedback.set(true, paused ? 'Paused':'Play');
         setTimeout(() => UserInputFeedback.hide(), 1000);
     }
 
     function sort() {
         AnimationObserver.set([]);
+
         playing = true;
         const animationFrames = [];
         const array = $Sorting.array;
@@ -37,6 +67,7 @@
             animationFrames.push(frames);
         })
         recieveAnimationData(animationFrames, $Sorting);
+        startTimer();
     }
 
     function hideFeedback() {
@@ -63,7 +94,7 @@
 
     async function addWindow() {
         Sorting.addWindow();
-
+        
         /* await the addWindow micro task before 
         scrollihg and styling the select drop down arrow */
         await tick();
