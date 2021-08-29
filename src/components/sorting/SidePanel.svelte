@@ -147,23 +147,35 @@
     });
 </script>
 
-<button class="btns" color="accent" transition:fade on:click={sort} disabled={paused || playing}>
+<button 
+    class="btns" 
+    color="accent" 
+    transition:fade 
+    on:click={sort} disabled={paused || playing}>
     <!-- svelte-ignore a11y-invalid-attribute -->
-    <a href="#" style="width: 100%; height: 100%; display: block;"
-        >Start Sorting!</a
-    >
+    <a href="#" style="width: 100%; height: 100%; display: block;">
+        Start Sorting!
+    </a>
 </button>
-<button class="btns" color="primary" on:click={addWindow} transition:fade disabled={playing}>
+
+<button 
+    class="btns" color="primary" 
+    on:click={addWindow} 
+    transition:fade 
+    disabled={playing}>
     <!-- svelte-ignore a11y-invalid-attribute -->
-    <a
-        href="#"
-        style="color: var(--surface4); width: 100%; height: 100%; display: block;"
-        >Add window</a
-    >
+    <a  href="#" style="
+            color: var(--surface4); 
+            width: 100%; 
+            height: 100%; 
+            display: block;">
+        Add window</a>
 </button>
-<button class="btns" color="primary" on:click={generate} transition:fade disabled={playing}
-    >Generate new array</button
->
+
+<button class="btns" color="primary" 
+        on:click={generate} transition:fade disabled={playing}>
+    Generate new array
+</button>
 
 <div title="Change array size" class="not-btn" transition:fade>
     <label for="array-size-slider"> Array size </label>
@@ -178,9 +190,9 @@
         on:input={onSizeInput}
         disabled={playing}
         color="accent"
-        id="array-size-slider"
-    />
+        id="array-size-slider" />
 </div>
+
 <div title="Change sorting speed" class="not-btn" transition:fade>
     <label for="sorting-speed-slider"> Speed </label>
     <input
@@ -193,44 +205,50 @@
         on:mouseleave={hideFeedback}
         on:input={onSpeedInput}
         disabled={playing}
-        id="sorting-speed-slider"
-    />
+        id="sorting-speed-slider" />
 </div>
+
 <!-- svelte-ignore a11y-invalid-attribute -->
 <a href="#">
-<div title="Change sorting order" class="not-btn" transition:fade>
-    <label for="sort-order">Ascending</label>
-
-    <input
-    id="sort-order"
-        type="checkbox"
-        role="switch"
-        bind:checked={$Sorting.ascending}
-        on:input={onSortOrderInput}
-        disabled={playing}
-        />
+    <div title="Change sorting order" class="not-btn" transition:fade>
+        <label for="sort-order">Ascending</label>
+        <input
+            id="sort-order"
+            type="checkbox"
+            role="switch"
+            bind:checked={$Sorting.ascending}
+            on:input={onSortOrderInput}
+            disabled={playing}/>
     </div>
 </a>
 
-<button class="btns" color={paused ? "primary":"accent"} on:click={togglePause} transition:fade disabled={!playing}>
+<button 
+    class="btns" 
+    color={paused ? "primary":"accent"} 
+    on:click={togglePause} 
+    transition:fade 
+    disabled={!playing}>
     <!-- svelte-ignore a11y-invalid-attribute -->
-    <a
-        href="#"
-        style="color: { paused ? 'var(--surface4)':''}; width: 100%; height: 100%; display: block;"
-        >{!paused ? 'Pause':'Play'}</a
-    >
+    <a  href="#" style="
+            color: { paused ? 'var(--surface4)':''}; 
+            width: 100%; 
+            height: 100%; 
+            display: block;">
+        {!paused ? 'Pause':'Play'}
+    </a>
 </button>
 
-<button class="btns" color="accent" on:click={stopAndReset} transition:fade disabled={!paused && !playing}>
+<button 
+    class="btns" color="accent" 
+    on:click={stopAndReset} 
+    transition:fade 
+    disabled={!paused && !playing}>
     <!-- svelte-ignore a11y-invalid-attribute -->
-    <a
-        href="#"
-        style="width: 100%; height: 100%; display: block;"
-        >Stop and Reset</a
-    >
+    <a  href="#"
+        style="width: 100%; height: 100%; display: block;">
+        Stop and Reset
+    </a>
 </button>
-
-
 
 <style>
     *[disabled] {

@@ -1,5 +1,6 @@
-import { mergeSort } from '../components/sorting/algorithms/merge'
-import { bubbleSort } from '../components/sorting/algorithms/bubble'
+import { mergeSort } from '../components/sorting/algorithms/merge';
+import { bubbleSort } from '../components/sorting/algorithms/bubble';
+import { quickSort } from '../components/sorting/algorithms/quick';
 
 export const SortingAlgortihms = [
     {
@@ -8,7 +9,7 @@ export const SortingAlgortihms = [
     },
     {
         name: "Quick Sort",
-        algo: mergeSort,
+        algo: quickSort,
     },
     {
         name: "Heap Sort",

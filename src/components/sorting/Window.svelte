@@ -74,9 +74,8 @@
             name="algo"
             id="algo"
             bind:value={window.algo}
-            title="Choose which sorting algorithm to use in this window. Current: {window
-                .algo.name}"
-        >
+            title="Choose which sorting algorithm to use in this window. Current: {window.algo.name}">
+            
             {#each SortingAlgortihms as algo (algo)}
                 <option value={algo}>
                     {algo.name}
@@ -96,7 +95,12 @@
         </div>
 
         <div style="flex: 1 1 auto;" />
-        <button class="sort-close-window" title="Close this window" on:click={removeWindow}>&times;</button>
+        <button 
+            class="sort-close-window" 
+            title="Close this window" 
+            on:click={removeWindow}>
+            &times;
+        </button>
     </div>
 
     <div class="timer" hidden={innerWidth > 500}>
