@@ -16,14 +16,14 @@ export function bubbleSort(array, _descending) {
 function sort() {
     let size = arr.length;
 
-    for (let i = 0; i < size - 1; i++)
+    for (let i = 0; i < size; i++)
     {
-        for (let j = i + 1; j < size; j++) {
+        for (let j = 0; j < size; j++) {
 
             animationFrames.push({ type: 'invert-color', value1: j });
             animationFrames.push({ type: 'revert-color', value1: j });
 
-            if (!descending) {
+            if (descending) {
                 if (arr[i] > arr[j]) {
                     animationFrames.push({ type: 'invert-color', value1: i, value2: j });
                     animationFrames.push({ type: 'revert-color', value1: i, value2: j });
