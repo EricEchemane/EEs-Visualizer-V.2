@@ -82,7 +82,7 @@
         />
 
         <div style="flex: 1 1 auto;" />
-        <button class="close-window" title="Close this window" on:click={removeWindow}
+        <button class="sort-close-window" title="Close this window" on:click={removeWindow}
             >&times;</button
         >
     </div>
@@ -103,6 +103,10 @@
 </section>  
 
 <style>
+    .disabled {
+        pointer-events: none;
+        opacity: 0.2;
+    }
     .timer {
         margin-top: 1rem;
         color: var(--text1);
@@ -131,7 +135,7 @@
         margin: 1px;
         transition: 0.2s ease;
     }
-    .close-window {
+    .sort-close-window {
         width: 1.7rem;
         height: 1.7rem;
         padding: 0 !important;

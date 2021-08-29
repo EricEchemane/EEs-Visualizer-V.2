@@ -15,9 +15,18 @@
     $: Sorting.generateNewArray(arraySize);
     $: {
         const completed = $AnimationObserver.length == $Sorting.windows.length;
-        if(completed) playing = false;  
-        
+        if(completed) {
+            playing = false;
+            disableCloseButtons(false);
+        }
         stopTimerOfFinishedAnimation();
+    }
+
+    function disableCloseButtons(disable = true) {
+        const closeBtns = document.querySelectorAll('.sort-close-window');
+        disable ? 
+            closeBtns.forEach(each => each.classList.add('disabled')) :
+            closeBtns.forEach(each => each.classList.remove('disabled'))
     }
 
     function stopTimerOfFinishedAnimation() {
@@ -28,10 +37,11 @@
     }
 
     function startTimer() {
+        disableCloseButtons();
         $Sorting.windows.forEach(window => {
             const startButtonId = `timer-start-${window.algo.name}`;
             document.getElementById(startButtonId).click();
-        })
+        });
     }
 
     function stopTimers() {
