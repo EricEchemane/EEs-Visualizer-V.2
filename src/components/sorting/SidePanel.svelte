@@ -2,7 +2,6 @@
     import { fillTracks } from "../../modules/slider";
     import { onMount, tick } from "svelte";
     import { Sorting } from "../../stores/Sorting";
-    import { fade } from "svelte/transition";
     import { UserInputFeedback } from "../../stores/user-input-feedback";
     import { recieveAnimationData, pause, animate } from './sorting-animation-logic';
     import { AnimationObserver } from '../../stores/animations-observer';
@@ -150,7 +149,6 @@
 <button 
     class="btns" 
     color="accent" 
-    transition:fade 
     on:click={sort} disabled={paused || playing}>
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#" style="width: 100%; height: 100%; display: block;">
@@ -161,7 +159,6 @@
 <button 
     class="btns" color="primary" 
     on:click={addWindow} 
-    transition:fade 
     disabled={playing}>
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a  href="#" style="
@@ -174,11 +171,11 @@
 
 <button class="btns" color="primary" 
         on:click={generate} 
-        transition:fade disabled={playing}>
+        disabled={playing}>
         Generate new array
 </button>
 
-<div title="Change array size" class="not-btn" transition:fade>
+<div title="Change array size" class="not-btn">
     <label for="array-size-slider"> Array size </label>
     <input
         type="range"
@@ -195,7 +192,7 @@
         id="array-size-slider" />
 </div>
 
-<div title="Change sorting speed" class="not-btn" transition:fade>
+<div title="Change sorting speed" class="not-btn">
     <label for="sorting-speed-slider"> Speed </label>
     <input
         type="range"
@@ -213,7 +210,7 @@
 
 <!-- svelte-ignore a11y-invalid-attribute -->
 <a href="#">
-    <div title="Change sorting order" class="not-btn" transition:fade>
+    <div title="Change sorting order" class="not-btn">
         <label for="sort-order">Ascending</label>
         <input
             id="sort-order"
@@ -229,7 +226,6 @@
     class="btns" 
     color={paused ? "primary":"accent"} 
     on:click={togglePause} 
-    transition:fade 
     disabled={!playing}>
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a  href="#" style="
@@ -244,7 +240,6 @@
 <button 
     class="btns" color="accent" 
     on:click={stopAndReset} 
-    transition:fade 
     disabled={!paused && !playing}>
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a  href="#"

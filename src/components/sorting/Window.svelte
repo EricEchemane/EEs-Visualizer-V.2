@@ -3,6 +3,7 @@
     import { SortingAlgortihms } from "../../modules/SortingAlgorithms";
     import { slide, fly } from "svelte/transition";
     import { AnimationObserver } from '../../stores/animations-observer';
+    import { SpeedTracker } from '../../stores/speed-tracker';
 
     export let window;
 
@@ -18,7 +19,16 @@
     /* This class will be used to target the bar nodes in each window */
     $: barClass = `bar-sorting-${window.algo.name}`;
 
-    function stopTimer() { clearInterval(timerInterval) };
+    $: console.log($SpeedTracker);
+
+    function stopTimer() { 
+        clearInterval(timerInterval);
+
+        /* if the algorithm is done, we will report the speed to speed tracker */
+        const x = $AnimationObserver.indexOf(window.algo.name);
+        if(x != -1) SpeedTracker.update(prev => 
+            new Map([...prev, [window.algo.name, [min, sec, mill] ]]));
+    };
 
     function resetTimer() {
         mill_int = 0, sec_int = 0, min_int = 0;
@@ -37,7 +47,7 @@
         timerInterval = setInterval(() => {
             mill_int++;
 
-            mill = mill_int <= 9 ? `0${mill_int}` : mill_int;
+            mill = mill_int <= 9 ? `0${mill_int}` : mill_int+"";
 
             if(mill_int > 99) {
                 sec_int++;
@@ -45,7 +55,7 @@
                 mill = '00';
             }
 
-            sec = sec_int > 9 ? sec_int : `0${sec_int}`;
+            sec = sec_int > 9 ? sec_int+"" : `0${sec_int}`;
 
             if(sec_int > 59) {
                 min_int++;
@@ -104,7 +114,7 @@
         </button>
     </div>
 
-    <div class="timer" hidden={innerWidth > 500}>
+    <div class="timer" hidden={innerWidth > 500} style="margin-top: 1rem;" >
         {timer}
     </div>
 
@@ -123,7 +133,6 @@
         opacity: 0.2;
     }
     .timer {
-        margin-top: 1rem;
         color: var(--text1);
     }
     section {

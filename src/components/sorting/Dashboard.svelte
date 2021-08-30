@@ -2,6 +2,7 @@
     import { onMount, onDestroy } from "svelte";
     import { ActiveVisualizer } from "../../stores/active-visualizer";
     import { Sorting } from "../../stores/Sorting";
+    import { AnimationObserver } from "../../stores/animations-observer";
     import SortingWindows from "./Window.svelte";
     import { fade } from "svelte/transition";
 
@@ -11,14 +12,24 @@
     onDestroy(() => {
         ActiveVisualizer.set("");
     });
+
+    /* function rankBySpeed() {} */
+
+    $: rankBySpeed_disabled = $AnimationObserver.length != $Sorting.windows.length;
 </script>
 
 <main transition:fade={{ duration: 100 }}>
     <div class="header">
         <h2>Sorting Dashboard</h2>
-        <div>
+        <div title={ rankBySpeed_disabled 
+                     ? 'You can use this after sorting is completed.'
+                     : 'Rank the algorithms base on their result speed.' }>
             <label for="sort-by-speed">Rank by Speed</label>
-            <input type="checkbox" role="switch" id="sort-by-speed">
+            <input 
+                type="checkbox" 
+                role="switch" 
+                id="sort-by-speed" 
+                disabled={rankBySpeed_disabled}>
         </div>
     </div>
 

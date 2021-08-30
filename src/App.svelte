@@ -1,12 +1,10 @@
 <script>
     import Navbar from "./components/Navbar.svelte";
-
     import SortingSidePanel from "./components/sorting/SidePanel.svelte";
     import SortingDashboard from "./components/sorting/Dashboard.svelte";
     import UserInputFeedback from "./components/user-input-feedback.svelte";
 
     import { ActiveVisualizer } from "./stores/active-visualizer";
-
     import { Router, Route } from "svelte-routing";
 </script>
 
