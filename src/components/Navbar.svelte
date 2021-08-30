@@ -8,50 +8,39 @@
         <Router>
             <a href="/" use:link>
                 <h3>
-                    EEs Visualizer <span class="animate-text-gradient">2.0</span
-                    >
+                    EEs Visualizer
+                    <span class="animate-text-gradient"> 2.0 </span>
                 </h3>
             </a>
         </Router>
         <Router>
             <div class="links" id="desktop-links">
-                <a
-                    use:link
-                    href="sorting"
-                    class:activeRoute={$ActiveVisualizer == "sorting"}
-                    >Sorting</a
-                >
-                <a
-                    use:link
-                    href="searching"
-                    class:activeRoute={$ActiveVisualizer == "searching"}
-                    >Searching</a
-                >
-                <a
-                    use:link
-                    href="path-finding"
-                    class:activeRoute={$ActiveVisualizer == "path-finding"}
-                    >Path Finding</a
-                >
+                <a  use:link href="sorting"
+                    class:activeRoute={$ActiveVisualizer == "sorting"}>
+                    Sorting </a>
+
+                <a  use:link href="searching"
+                    class:activeRoute={$ActiveVisualizer == "searching"}>
+                    Searching </a>
+
+                <a  use:link href="path-finding"
+                    class:activeRoute={$ActiveVisualizer == "path-finding"}>
+                    Path Finding </a>
             </div>
         </Router>
         <a href="https://github.com/ericechemane">
             <img
                 src="https://avatars.githubusercontent.com/u/68469018?v=4"
                 class="avatar"
-                alt=""
-            />
+                alt="ericechemane avatar" />
         </a>
     </div>
     <div id="mobile-nav">
         <Router>
             <div class="links">
-                <a
-                    use:link
-                    href="sorting"
-                    class:activeRoute={$ActiveVisualizer == "sorting"}
-                    >Sorting</a
-                >
+                <a  use:link href="sorting"
+                    class:activeRoute={$ActiveVisualizer == "sorting"}>
+                    Sorting </a>
                 <a use:link href="searching">Searching</a>
                 <a use:link href="path-finding">Path Finding</a>
             </div>

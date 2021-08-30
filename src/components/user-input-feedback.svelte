@@ -4,11 +4,9 @@
 </script>
 
 {#if $UserInputFeedback.show}
-    <h2
-        id="user-input-feedback"
+    <h2 id="user-input-feedback"
         in:fade={{ duration: 100 }}
-        out:fade={{ y: -100, duration: 500 }}
-    >
+        out:fade={{ y: -100, duration: 500 }} >
         {$UserInputFeedback.content}
     </h2>
 {/if}

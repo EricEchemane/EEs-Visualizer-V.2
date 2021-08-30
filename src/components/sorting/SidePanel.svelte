@@ -173,8 +173,9 @@
 </button>
 
 <button class="btns" color="primary" 
-        on:click={generate} transition:fade disabled={playing}>
-    Generate new array
+        on:click={generate} 
+        transition:fade disabled={playing}>
+        Generate new array
 </button>
 
 <div title="Change array size" class="not-btn" transition:fade>
@@ -236,7 +237,7 @@
             width: 100%; 
             height: 100%; 
             display: block;">
-        {!paused ? 'Pause':'Play'}
+            {!paused ? 'Pause':'Play'}
     </a>
 </button>
 

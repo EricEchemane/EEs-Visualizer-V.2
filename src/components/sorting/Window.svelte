@@ -64,10 +64,11 @@
 <svelte:window bind:innerWidth={innerWidth} />
 
 <section in:slide={{duration: 100}} out:fly={{ x: 300 }}>
+    
     <!-- hidden buttons: These will be targeted in side panel -->
-    <button on:click={startTimer} hidden id="timer-start-{window.algo.name}">Start</button>
-    <button on:click={stopTimer} hidden id="timer-stop-{window.algo.name}">Stop</button>
-    <button on:click={resetTimer} hidden id="timer-reset-{window.algo.name}">reset</button>
+    <button on:click={startTimer} hidden id="timer-start-{window.algo.name}" />
+    <button on:click={stopTimer} hidden id="timer-stop-{window.algo.name}" />
+    <button on:click={resetTimer} hidden id="timer-reset-{window.algo.name}" />
 
     <div class="options">
         <select
@@ -87,14 +88,14 @@
             type="color"
             id="color"
             bind:value={window.color}
-            title="Choose color"
-        />
+            title="Choose color" />
 
         <div class="timer" hidden={innerWidth <= 500}>
             {timer}
         </div>
 
         <div style="flex: 1 1 auto;" />
+
         <button 
             class="sort-close-window" 
             title="Close this window" 
@@ -110,10 +111,8 @@
     <div class="bars-container">
         <!--  -->
         {#each nums as num, i (i)}
-            <div
-                class="bar {barClass}"
-                style="background-color: {window.color}; height: {num}px"
-            />
+            <div class="bar {barClass}"
+                 style="background-color: {window.color}; height: {num}px"/>
         {/each}
     </div>
 </section>  
