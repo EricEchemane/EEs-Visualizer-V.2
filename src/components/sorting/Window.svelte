@@ -3,13 +3,13 @@
     import { SortingAlgortihms } from "../../modules/SortingAlgorithms";
     import { slide, fly } from "svelte/transition";
     import { AnimationObserver } from '../../stores/animations-observer';
-    import { SpeedTracker } from '../../stores/speed-tracker';
+    import { SpeedTracker } from "../../stores/speed-tracker";
 
     export let window;
+    export let timer = "00:00:00";
 
     let innerWidth;
 
-    let timer = "00:00:00";
     let mill_int = 0, sec_int = 0, min_int = 0;
     let mill = '00', sec = '00', min = '00';
     let timerInterval;
@@ -19,16 +19,19 @@
     /* This class will be used to target the bar nodes in each window */
     $: barClass = `bar-sorting-${window.algo.name}`;
 
-    $: console.log($SpeedTracker);
-
     function stopTimer() { 
         clearInterval(timerInterval);
-
-        /* if the algorithm is done, we will report the speed to speed tracker */
-        const x = $AnimationObserver.indexOf(window.algo.name);
-        if(x != -1) SpeedTracker.update(prev => 
-            new Map([...prev, [window.algo.name, [min, sec, mill] ]]));
     };
+
+    function reportTimer() {
+        /* reduce min, sec, milli to a single value
+        which will be the total speed in milliseconds */
+        let totalSpeed = (min_int * 60 * 1000) + (sec_int * 1000) + mill_int;
+        SpeedTracker.report(window.algo.name, {
+            total: totalSpeed,
+            raw: timer
+        } );
+    }
 
     function resetTimer() {
         mill_int = 0, sec_int = 0, min_int = 0;
@@ -68,7 +71,9 @@
         },10);
     }
 
-    function removeWindow() { Sorting.removeOne(window); }
+    function removeWindow() { 
+        Sorting.removeOne(window);
+    }
 </script>
 
 <svelte:window bind:innerWidth={innerWidth} />
@@ -79,6 +84,7 @@
     <button on:click={startTimer} hidden id="timer-start-{window.algo.name}" />
     <button on:click={stopTimer} hidden id="timer-stop-{window.algo.name}" />
     <button on:click={resetTimer} hidden id="timer-reset-{window.algo.name}" />
+    <button on:click={reportTimer} hidden class="report-timer" />
 
     <div class="options">
         <select

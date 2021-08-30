@@ -5,6 +5,7 @@
     import { UserInputFeedback } from "../../stores/user-input-feedback";
     import { recieveAnimationData, pause, animate } from './sorting-animation-logic';
     import { AnimationObserver } from '../../stores/animations-observer';
+    import { SpeedTracker } from '../../stores/speed-tracker';
 
     let arraySize = 100;
     let paused = false;
@@ -17,8 +18,14 @@
         if(completed) {
             playing = false;
             disableCloseButtons(false);
+            reportTimerResults();
         }
         stopTimerOfFinishedAnimation();
+    }
+
+    function reportTimerResults() {
+        const reportTimerButtons = document.querySelectorAll('.report-timer');
+        reportTimerButtons.forEach(each => each.click());
     }
 
     function stopAndReset() {
@@ -82,6 +89,7 @@
 
     function sort() {
         AnimationObserver.set([]);
+        SpeedTracker.clear();
 
         playing = true;
         const animationFrames = [];
@@ -91,7 +99,8 @@
         $Sorting.windows.forEach(window => {
             const frames = window.algo.algo(array, ascending);
             animationFrames.push(frames);
-        })
+        });
+
         recieveAnimationData(animationFrames, $Sorting);
         resetTimers();
         startTimer();

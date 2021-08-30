@@ -13,9 +13,22 @@
         ActiveVisualizer.set("");
     });
 
-    /* function rankBySpeed() {} */
+    function rankBySpeed() {
+        const rankedVersion = Sorting.getRankedWindowsBySpeed();
+        Sorting.set(rankedVersion);
+    }
+
+    function toggleRank() {
+        // previousState.set({...$Sorting});
+
+        if(isRanked) rankBySpeed();
+        // else Sorting.set($previousState);
+    }
+
+    let isRanked;
 
     $: rankBySpeed_disabled = $AnimationObserver.length != $Sorting.windows.length;
+
 </script>
 
 <main transition:fade={{ duration: 100 }}>
@@ -29,12 +42,14 @@
                 type="checkbox" 
                 role="switch" 
                 id="sort-by-speed" 
+                bind:checked={isRanked}
+                on:change={toggleRank}
                 disabled={rankBySpeed_disabled}>
         </div>
     </div>
 
     {#each $Sorting.windows as window (window)}
-        <SortingWindows {window} />
+        <SortingWindows {window} timer={window.resultSpeed.raw} />
     {:else}
         <h1 style="text-align: center; margin: auto;"
             in:fade={{ duration: 500 }} >
