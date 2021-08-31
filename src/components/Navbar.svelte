@@ -53,7 +53,7 @@
         background-color: var(--surface3);
         padding: 1rem;
         box-shadow: 0 -8px 16px 16px rgba(0, 0, 0, .2);
-        z-index: 11;
+        z-index: 4;
     }
     #desktop-nav {
         display: flex;

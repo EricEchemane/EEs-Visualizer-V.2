@@ -3,6 +3,9 @@
     import SortingSidePanel from "./components/sorting/SidePanel.svelte";
     import SortingDashboard from "./components/sorting/Dashboard.svelte";
     import UserInputFeedback from "./components/user-input-feedback.svelte";
+    import { backdrop } from './stores/backdrop';
+    import { DataTable as dt } from './stores/data-table';
+    import DataTable from './components/data-table.svelte';
 
     import { ActiveVisualizer } from "./stores/active-visualizer";
     import { Router, Route } from "svelte-routing";
@@ -35,6 +38,11 @@
         </Router>
     </main>
 </div>
+
+<div id="back-drop" on:click={backdrop.click} hidden={!$backdrop}></div>
+{#if $dt.shown}
+    <DataTable />
+{/if}
 <UserInputFeedback />
 
 <style>
@@ -125,8 +133,18 @@
         --panel-translateX: 0;
     }
 
+    #back-drop {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        background-color: rgba(0, 0, 0, .3);
+        top: 0;
+        left: 0;
+        z-index: 2;
+    }
+
     nav {
-        padding: 2rem 1rem;
+        padding: 1rem;
         display: flex;
         flex-direction: column;
         gap: 1ch;

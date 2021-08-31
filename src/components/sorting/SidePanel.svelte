@@ -130,7 +130,7 @@
 
     async function addWindow() {
         Sorting.addWindow();
-        
+        Sorting.generateNewArray(arraySize);
         /* await the addWindow micro task before 
         scrollihg and styling the select drop down arrow */
         await tick();
@@ -218,7 +218,7 @@
 </div>
 
 <!-- svelte-ignore a11y-invalid-attribute -->
-<a href="#">
+<a href="#" class="hover-none">
     <div title="Change sorting order" class="not-btn">
         <label for="sort-order">Ascending</label>
         <input
