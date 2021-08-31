@@ -130,7 +130,6 @@
 
     async function addWindow() {
         Sorting.addWindow();
-        Sorting.generateNewArray(arraySize);
         /* await the addWindow micro task before 
         scrollihg and styling the select drop down arrow */
         await tick();
