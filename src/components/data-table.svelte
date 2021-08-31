@@ -11,7 +11,7 @@
                 <tr>
                     <th>Place</th>
                     <th>Algorithm</th>
-                    <th>Timer (min:sec:milli) </th>
+                    <th>Timer (min:sec:mic) </th>
                 </tr>
                 {#each $DataTable.data.table as {name, timer},i (i)}
                     <tr>
@@ -27,7 +27,7 @@
 
 <style>
     main {
-        width: 400px;
+        width: minmax(auto, 95vw);
         height: auto;
         border-radius: .25rem;
         background-color: var(--surface3);
@@ -58,7 +58,7 @@
         padding: 1rem;
         text-align: center;
     }
-    @media (max-width: 360px) {
+    @media (max-width: 500px) {
         th, td {
             padding: .5rem;
         }

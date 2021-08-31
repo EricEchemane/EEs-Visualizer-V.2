@@ -6,6 +6,7 @@
     import { recieveAnimationData, pause, animate } from './sorting-animation-logic';
     import { AnimationObserver } from '../../stores/animations-observer';
     import { SpeedTracker } from '../../stores/speed-tracker';
+    import { link } from 'svelte-routing';
 
     let arraySize = 100;
     let paused = false;
@@ -216,19 +217,16 @@
         id="sorting-speed-slider" />
 </div>
 
-<!-- svelte-ignore a11y-invalid-attribute -->
-<a href="#" class="hover-none">
-    <div title="Change sorting order" class="not-btn">
-        <label for="sort-order">Ascending</label>
-        <input
-            id="sort-order"
-            type="checkbox"
-            role="switch"
-            bind:checked={$Sorting.ascending}
-            on:input={onSortOrderInput}
-            disabled={playing}/>
-    </div>
-</a>
+<div title="Change sorting order" class="not-btn">
+    <label for="sort-order">Ascending</label>
+    <input
+        id="sort-order"
+        type="checkbox"
+        role="switch"
+        bind:checked={$Sorting.ascending}
+        on:input={onSortOrderInput}
+        disabled={playing}/>
+</div>
 
 <button 
     class="btns" 
