@@ -671,11 +671,6 @@ nav .links a:hover {
     background: var(--accent);
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-
 a.activeRoute {
     background-color: var(--surface3);
     color: var(--brand) !important;
