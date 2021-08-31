@@ -58,7 +58,7 @@
         padding: 1rem;
         text-align: center;
     }
-    @media (max-width: 500px) {
+    @media (max-width: 360px) {
         th, td {
             padding: .5rem;
         }

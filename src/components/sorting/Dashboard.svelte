@@ -33,6 +33,7 @@
 
     onMount(() => {
         ActiveVisualizer.set("sorting");
+        setTimeout(() => rankBySpeed_disabled = true, 10);
     });
     onDestroy(() => {
         ActiveVisualizer.set("");
