@@ -169,13 +169,7 @@
     class="btns" color="primary" 
     on:click={addWindow} 
     disabled={playing}>
-    <!-- svelte-ignore a11y-invalid-attribute -->
-    <a  href="#" style="
-            color: var(--surface4); 
-            width: 100%; 
-            height: 100%; 
-            display: block;">
-        Add window</a>
+        Add window
 </button>
 
 <button class="btns" color="primary" 
@@ -233,25 +227,14 @@
     color={paused ? "primary":"accent"} 
     on:click={togglePause} 
     disabled={!playing}>
-    <!-- svelte-ignore a11y-invalid-attribute -->
-    <a  href="#" style="
-            color: { paused ? 'var(--surface4)':''}; 
-            width: 100%; 
-            height: 100%; 
-            display: block;">
-            {!paused ? 'Pause':'Play'}
-    </a>
+        {!paused ? 'Pause':'Play'}
 </button>
 
 <button 
     class="btns" color="accent" 
     on:click={stopAndReset} 
     disabled={!paused && !playing}>
-    <!-- svelte-ignore a11y-invalid-attribute -->
-    <a  href="#"
-        style="width: 100%; height: 100%; display: block;">
-        Stop and Reset
-    </a>
+    Stop and Reset
 </button>
 
 <style>

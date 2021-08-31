@@ -27,7 +27,8 @@
 
 <style>
     main {
-        width: minmax(auto, 95vw);
+        min-width: 320px;
+        max-width: 95vw;
         height: auto;
         border-radius: .25rem;
         background-color: var(--surface3);
@@ -52,6 +53,12 @@
     th, td {
         text-align: left;
         padding: .5rem 1rem;
+    }
+    tr > th:nth-child(1), tr > td:nth-child(1) {
+        width: 1rem;
+    }
+    tr > th:nth-child(2), tr > td:nth-child(2) {
+        min-width: 10ch;
     }
     .title {
         background-color: var(--surface4);
