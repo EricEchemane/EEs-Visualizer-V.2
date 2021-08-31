@@ -3,6 +3,8 @@ import { bubbleSort } from '../components/sorting/algorithms/bubble';
 import { quickSort } from '../components/sorting/algorithms/quick';
 import { heapSort } from '../components/sorting/algorithms/heap';
 import { shellSort } from '../components/sorting/algorithms/shell';
+import { insertionSort } from '../components/sorting/algorithms/insertion';
+import { selectionSort } from '../components/sorting/algorithms/selection';
 
 export const SortingAlgortihms = [
     {
@@ -23,11 +25,11 @@ export const SortingAlgortihms = [
     },
     {
         name: "Insertion Sort",
-        algo: mergeSort,
+        algo: insertionSort,
     },
     {
         name: "Selection Sort",
-        algo: mergeSort,
+        algo: selectionSort,
     },
     {
         name: "Bubble Sort",
