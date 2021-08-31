@@ -58,7 +58,7 @@
         width: 1rem;
     }
     tr > th:nth-child(2), tr > td:nth-child(2) {
-        min-width: 12ch;
+        min-width: 14ch;
     }
     .title {
         background-color: var(--surface4);
