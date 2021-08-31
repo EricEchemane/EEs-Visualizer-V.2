@@ -28,12 +28,11 @@
         }
     }
 
-    $: rankBySpeed_disabled = $AnimationObserver.length != $Sorting.windows.length;
+    $: rankBySpeed_disabled = ($AnimationObserver.length != $Sorting.windows.length) || $Sorting.windows.length == 0;
     $: if($AnimationObserver.length == 0) isRanked = false;
 
     onMount(() => {
         ActiveVisualizer.set("sorting");
-        AnimationObserver.set([]);
     });
     onDestroy(() => {
         ActiveVisualizer.set("");
@@ -87,7 +86,7 @@
     {#each $Sorting.windows as window (window)}
         <SortingWindows {window} timer={window.resultSpeed.raw} />
     {:else}
-        <h1 style="text-align: center; margin: auto;"
+        <h1 style="text-align: center; margin-top: 7rem;"
             in:fade={{ duration: 500 }} >
             Add Window !
         </h1>

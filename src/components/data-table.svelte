@@ -27,7 +27,7 @@
 
 <style>
     main {
-        width: minmax(400px,90vw);
+        width: 400px;
         height: auto;
         border-radius: .25rem;
         background-color: var(--surface3);

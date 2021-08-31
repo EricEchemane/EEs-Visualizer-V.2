@@ -604,6 +604,10 @@ a {
 a:hover {
     text-decoration: underline;
 }
+a:active {
+    background-color: none;
+    background: none;
+}
 
 h1,
 h2,
