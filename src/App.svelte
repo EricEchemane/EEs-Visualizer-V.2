@@ -97,9 +97,6 @@
         scroll-behavior: smooth;
         position: relative;
     }
-    aside {
-        z-index: 2;
-    }
     #close-panel {
         position: fixed;
         will-change: display;
@@ -116,6 +113,7 @@
         will-change: transform;
         transform: translateX(var(--panel-translateX));
         transition: 200ms ease;
+        z-index: 2;
     }
     aside #close-panel {
         display: none;

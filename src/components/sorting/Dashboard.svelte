@@ -5,6 +5,12 @@
     import { AnimationObserver } from "../../stores/animations-observer";
     import SortingWindows from "./Window.svelte";
     import { fade } from "svelte/transition";
+    import { SpeedTracker } from '../../stores/speed-tracker';
+
+    let isRanked = false;
+
+    $: rankBySpeed_disabled = $AnimationObserver.length != $Sorting.windows.length;
+    $: if($AnimationObserver.length == 0) isRanked = false;
 
     onMount(() => {
         ActiveVisualizer.set("sorting");
@@ -14,21 +20,18 @@
     });
 
     function rankBySpeed() {
-        const rankedVersion = Sorting.getRankedWindowsBySpeed();
+        isRanked = true;
+        const rankedVersion = getRankedWindowsBySpeed();
         Sorting.set(rankedVersion);
     }
 
-    function toggleRank() {
-        // previousState.set({...$Sorting});
-
-        if(isRanked) rankBySpeed();
-        // else Sorting.set($previousState);
+    function getRankedWindowsBySpeed() {
+        const sortingCopy = {...$Sorting};
+        sortingCopy.windows.forEach(each => each.resultSpeed = $SpeedTracker[each.algo.name])
+        sortingCopy.array.sort((a,b) => (sortingCopy.ascending ? a-b : b-a));
+        sortingCopy.windows.sort((w1, w2) => w1.resultSpeed.total - w2.resultSpeed.total);
+        return sortingCopy;
     }
-
-    let isRanked;
-
-    $: rankBySpeed_disabled = $AnimationObserver.length != $Sorting.windows.length;
-
 </script>
 
 <main transition:fade={{ duration: 100 }}>
@@ -37,14 +40,9 @@
         <div title={ rankBySpeed_disabled 
                      ? 'You can use this after sorting is completed.'
                      : 'Rank the algorithms base on their result speed.' }>
-            <label for="sort-by-speed">Rank by Speed</label>
-            <input 
-                type="checkbox" 
-                role="switch" 
-                id="sort-by-speed" 
-                bind:checked={isRanked}
-                on:change={toggleRank}
-                disabled={rankBySpeed_disabled}>
+            <button on:click={rankBySpeed} disabled={rankBySpeed_disabled}> 
+                Rank by Speed 
+            </button>
         </div>
     </div>
 

@@ -52,6 +52,8 @@
     nav {
         background-color: var(--surface3);
         padding: 1rem;
+        box-shadow: 0 -8px 16px 16px rgba(0, 0, 0, .2);
+        z-index: 11;
     }
     #desktop-nav {
         display: flex;
@@ -62,20 +64,33 @@
         display: flex;
         place-content: center;
         align-items: center;
-        gap: 1rem;
+        background: linear-gradient(var(--surface4),var(--surface3));
+        box-shadow: 0 2px 4px 4px rgba(0, 0, 0, .2);
+    }
+    .links a {
+        padding: .5rem 1.3rem;
+        border-radius: .25rem;
+        color: var(--text1);
     }
     #mobile-nav {
         display: none;
+        margin-top: 1rem;
     }
     @media (max-width: 700px) {
         #desktop-links {
             display: none;
         }
         #mobile-nav {
-            display: block;
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
         }
         #mobile-nav .links {
             place-content: start;
+        }
+        #mobile-nav .links a {
+            padding: .5rem 1rem;
         }
     }
 </style>

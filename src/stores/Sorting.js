@@ -4,9 +4,6 @@ import { generateArray } from "../modules/numberGenerator";
 import { SortingAlgortihms as algos } from "../modules/SortingAlgorithms";
 import { algoIsUsed } from "../modules/algoIsUsed-identifier";
 import { generateRandomHexColor } from "../modules/randomColorGenerator";
-import { SpeedTracker } from './speed-tracker';
-
-let prevState;
 
 function create() {
     const { subscribe, set, update } = writable({
@@ -68,28 +65,6 @@ function create() {
                     windows: windows,
                 };
             });
-        },
-        getRankedWindowsBySpeed: () => {
-            let tracker;
-            let unsub = SpeedTracker.subscribe(value => tracker = value);
-            unsub();
-
-            let sorting;
-            unsub = subscribe(value => sorting = value);
-            unsub();
-
-            prevState = {...sorting};
-
-            for (let index = 0; index < sorting.windows.length; index++) {
-                const window = sorting.windows[index];
-                window.resultSpeed = tracker[window.algo.name];
-            }
-
-            sorting.array.sort((a,b) => a-b);
-
-            sorting.windows.sort((w1, w2) => w1.resultSpeed.total - w2.resultSpeed.total);
-
-            return sorting;
         },
     };
 }

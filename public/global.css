@@ -553,6 +553,11 @@ a[role="button"][color="primary"]:hover {
     text-decoration: none;
 }
 
+button[disabled] {
+    pointer-events: none;
+    opacity: .3;
+}
+
 button[color="primary"]:hover,
 a[role="button"][color="primary"]:hover {
     background-color: var(--brand);
@@ -646,7 +651,7 @@ h6 {
 
 nav .links a:hover {
     text-decoration: none;
-    color: var(--brand);
+    background-color: var(--surface3);
 }
 
 #desktop-nav a:hover {
@@ -672,5 +677,6 @@ nav .links a:hover {
 }
 
 a.activeRoute {
+    background-color: var(--surface3);
     color: var(--brand) !important;
 }
