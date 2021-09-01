@@ -9,10 +9,7 @@
     import { DataTable as dt } from '../../stores/data-table';
     import { backdrop } from '../../stores/backdrop';
 
-    backdrop.registerClickEvent('sort-data-table', () => {
-        tableIsshown = false;
-        dt.hide();
-    });
+    backdrop.registerClickEvent('close-data-table', () => tableIsshown = false);
 
     let isRanked = false;
     let tableIsshown = false;
@@ -36,7 +33,6 @@
         setTimeout(() => rankBySpeed_disabled = true, 10);
     });
     onDestroy(() => {
-        ActiveVisualizer.set("");
         dt.hide();
         backdrop.hide();
     });
@@ -53,7 +49,7 @@
             map(each => ({ name: each.algo.name, timer: each.resultSpeed.raw }));
         
         dt.setData({title: "Sort Timer Results", table: table})
-        backdrop.setKey('sort-data-table');
+        backdrop.setKey('close-data-table');
         tableIsshown = !tableIsshown;
     }
 

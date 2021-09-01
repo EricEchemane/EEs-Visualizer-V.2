@@ -1,7 +1,13 @@
 <script>
     import Navbar from "./components/Navbar.svelte";
+    import Tutorial from "./components//Tutorial.svelte";
+
     import SortingSidePanel from "./components/sorting/SidePanel.svelte";
     import SortingDashboard from "./components/sorting/Dashboard.svelte";
+
+    import SearchingSidePanel from './components/searching/SidePanel.svelte';
+    import SearchingDashboard from './components/searching/SearchingDashboard.svelte';
+
     import UserInputFeedback from "./components/user-input-feedback.svelte";
     import { backdrop } from './stores/backdrop';
     import { DataTable as dt } from './stores/data-table';
@@ -9,6 +15,12 @@
 
     import { ActiveVisualizer } from "./stores/active-visualizer";
     import { Router, Route } from "svelte-routing";
+
+    let panels = {
+        "sorting": SortingSidePanel,
+        "searching": SearchingSidePanel,
+        "": Tutorial,
+    }
 </script>
 
 <Navbar />
@@ -16,15 +28,7 @@
     <!-- svelte-ignore a11y-unknown-role -->
     <aside role="Tools Panel" id="tools-panel">
         <nav>
-            {#if $ActiveVisualizer == "sorting"}
-                <SortingSidePanel />
-            {:else if $ActiveVisualizer == "searching"}
-                <button color="primary">Search now</button>
-            {:else if $ActiveVisualizer == "searching"}
-                <button color="primary">Find the path</button>
-            {:else}
-                <h3>Tutorial</h3>
-            {/if}
+            <svelte:component this={panels[$ActiveVisualizer]} />
         </nav>
         <!-- svelte-ignore a11y-unknown-role -->
         <!-- svelte-ignore a11y-invalid-attribute -->
@@ -35,6 +39,7 @@
         <a href="#tools-panel" id="open-panel" role="button">OPEN PANEL</a>
         <Router>
             <Route path="sorting"><SortingDashboard /></Route>
+            <Route path="searching"><SearchingDashboard /></Route>
         </Router>
     </main>
 </div>

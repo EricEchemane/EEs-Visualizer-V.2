@@ -6,14 +6,11 @@
     import { recieveAnimationData, pause, animate } from './sorting-animation-logic';
     import { AnimationObserver } from '../../stores/animations-observer';
     import { SpeedTracker } from '../../stores/speed-tracker';
-    import { link } from 'svelte-routing';
 
     let arraySize = 100;
     let paused = false;
     let playing = false;
 
-    /* These expressions will run every time arraySize is changed */
-    $: Sorting.generateNewArray(arraySize);
     $: {
         const completed = $AnimationObserver.length == $Sorting.windows.length;
         if(completed) {
@@ -111,6 +108,11 @@
         setTimeout(() => UserInputFeedback.hide(), 1000);
     }
 
+    function handleSizeChange() {
+        Sorting.generateNewArray(arraySize);
+        hideFeedback();
+    }
+
     function onSizeInput() {
         UserInputFeedback.set(true, `Array size: ${arraySize}`);
     }
@@ -152,6 +154,7 @@
         so that the range track progress will react to changes */
 
         UserInputFeedback.set(false, ``);
+        Sorting.generateNewArray(arraySize);
     });
 </script>
 
@@ -161,7 +164,7 @@
     on:click={sort} disabled={paused || playing}>
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#" style="width: 100%; height: 100%; display: block;">
-        Start Sorting!
+        Sort!
     </a>
 </button>
 
@@ -169,13 +172,13 @@
     class="btns" color="primary" 
     on:click={addWindow} 
     disabled={playing}>
-        Add window
+        Add Window
 </button>
 
 <button class="btns" color="primary" 
         on:click={generate} 
         disabled={playing}>
-        Generate new array
+        Generate New Array
 </button>
 
 <div title="Change array size" class="not-btn">
@@ -188,7 +191,7 @@
         max="130"
         bind:value={arraySize}
         on:mouseleave={hideFeedback}
-        on:change={hideFeedback}
+        on:change={handleSizeChange}
         on:input={onSizeInput}
         disabled={playing}
         color="accent"

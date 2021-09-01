@@ -6,7 +6,7 @@
 <nav>
     <div id="desktop-nav">
         <Router>
-            <a href="/" use:link>
+            <a href="/" use:link on:click={() => ActiveVisualizer.set("")}>
                 <h3>
                     EEs Visualizer
                     <span class="animate-text-gradient"> 2.0 </span>
@@ -41,8 +41,14 @@
                 <a  use:link href="sorting"
                     class:activeRoute={$ActiveVisualizer == "sorting"}>
                     Sorting </a>
-                <a use:link href="searching">Searching</a>
-                <a use:link href="path-finding">Path Finding</a>
+
+                <a  use:link href="searching"
+                    class:activeRoute={$ActiveVisualizer == "searching"}>
+                    Searching </a>
+                    
+                <a  use:link href="path-finding"
+                    class:activeRoute={$ActiveVisualizer == "path-finding"}>
+                    Path Finding </a>
             </div>
         </Router>
     </div>
@@ -50,8 +56,9 @@
 
 <style>
     nav {
-        background-color: var(--surface3);
-        padding: 1rem;
+        /* background-color: var(--surface3); */
+        background: linear-gradient(var(--surface3), var(--surface2));
+        padding: .75rem 1.5rem;
         box-shadow: 0 -8px 16px 16px rgba(0, 0, 0, .2);
         z-index: 4;
     }
@@ -91,6 +98,11 @@
         }
         #mobile-nav .links a {
             padding: .5rem 1rem;
+        }
+    }
+    @media (max-width: 500px) {
+        nav {
+            padding: .75rem 1rem;
         }
     }
 </style>

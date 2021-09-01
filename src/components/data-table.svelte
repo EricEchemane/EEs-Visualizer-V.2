@@ -11,7 +11,7 @@
                 <tr>
                     <th>Place</th>
                     <th>Algorithm</th>
-                    <th>Timer (min:sec:mic) </th>
+                    <th>Timer (m:s:ms) </th>
                 </tr>
                 {#each $DataTable.data.table as {name, timer},i (i)}
                     <tr>
