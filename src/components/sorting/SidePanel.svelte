@@ -198,7 +198,7 @@
         id="array-size-slider" />
 </div>
 
-<div title="Change sorting speed" class="not-btn">
+<div title="Change animation speed" class="not-btn">
     <label for="sorting-speed-slider"> Speed </label>
     <input
         type="range"

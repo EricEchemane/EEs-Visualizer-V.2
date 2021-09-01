@@ -1,11 +1,34 @@
 <script>
     import { onMount } from 'svelte';
+    import { Searching } from '../../stores/searching';
+    import { UserInputFeedback } from '../../stores/user-input-feedback';
 
     import { fillTracks } from "../../modules/slider";
 
     onMount(() => {
         fillTracks();
     });
+
+    const hideUserInputFeedback = (ms = 1000) => setTimeout(UserInputFeedback.hide, ms);
+    
+    const handleSizeChange = () => {
+        hideUserInputFeedback();
+        generateNewArray();
+    };
+    const handleSizeInput = () => UserInputFeedback.set(true, `Array Size: ${arraySize}`);
+    const handleSpeedInput = () => UserInputFeedback.set(true, `Animation Speed: ${animationSpeed}`);
+    
+    const generateNewArray = () => Searching.generateNewArray(arraySize);
+    const search = () => {
+        if(!Number.isInteger(searchItem) || Math.sign(searchItem) == -1) {
+            UserInputFeedback.set(true, 'Positive integer only.');
+            hideUserInputFeedback(2000);
+        }
+    };
+
+    let arraySize = 130;
+    let animationSpeed = 9;
+    let searchItem;
 </script>
 
 <!-- search for integer -->
@@ -15,31 +38,47 @@
         type="number" 
         placeholder="0" 
         id="search-value" 
+        bind:value={searchItem}
         style="width: 10ch; text-align: center;">
 </div>
 <!-- Search! -->
-<button class="btns" color="primary"> Search! </button>
+<button class="btns" color="primary" on:click={search} disabled={!searchItem}> 
+    <!-- svelte-ignore a11y-invalid-attribute -->
+    <a href="#" style="width: 100%; height: 100%; display: block;">
+        Search!
+    </a>
+</button>
 
 <!-- Generate new array -->
-<button class="btns" color="primary"> Generate New Array! </button>
+<button class="btns" color="primary" on:click={generateNewArray}> 
+    Generate New Array! 
+</button>
 
 <!-- Change size -->
 <div class="not-btn" title="Change array size">
     <label for="array-size">Array size</label>
     <input 
+        bind:value={arraySize}
+        on:change={handleSizeChange}
+        on:input={handleSizeInput}
+        on:blur={hideUserInputFeedback}
         type="range" 
         role="slider"
         color="accent"
         min="10"
-        max="100"
+        max="130"
         step="1"
         id="array-size">
 </div>
 
 <!-- Change speed -->
-<div class="not-btn" title="Change searching speed.">
-    <label for="search-speed">Search speed</label>
+<div class="not-btn" title="Change animation speed.">
+    <label for="search-speed"> Speed </label>
     <input 
+        bind:value={animationSpeed}
+        on:change={hideUserInputFeedback}
+        on:input={handleSpeedInput}
+        on:blur={hideUserInputFeedback}
         type="range" 
         role="slider"
         color="primary"
@@ -57,11 +96,14 @@
         opacity: 0.2;
         pointer-events: none;
     }
-    button[color="accent"] > a {
+    /* button[color="accent"] > a {
         color: white;
-    }
+    } */
     button > a:hover {
         text-decoration: none;
+    }
+    button > a {
+        color: var(--surface1);
     }
     .btns {
         margin: 0.7rem 0.5rem;
