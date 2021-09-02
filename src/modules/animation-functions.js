@@ -4,6 +4,7 @@ export function changeColor(color, barNodeElement /* reference to bar node */, i
     color = invertColor ? invert(color) : color;
     barNodeElement.style.transition = '0ms';
     barNodeElement.style.backgroundColor = color;
+    setTimeout(() => barNodeElement.style.transition = '200ms ease', 500);
 }
 
 export function changeHeight(newHeight, barNodeElement) {

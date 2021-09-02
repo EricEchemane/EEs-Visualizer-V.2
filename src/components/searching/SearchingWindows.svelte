@@ -1,6 +1,7 @@
 <script>
     import { Searching } from '../../stores/searching';
     import { fade } from 'svelte/transition';
+    import { Found } from './searching-animations-logic';
 
     export let window;
 
@@ -8,11 +9,11 @@
     $: barClass = `bar-search-${window.name}`;
 </script>
 
-<section in:fade={{ duration: 1000 }}>
+<section in:fade={{ duration: 1000, delay: 200 }}>
     <div class="header">
         <h4> {window.name} </h4>
+        <p> { $Found.status == 'not-found' ? `Not Found`:`` } </p>
         <div style="flex: 1 1 auto"/>
-        <input type="color" id="color" bind:value={window.color}>
     </div>
 
     <div class="bars-container">

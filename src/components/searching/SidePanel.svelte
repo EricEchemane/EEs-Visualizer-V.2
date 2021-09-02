@@ -4,6 +4,7 @@
     import { UserInputFeedback } from '../../stores/user-input-feedback';
 
     import { fillTracks } from "../../modules/slider";
+    import { recieveAnimationData, revertColors, Found } from './searching-animations-logic';
 
     onMount(() => {
         fillTracks();
@@ -19,26 +20,41 @@
     const handleSpeedInput = () => UserInputFeedback.set(true, `Animation Speed: ${animationSpeed}`);
     
     const generateNewArray = () => Searching.generateNewArray(arraySize);
+    const togglePause = () => paused = !paused;
+
     const search = () => {
         if(!Number.isInteger(searchItem) || Math.sign(searchItem) == -1) {
             UserInputFeedback.set(true, 'Positive integer only.');
             hideUserInputFeedback(2000);
+        }
+        else {
+            revertColors($Searching.windows);
+            Found.set({status: 'not-searched', atIndex: null});
+
+            const animationFrames = [];
+            $Searching.windows.forEach(window => 
+                animationFrames.push(window.algo($Searching.array, searchItem)));
+
+            recieveAnimationData(animationFrames, $Searching, animationSpeed);
         }
     };
 
     let arraySize = 130;
     let animationSpeed = 9;
     let searchItem;
+    let playing = false;
+    let paused = true;
 </script>
 
 <!-- search for integer -->
 <div class="not-btn" title="Input an interger to search">
     <label for="search-value">Enter an Integer</label>
     <input 
+        bind:value={searchItem}
+        on:keypress={(event) => {if(event.key == "Enter") search()} }
         type="number" 
         placeholder="0" 
         id="search-value" 
-        bind:value={searchItem}
         style="width: 10ch; text-align: center;">
 </div>
 <!-- Search! -->
@@ -50,7 +66,7 @@
 </button>
 
 <!-- Generate new array -->
-<button class="btns" color="primary" on:click={generateNewArray}> 
+<button class="btns" color="primary" on:click={generateNewArray} disabled={playing}> 
     Generate New Array! 
 </button>
 
@@ -62,6 +78,7 @@
         on:change={handleSizeChange}
         on:input={handleSizeInput}
         on:blur={hideUserInputFeedback}
+        disabled={playing}
         type="range" 
         role="slider"
         color="accent"
@@ -79,6 +96,7 @@
         on:change={hideUserInputFeedback}
         on:input={handleSpeedInput}
         on:blur={hideUserInputFeedback}
+        disabled={playing}
         type="range" 
         role="slider"
         color="primary"
@@ -88,8 +106,13 @@
         id="search-speed">
 </div>
 
+<!-- Pause! -->
+<button class="btns" color="accent" disabled={!playing} on:click={togglePause}> 
+    { (!paused || playing) ? 'Pause':'Play' } 
+</button>
+
 <!-- Stop! -->
-<button class="btns" color="accent"> Stop </button>
+<button class="btns" color="accent" disabled={!playing}> Stop </button>
 
 <style>
     *[disabled] {

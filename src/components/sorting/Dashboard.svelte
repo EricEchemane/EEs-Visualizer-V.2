@@ -9,7 +9,7 @@
     import { DataTable as dt } from '../../stores/data-table';
     import { backdrop } from '../../stores/backdrop';
 
-    backdrop.registerClickEvent('close-data-table', () => tableIsshown = false);
+    backdrop.registerClickEvent('close-sorting-data-table', () => tableIsshown = false);
 
     let isRanked = false;
     let tableIsshown = false;
@@ -49,7 +49,7 @@
             map(each => ({ name: each.algo.name, timer: each.resultSpeed.raw }));
         
         dt.setData({title: "Sort Timer Results", table: table})
-        backdrop.setKey('close-data-table');
+        backdrop.setKey('close-sorting-data-table');
         tableIsshown = !tableIsshown;
     }
 

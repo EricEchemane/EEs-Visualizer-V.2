@@ -30,7 +30,7 @@
         </Router>
         <a href="https://github.com/ericechemane">
             <img
-                src="https://avatars.githubusercontent.com/u/68469018?v=4"
+                src="./assets/me.png"
                 class="avatar"
                 alt="ericechemane avatar" />
         </a>
@@ -72,7 +72,7 @@
         place-content: center;
         align-items: center;
         background: linear-gradient(var(--surface4),var(--surface3));
-        box-shadow: 0 2px 4px 4px rgba(0, 0, 0, .2);
+        box-shadow: 0 2px 2px 2px rgba(0, 0, 0, .1);
     }
     .links a {
         padding: .5rem 1.3rem;

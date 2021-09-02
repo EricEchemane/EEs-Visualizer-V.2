@@ -24,5 +24,6 @@
         color: var(--surface1);
         z-index: 10;
         font-weight: 500;
+        width: fit-content;
     }
 </style>

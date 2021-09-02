@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 import { generateArray } from '../modules/numberGenerator';
-import { generateRandomHexColor } from '../modules/randomColorGenerator';
+
+import { linearSearch } from '../components/searching/algortihms/linear';
 
 function create() {
     const { subscribe, set, update } = writable({
@@ -8,19 +9,24 @@ function create() {
         windows: [
             {
                 name: 'Linear Search',
-                algo: () => {},
-                color: generateRandomHexColor()
-            },
-            {
-                name: 'Jump Search',
-                algo: () => {},
-                color: generateRandomHexColor()
+                algo: linearSearch,
+                color: "#00FFFF"
             },
             {
                 name: 'Binary Search',
-                algo: () => {},
-                color: generateRandomHexColor()
-            }
+                algo: linearSearch,
+                color: "#00FFFF"
+            },
+            // {
+            //     name: 'Jump Search',
+            //     algo: () => {},
+            //     color: generateRandomHexColor()
+            // },
+            // {
+            //     name: 'Binary Search',
+            //     algo: () => {},
+            //     color: generateRandomHexColor()
+            // }
         ]
     });
 
