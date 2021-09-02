@@ -12,11 +12,6 @@ function create() {
                 algo: linearSearch,
                 color: "#00FFFF"
             },
-            {
-                name: 'Binary Search',
-                algo: linearSearch,
-                color: "#00FFFF"
-            },
             // {
             //     name: 'Jump Search',
             //     algo: () => {},

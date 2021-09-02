@@ -4,23 +4,32 @@
     import { UserInputFeedback } from '../../stores/user-input-feedback';
 
     import { fillTracks } from "../../modules/slider";
-    import { recieveAnimationData, revertColors, Found } from './searching-animations-logic';
+    import { 
+        recieveAnimationData, revertColors, 
+        SearchResult, pause, animate 
+    } from './searching-animations-logic';
+    import { AnimationObserver } from './AnimationObserver';
 
     onMount(() => {
         fillTracks();
     });
 
     const hideUserInputFeedback = (ms = 1000) => setTimeout(UserInputFeedback.hide, ms);
-    
     const handleSizeChange = () => {
         hideUserInputFeedback();
         generateNewArray();
     };
     const handleSizeInput = () => UserInputFeedback.set(true, `Array Size: ${arraySize}`);
     const handleSpeedInput = () => UserInputFeedback.set(true, `Animation Speed: ${animationSpeed}`);
-    
-    const generateNewArray = () => Searching.generateNewArray(arraySize);
-    const togglePause = () => paused = !paused;
+    const generateNewArray = () => {
+        Searching.generateNewArray(arraySize);
+        SearchResult.set({});
+    }
+    const togglePause = () => {
+        paused = !paused;
+        if(paused) pause();
+        else animate();
+    }
 
     const search = () => {
         if(!Number.isInteger(searchItem) || Math.sign(searchItem) == -1) {
@@ -29,7 +38,10 @@
         }
         else {
             revertColors($Searching.windows);
-            Found.set({status: 'not-searched', atIndex: null});
+            SearchResult.set({});
+            paused = false;
+            playing = true;
+            AnimationObserver.set([]);
 
             const animationFrames = [];
             $Searching.windows.forEach(window => 
@@ -44,6 +56,11 @@
     let searchItem;
     let playing = false;
     let paused = true;
+
+    $: allAreFinished = $AnimationObserver.length == $Searching.windows.length;
+    $: {
+        if(allAreFinished) playing = false;
+    }
 </script>
 
 <!-- search for integer -->
@@ -58,7 +75,7 @@
         style="width: 10ch; text-align: center;">
 </div>
 <!-- Search! -->
-<button class="btns" color="primary" on:click={search} disabled={!searchItem}> 
+<button class="btns" color="primary" on:click={search} disabled={!searchItem || playing}> 
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#" style="width: 100%; height: 100%; display: block;">
         Search!
@@ -107,8 +124,11 @@
 </div>
 
 <!-- Pause! -->
-<button class="btns" color="accent" disabled={!playing} on:click={togglePause}> 
-    { (!paused || playing) ? 'Pause':'Play' } 
+<button 
+    class="btns" 
+    color={!paused ? "accent":"primary"} 
+    disabled={!playing} on:click={togglePause}> 
+    { !paused ? 'Pause':'Play' } 
 </button>
 
 <!-- Stop! -->

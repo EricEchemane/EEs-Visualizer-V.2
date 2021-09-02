@@ -1,10 +1,8 @@
 import { changeColor } from '../../modules/animation-functions';
+import { AnimationObserver } from './AnimationObserver';
 
 import { writable } from 'svelte/store';
-export const Found = writable({ 
-    status: 'not-searched', 
-    atIndex: null
-});
+export const SearchResult = writable({});
 
 /* the array containing information about each window color and algo */
 let windowsArray; 
@@ -33,6 +31,13 @@ export function recieveAnimationData(
     iterators = {};
     animationIntervals = {};
 
+    const tempSearchResult = {};
+    windowsArray.forEach(window => { tempSearchResult[window.name] = { 
+        status: 'unsearched', foundAtIndex: null, steps: null };
+    });
+
+    SearchResult.set(tempSearchResult);
+    
     animate();
 }
 
@@ -61,14 +66,34 @@ export function animate() {
             else if(type == 'found') {
                 if(node) changeColor('lime', node, false);
                 clearArrayOfIntervals(animationIntervals[i]);
-                Found.set({ status: 'found', atIndex: i});
+                SearchResult.update(prev => {
+                    return {
+                        ...prev,
+                        [windowsArray[i].name]: {
+                            status: 'found', 
+                            foundAtIndex: index, 
+                            steps: Frames.length - 1
+                        }
+                    }
+                });
+                AnimationObserver.push(windowsArray[i].name);
             }
 
             /* prevent from doing infinite.
             If the iterator is at the end of the array, stop it the animation */
             if(iterators[i] == Frames.length) {
                 clearArrayOfIntervals(animationIntervals[i]);
-                Found.set({ status: 'not-found', atIndex: null});
+                SearchResult.update(prev => {
+                    return {
+                        ...prev,
+                        [windowsArray[i].name]: {
+                            status: 'not-found', 
+                            foundAtIndex: null, 
+                            steps: Frames.length - 1
+                        }
+                    }
+                });
+                AnimationObserver.push(windowsArray[i].name);
             };
             
             iterators[i] += 1;
