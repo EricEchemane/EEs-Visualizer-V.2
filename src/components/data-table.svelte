@@ -9,15 +9,15 @@
         <div class="table">
             <table>
                 <tr>
-                    <th>Place</th>
-                    <th>Algorithm</th>
-                    <th>Timer (m:s:ms) </th>
+                    {#each $DataTable.data.headers as header (header)}
+                        <th> {header} </th>
+                    {/each}
                 </tr>
-                {#each $DataTable.data.table as {name, timer},i (i)}
+                {#each $DataTable.data.table as row ,i (i)}
                     <tr>
-                        <td> {i+1} </td>
-                        <td> {name} </td>
-                        <td> {timer} </td>
+                        {#each row as data,i (i)}
+                            <td> {data} </td>
+                        {/each}
                     </tr>
                 {/each}
             </table>

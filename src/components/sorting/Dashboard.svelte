@@ -46,9 +46,14 @@
     function generateTable() {
         const rankedVersion = getRankedWindowsBySpeed();
         const table = rankedVersion.windows.
-            map(each => ({ name: each.algo.name, timer: each.resultSpeed.raw }));
+            map((each, index) => [index + 1, each.algo.name, each.resultSpeed.raw]);
         
-        dt.setData({title: "Sort Timer Results", table: table})
+        dt.setData({
+            title: "Sort Timer Results", 
+            table: table, 
+            headers: ["Place","Name","Timer(m:s:ms)"]
+        });
+
         backdrop.setKey('close-sorting-data-table');
         tableIsshown = !tableIsshown;
     }
