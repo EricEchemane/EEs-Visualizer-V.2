@@ -29,6 +29,15 @@
         paused = !paused;
         if(paused) pause();
         else animate();
+        UserInputFeedback.set(true, paused ? 'Paused':'Play');
+        hideUserInputFeedback();
+    }
+    const stop = () => {
+        playing = false;
+        paused = true;
+        pause();
+        AnimationObserver.set([]);
+        SearchResult.set({});
     }
 
     const search = () => {
@@ -132,7 +141,12 @@
 </button>
 
 <!-- Stop! -->
-<button class="btns" color="accent" disabled={!playing}> Stop </button>
+<button 
+    class="btns" color="accent" 
+    on:click={stop}
+    disabled={!playing}>
+    Stop 
+</button>
 
 <style>
     *[disabled] {
