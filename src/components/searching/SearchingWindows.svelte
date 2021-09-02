@@ -8,6 +8,10 @@
     $: nums = $Searching.array;
     $: barClass = `bar-search-${window.name}`;
 
+    $: if(window.name == "Binary Search") {
+        nums = [...nums].sort((a, b) => a-b);
+    }
+
 </script>
 
 <section in:fade={{ duration: 1000, delay: 200 }}>
@@ -17,7 +21,6 @@
         <p> { $SearchResult[window.name]?.status == 'found' 
             ? `Found at index ${$SearchResult[window.name]?.foundAtIndex} in ${$SearchResult[window.name]?.steps} steps.`
             :'' } </p>
-        <div style="flex: 1 1 auto"/>
     </div>
 
     <div class="bars-container">
@@ -74,7 +77,7 @@
         margin: 2rem 0;
     }
     .bars-container {
-        height: 220px;
+        height: 230px;
         display: flex;
         align-items: flex-end;
         margin: auto;

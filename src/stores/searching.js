@@ -2,6 +2,7 @@ import { writable } from 'svelte/store';
 import { generateArray } from '../modules/numberGenerator';
 
 import { linearSearch } from '../components/searching/algortihms/linear';
+import { binarySearch } from '../components/searching/algortihms/binary';
 
 function create() {
     const { subscribe, set, update } = writable({
@@ -17,11 +18,11 @@ function create() {
             //     algo: () => {},
             //     color: generateRandomHexColor()
             // },
-            // {
-            //     name: 'Binary Search',
-            //     algo: () => {},
-            //     color: generateRandomHexColor()
-            // }
+            {
+                name: 'Binary Search',
+                algo: binarySearch,
+                color: "#00FFFF"
+            }
         ]
     });
 
