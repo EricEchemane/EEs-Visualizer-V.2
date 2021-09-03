@@ -4,9 +4,11 @@
 
     import SortingSidePanel from "./components/sorting/SidePanel.svelte";
     import SortingDashboard from "./components/sorting/Dashboard.svelte";
+    import PathFindingPanel from "./components/path-finding/SidePanel.svelte";
 
     import SearchingSidePanel from './components/searching/SidePanel.svelte';
     import SearchingDashboard from './components/searching/SearchingDashboard.svelte';
+    import PathFindingDashboard from './components/path-finding/Dashboard.svelte';
 
     import UserInputFeedback from "./components/user-input-feedback.svelte";
     import { backdrop } from './stores/backdrop';
@@ -19,6 +21,7 @@
     let panels = {
         "sorting": SortingSidePanel,
         "searching": SearchingSidePanel,
+        "path-finding": PathFindingPanel,
         "": Tutorial,
     }
 </script>
@@ -40,6 +43,7 @@
         <Router>
             <Route path="sorting"><SortingDashboard /></Route>
             <Route path="searching"><SearchingDashboard /></Route>
+            <Route path="path-finding"><PathFindingDashboard /></Route>
         </Router>
     </main>
 </div>

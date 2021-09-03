@@ -483,6 +483,11 @@ select:hover {
     border: 1px solid var(--text2);
 }
 
+option {
+    font-size: 1rem;
+    color: var(--text1);
+}
+
 button,
 a[role="button"] {
     width: auto;
