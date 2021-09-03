@@ -5,15 +5,35 @@
     
     import Node from './node.svelte';
 
-    let nodeSize = 16;
-    let gridWidth;
+    let nodeSize = 20;
+
     let gridContainer;
+    /* Dimensions of gridContainer */
+    let gridWidth;
+    let gridHeight;
+    
     let grid = [];
+
+    let columnSize; /* number of nodes in x axis */
+    let rowSize; /* number of nodes in y axis */
+
+    let nodes; /* node elements */
 
     onMount(() => {
         ActiveVisualizer.set("path-finding");
-        grid = generateGrid();
-        window.onresize = () => grid = generateGrid();
+
+        const gridInfo = generateGrid();
+
+        grid = gridInfo.grid;
+        columnSize = gridInfo.rowSize; /* number of nodes in x axis */
+        rowSize = gridInfo.rowsLength; /* number of nodes in y axis */
+
+        /* this will cause to recalculate the grid 
+        dimensions for better view on diff. viewport sizes */
+        window.onresize = () => window.location.reload();
+
+        /* collect all nodes */
+        window.onload = () => nodes = document.getElementsByClassName('node');
     });
     onDestroy(() => {
         ActiveVisualizer.set("");
@@ -21,7 +41,8 @@
 
     const generateGrid = () => {
         gridWidth = gridContainer.clientWidth;
-        return getInitialGrid(gridWidth, nodeSize);
+        gridHeight = gridContainer.clientHeight;
+        return getInitialGrid(gridWidth, gridHeight, nodeSize);
     }
 </script>
 
@@ -29,27 +50,36 @@
     <div class="header">
         <h4> LEGENDS </h4>
     </div>
-    <section>
-        <div class="grid" bind:this={gridContainer}>
 
-        </div>
-    </section>
+    <div class="grid" bind:this={gridContainer}>
+        {#each grid as rows, y (rows)}
+            {#each rows as row, x (row)}
+                <Node size={nodeSize} />
+            {/each}
+        {/each}
+    </div>
 </main>
 
 <style>
     .grid {
         height: auto;
-    }
-    section {
+        display: flex;
+        flex-wrap: wrap;
         margin-top: 2rem;
-        padding: 1rem;
-        height: auto;
-        background-image: linear-gradient(var(--surface2), var(--surface1));
+        height: 70vh;
     }
     main {
         padding: 1rem;
     }
     :global(.node) {
-        border: 1px solid var(--text3);
+        border: 1px solid var(--surface4);
+    }
+    @media (max-width: 500px) {
+        main {
+            padding: 0;
+        }
+        .grid {
+            height: 60vh;
+        }
     }
 </style>

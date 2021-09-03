@@ -1,7 +1,7 @@
 
-export function getInitialGrid(gridWidth, nodeSize) {
+export function getInitialGrid(gridWidth, gridHeight, nodeSize) {
     const rowSize = Math.floor(gridWidth / nodeSize);
-    const rowsLength = rowSize > 10 ? rowSize : 10;
+    const rowsLength = Math.floor(gridHeight / nodeSize);
 
     const grid = [];
 
@@ -11,5 +11,15 @@ export function getInitialGrid(gridWidth, nodeSize) {
         grid.push(row);
     }
 
-    return grid;
+    return {grid, rowSize, rowsLength};
+}
+
+export function getNeighborNodes(nodes, columnSize, index) {
+    return {
+        from: nodes[index],
+        up: nodes[index - columnSize],
+        down: nodes[index + columnSize],
+        left: nodes[index - 1],
+        right: nodes[index + 1],
+    }
 }
