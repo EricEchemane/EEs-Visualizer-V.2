@@ -8,7 +8,7 @@
     let keydown = '';
 
     window.onkeydown = event => keydown = event.key;
-    window.onkeyup = event => keydown = '';
+    window.onkeyup = () => keydown = '';
 </script>
 
 <script>
@@ -48,6 +48,7 @@
     const handleDragEnd = event => {
         mouseIsDown = false;
         wallNodes.remove(index);
+        obstacles.remove(index);
         if(draggedElementIndex == $gridStore.startIndex) 
             gridStore.updateStartIndex(targetElementIndex);
         else if(draggedElementIndex == $gridStore.destinationIndex)

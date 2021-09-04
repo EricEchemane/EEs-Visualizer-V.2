@@ -52,8 +52,28 @@
 </script>
 
 <main>
-    <div class="header">
-        <h4> LEGENDS </h4>
+    <h4 id="legend"> LEGEND </h4>
+    <div class="header flex-center">
+        <div class="flex-center">
+            <div class="node"/>
+            Node
+        </div>
+        <div class="flex-center">
+            <div class="node wall"></div>
+            Wall
+        </div>
+        <div class="flex-center">
+            <div class="node obstacle"></div>
+            Obstacle
+        </div>
+        <div class="flex-center">
+            <div class="node start"/>
+            Start Node
+        </div>
+        <div class="flex-center">
+            <div class="node destination"/>
+            Destination Node
+        </div>
     </div>
 
     <div class="grid" bind:this={gridContainer}>
@@ -66,12 +86,24 @@
 </main>
 
 <style>
+    #legend {
+        margin-bottom: 1rem;
+    }
+    .flex-center {
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .header {
+        gap: 1.5rem;
+    }
     .grid {
         height: auto;
         display: flex;
         flex-wrap: wrap;
         margin-top: 2rem;
-        height: 70vh;
+        height: 65vh;
     }
     main {
         padding: 1rem;
@@ -80,8 +112,9 @@
         main {
             padding: 0;
         }
-        .grid {
-            height: 65vh;
-        }
+    }
+    .node {
+        width: 20px;
+        height: 20px;
     }
 </style>

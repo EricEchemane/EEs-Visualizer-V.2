@@ -736,6 +736,9 @@ a.activeRoute {
 .start, .start::before {
     background-color: lime !important;
 }
+.destination, .destination::before {
+    background-color: var(--accent) !important;
+}
 .target-node {
     transform: scale(2);
     border: 1px dotted white;
