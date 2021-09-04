@@ -2,10 +2,17 @@
     import { UserInputFeedback } from '../../stores/user-input-feedback';
     import { fillTracks } from "../../modules/slider";
     import { onMount } from 'svelte';
+    import { wallNodes } from './stores/walls';
+    import { obstacles } from './stores/obstacle';
 
     onMount(() => {
         fillTracks();
     });
+
+    const clearAll = () => {
+        obstacles.clear();
+        wallNodes.clear();
+    }
 </script>
 
 <!-- choose algrotihm -->
@@ -41,8 +48,19 @@
 </button>
 
 <div class="two-btns">
+    <!-- clear walls -->
+    <button color="primary" on:click={wallNodes.clear}> 
+        Clear Walls
+    </button>
+    <!-- clear obstacles -->
+    <button color="primary" on:click={obstacles.clear}> 
+        Clear Obstacles
+    </button>
+</div>
+
+<div class="two-btns">
     <!-- Clear All -->
-    <button color="primary"> Clear All </button>
+    <button color="primary" on:click={clearAll} > Clear All </button>
     <!-- Clear path -->
     <button color="primary"> Clear Path </button>
 </div>
@@ -66,6 +84,11 @@
 </div>
 
 <style>
+    button {
+        text-overflow: ellipsis !important;
+        white-space: nowrap;
+        overflow: hidden;
+    }
     *[disabled] {
         opacity: 0.2;
         pointer-events: none;

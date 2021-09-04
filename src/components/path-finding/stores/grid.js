@@ -12,7 +12,9 @@ function createGridStore() {
 }
 
 /* SETS containing the indeces of nodes */
+/* 
 export const visitedNodes = writable(new Set()); 
-export const wallNodes = writable(new Set()); 
+
 export const pathNodes = writable(new Set()); 
 export const weightedNodes = writable(new Set()); 
+*/

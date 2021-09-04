@@ -76,10 +76,6 @@
     main {
         padding: 1rem;
     }
-    :global(.node) {
-        border: 1px solid var(--surface4);
-        position: relative;
-    }
     @media (max-width: 500px) {
         main {
             padding: 0;
@@ -87,42 +83,5 @@
         .grid {
             height: 65vh;
         }
-    }
-    :global(.destination), :global(.start) {
-        background-color: var(--text1);
-        border-radius: 50%;
-        animation: breath 2s infinite ease;
-        z-index: 2;
-        cursor: grabbing;
-    }
-    :global(.destination)::after, :global(.start)::after {
-        content: '';
-        position: absolute;
-        border-radius: 50%;
-        background-color: var(--surface1);
-        top: 2px;
-        bottom: 2px;
-        left: 2px;
-        right: 2px;
-    }
-    :global(.destination)::before, :global(.start)::before {
-        content: '';
-        position: absolute;
-        border-radius: 50%;
-        background-color: var(--text1);
-        top: 6px;
-        bottom: 6px;
-        right: 6px;
-        left: 6px;
-        z-index: 2;
-    }
-    :global(.start), :global(.start)::before {
-        background-color: lime;
-    }
-    :global(.target-node) {
-        transform: scale(2);
-        border: 1px dotted white;
-        border-radius: 50%;
-        z-index: 3;
     }
 </style>

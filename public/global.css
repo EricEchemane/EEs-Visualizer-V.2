@@ -700,3 +700,53 @@ a.activeRoute {
         transform: scale(1);
     }
 }
+
+.node {
+    border: 1px solid var(--surface4);
+    position: relative;
+}
+.destination, .start {
+    background-color: var(--text1) !important;
+    border-radius: 50%;
+    animation: breath 2s infinite ease;
+    z-index: 2;
+    cursor: grab;
+}
+.destination::after, .start::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--surface1) !important;
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+}
+.destination::before, .start::before {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--text1) !important;
+    top: 6px;
+    bottom: 6px;
+    right: 6px;
+    left: 6px;
+    z-index: 2;
+}
+.start, .start::before {
+    background-color: lime !important;
+}
+.target-node {
+    transform: scale(2);
+    border: 1px dotted white;
+    border-radius: 50%;
+    z-index: 3;
+}
+.wall {
+    background-color: var(--surface4);
+}
+.obstacle {
+    background: url(./assets/obstacle.svg) no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
