@@ -20,6 +20,8 @@
     $: xsize = $PathFinding.xsize;
     $: ysize = $PathFinding.ysize;
 
+    const hideUserInputFeedback = () => setTimeout(UserInputFeedback.hide, 500);
+
     const clearAll = () => {
         obstacles.clear();
         wallNodes.clear();
@@ -29,13 +31,14 @@
     }
 
     const sampleSearch = () => {
+        pathNodes.clear();
+        visitedNodes.clear();
         const { searchAnimationFrames, pathAnimationFrames } = x_SearchFirst(
             xsize * ysize, 
             xsize, 
             $gridStore.destinationIndex,
             $gridStore.startIndex, 
             $wallNodes, $obstacles,
-            false
         )
         animate(searchAnimationFrames, pathAnimationFrames);
     }
@@ -102,11 +105,16 @@
 <div class="not-btn" title="Change animation speed">
     <label for="path-finding-speed"> Speed </label>
     <input 
+        on:input={
+        () => UserInputFeedback.set(true, `Animation Speed: ${$PathFinding.speed}`)}
+        on:change={hideUserInputFeedback}
+        on:blur={hideUserInputFeedback}
+        bind:value={$PathFinding.speed}
         id="path-finding-speed"
         color="primary"
         min="1"
         max="10"
-        step="0.1"
+        step="0.5"
         role="slider"
         type="range">
 </div>

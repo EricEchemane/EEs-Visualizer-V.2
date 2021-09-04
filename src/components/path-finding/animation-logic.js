@@ -1,13 +1,17 @@
 let searchTimeouts;
 let pathTimeouts;
+
 import { wallNodes } from './stores/walls';
 import { visitedNodes } from './stores/visited';
 import { pathNodes } from './stores/path';
+import { PathFinding } from './stores/path-finding';
 
 export function animate(searchFrames, pathFrames) {
 
     searchTimeouts = [];
     pathTimeouts = [];
+    let speed;
+    PathFinding.subscribe(v => speed = 115 - (v.speed * 10));
 
     searchFrames.forEach((index, i) => {
 
@@ -17,7 +21,7 @@ export function animate(searchFrames, pathFrames) {
                 animatePath(pathFrames);
                 visitedNodes.clear();
             }
-        }, 20 * i);
+        }, speed * i);
 
         searchTimeouts.push(timeout);
     });
