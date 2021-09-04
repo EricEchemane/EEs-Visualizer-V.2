@@ -2,16 +2,42 @@
     import { UserInputFeedback } from '../../stores/user-input-feedback';
     import { fillTracks } from "../../modules/slider";
     import { onMount } from 'svelte';
+
     import { wallNodes } from './stores/walls';
     import { obstacles } from './stores/obstacle';
+    import { pathNodes } from './stores/path';
+    import { visitedNodes } from './stores/visited';
+
+    import { x_SearchFirst } from './algorithms/x-first-search';
+    import { PathFinding } from './stores/path-finding';
+    import { gridStore } from './stores/grid';
+    import { animate, makeBorderWalls } from './animation-logic';
 
     onMount(() => {
         fillTracks();
     });
 
+    $: xsize = $PathFinding.xsize;
+    $: ysize = $PathFinding.ysize;
+
     const clearAll = () => {
         obstacles.clear();
         wallNodes.clear();
+        visitedNodes.clear();
+        pathNodes.clear();
+        makeBorderWalls(xsize, ysize);
+    }
+
+    const sampleSearch = () => {
+        const { searchAnimationFrames, pathAnimationFrames } = x_SearchFirst(
+            xsize * ysize, 
+            xsize, 
+            $gridStore.destinationIndex,
+            $gridStore.startIndex, 
+            $wallNodes, $obstacles,
+            false
+        )
+        animate(searchAnimationFrames, pathAnimationFrames);
     }
 </script>
 
@@ -40,7 +66,7 @@
 </div>
 
 <!-- Find the Path! -->
-<button color="accent" class="btns"> 
+<button color="accent" class="btns" on:click={sampleSearch}> 
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#" style="width: 100%; height: 100%; display: block;"> 
         Find the path! 
@@ -49,7 +75,9 @@
 
 <div class="two-btns">
     <!-- clear walls -->
-    <button color="primary" on:click={wallNodes.clear}> 
+    <button 
+        color="primary" 
+        on:click={() => {wallNodes.clear(); makeBorderWalls(xsize, ysize)}}> 
         Clear Walls
     </button>
     <!-- clear obstacles -->
@@ -62,7 +90,7 @@
     <!-- Clear All -->
     <button color="primary" on:click={clearAll} > Clear All </button>
     <!-- Clear path -->
-    <button color="primary"> Clear Path </button>
+    <button color="primary" on:click={pathNodes.clear}> Clear Path </button>
 </div>
 
 <div class="two-btns">    

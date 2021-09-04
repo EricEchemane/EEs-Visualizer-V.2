@@ -2,7 +2,7 @@ import { writable } from 'svelte/store';
 export const gridStore = createGridStore();
 
 function createGridStore() {
-    const { subscribe, set, update } = writable({ startIndex: 37, destinationIndex: 754 });
+    const { subscribe, set, update } = writable({ startIndex: 38, destinationIndex: 753 });
     return {
         subscribe,
         updateStartIndex: index => update(prev => ({...prev, startIndex: index})),
@@ -11,10 +11,8 @@ function createGridStore() {
     }
 }
 
-/* SETS containing the indeces of nodes */
 /* 
 export const visitedNodes = writable(new Set()); 
 
 export const pathNodes = writable(new Set()); 
-export const weightedNodes = writable(new Set()); 
 */

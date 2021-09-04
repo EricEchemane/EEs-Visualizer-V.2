@@ -2,6 +2,9 @@
     import { gridStore } from './stores/grid';
     import { wallNodes } from './stores/walls';
     import { obstacles } from './stores/obstacle';
+    import { visitedNodes } from './stores/visited';
+    import { pathNodes } from './stores/path';
+
     let draggedElementIndex;
     let targetElementIndex;
     let mouseIsDown = false;
@@ -20,9 +23,8 @@
     $: isDestination = index === $gridStore.destinationIndex;
     $: isWall = $wallNodes.has(index);
     $: isObstacle = $obstacles.has(index);
-    $: isPath = false;
-
-    $: isVisited = false;
+    $: isPath = $pathNodes.has(index);
+    $: isVisited = $visitedNodes.has(index);
 
     let node;
 
@@ -30,10 +32,12 @@
         if(isStartingPosition || isDestination) return;
 
         if(keydown == 'o') {
+            wallNodes.remove(index);
             isObstacle ? obstacles.remove(index) : obstacles.add(index);
             return;
         }
 
+        obstacles.remove(index)
         isWall ? wallNodes.remove(index) : wallNodes.add(index);
     }
     const handleDragLeave = event => {

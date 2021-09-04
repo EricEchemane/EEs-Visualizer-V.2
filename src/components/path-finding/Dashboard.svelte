@@ -3,6 +3,8 @@
     import { ActiveVisualizer } from '../../stores/active-visualizer';
     import { getInitialGrid } from './helper-functions';
     import { gridStore } from './stores/grid';
+    import { PathFinding } from './stores/path-finding';
+    import { makeBorderWalls } from './animation-logic';
     
     import Node from './node.svelte';
 
@@ -29,7 +31,11 @@
         columnSize = gridInfo.rowSize; /* number of nodes in x axis */
         rowSize = gridInfo.rowsLength; /* number of nodes in y axis */
 
-        gridStore.set((columnSize * 2), ((columnSize * rowSize) - 1) - (columnSize * 2));
+        makeBorderWalls(columnSize, rowSize);
+
+        PathFinding.setGridSize(columnSize,rowSize);
+
+        gridStore.set((columnSize * 4) + 1, (((columnSize * rowSize) - 1) - (columnSize * 4)) - 1);
 
         /* this will cause to recalculate the grid 
         dimensions for better view on diff. viewport sizes */
@@ -44,6 +50,7 @@
     });
 
     const reload = () => window.location.reload();
+    
     const generateGrid = () => {
         gridWidth = gridContainer.clientWidth;
         gridHeight = gridContainer.clientHeight;
@@ -55,23 +62,23 @@
     <h4 id="legend"> LEGEND </h4>
     <div class="header flex-center">
         <div class="flex-center">
-            <div class="node"/>
+            <div class="_node"/>
             Node
         </div>
         <div class="flex-center">
-            <div class="node wall"></div>
+            <div class="_node wall"></div>
             Wall
         </div>
         <div class="flex-center">
-            <div class="node obstacle"></div>
+            <div class="_node obstacle"></div>
             Obstacle
         </div>
         <div class="flex-center">
-            <div class="node start"/>
+            <div class="_node start"/>
             Start Node
         </div>
         <div class="flex-center">
-            <div class="node destination"/>
+            <div class="_node destination"/>
             Destination Node
         </div>
     </div>
@@ -99,11 +106,12 @@
         gap: 1.5rem;
     }
     .grid {
-        height: auto;
         display: flex;
         flex-wrap: wrap;
         margin-top: 2rem;
         height: 65vh;
+        gap: 0;
+        border-spacing: 0;
     }
     main {
         padding: 1rem;
@@ -113,8 +121,9 @@
             padding: 0;
         }
     }
-    .node {
+    ._node {
         width: 20px;
         height: 20px;
+        border: 1px solid var(--surface4);
     }
 </style>

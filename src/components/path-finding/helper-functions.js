@@ -14,12 +14,18 @@ export function getInitialGrid(gridWidth, gridHeight, nodeSize) {
     return {grid, rowSize, rowsLength};
 }
 
-export function getNeighborNodes(nodes, columnSize, index) {
+export function getSorroundingIndeces(index, columnSize) {
     return {
-        from: nodes[index],
-        up: nodes[index - columnSize],
-        down: nodes[index + columnSize],
-        left: nodes[index - 1],
-        right: nodes[index + 1],
+        up: index - columnSize,
+        down: index + columnSize,
+        left: index - 1,
+        right: index + 1
+    }
+}
+
+export class Node {
+    constructor(_indexNumber) {
+        this.indexNumber = _indexNumber;
+        this.parent = undefined;
     }
 }

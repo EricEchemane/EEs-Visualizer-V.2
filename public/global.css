@@ -739,6 +739,9 @@ a.activeRoute {
 .destination, .destination::before {
     background-color: var(--accent) !important;
 }
+.destination::after {
+    background-color: var(--text1) !important;
+}
 .target-node {
     transform: scale(2);
     border: 1px dotted white;
@@ -752,4 +755,34 @@ a.activeRoute {
     background: url(./assets/obstacle.svg) no-repeat;
     background-size: 100%;
     background-position: center;
+}
+
+.visited {
+    background: radial-gradient(yellow, orange, orange);
+    border: 1px solid orange !important;
+    animation: scale 1.5s ease;
+}
+
+.path {
+    background-color: var(--brand);
+    border: 1px solid var(--brand);
+    animation: path 1.5s ease;
+}
+
+@keyframes scale {
+    from {
+        transform: scale(.3);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes path {
+    from {
+        background-color: var(--accent);
+    }
+    tp {
+        background-color: var(--brand);
+    }
 }
