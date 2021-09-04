@@ -33,15 +33,17 @@
 
         /* this will cause to recalculate the grid 
         dimensions for better view on diff. viewport sizes */
-        window.onresize = () => window.location.reload();
+        window.addEventListener('resize', reload);
 
         /* collect all nodes */
         window.onload = () => nodes = document.getElementsByClassName('node');
     });
     onDestroy(() => {
         ActiveVisualizer.set("");
+        window.removeEventListener('resize', reload);
     });
 
+    const reload = () => window.location.reload();
     const generateGrid = () => {
         gridWidth = gridContainer.clientWidth;
         gridHeight = gridContainer.clientHeight;
@@ -91,7 +93,7 @@
         border-radius: 50%;
         animation: breath 2s infinite ease;
         z-index: 2;
-        cursor: pointer;
+        cursor: grabbing;
     }
     :global(.destination)::after, :global(.start)::after {
         content: '';
