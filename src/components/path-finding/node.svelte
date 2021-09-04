@@ -1,14 +1,41 @@
+<script context="module">
+    let draggedElementIndex;
+    let targetElementIndex;
+</script>
+
 <script>
+    import { gridStore } from './stores/grid';
+
     export let size; /* dimension as a square */
+    export let index;
 
     /* Booleans */
-    let isStartingPosition;
-    let isDestination;
-    let isWall = false;
-    let isWeighted = false;
-    let isPath = false;
+    $: isStartingPosition = index == $gridStore.startIndex;
+    $: isDestination = index == $gridStore.destinationIndex;
+    $: isWall = false;
+    $: isWeighted = false;
+    $: isPath = false;
 
-    let isVisited = false;
+    $: isVisited = false;
+
+    let node;
+
+    const handleDragLeave = event => {
+        node.classList.remove('target-node');
+    }
+    const handleDragOver = event => {
+        node.classList.add('target-node');
+        targetElementIndex = index;
+    }
+    const handleDragEnd = event => {
+        if(draggedElementIndex == $gridStore.startIndex) 
+            gridStore.updateStartIndex(targetElementIndex);
+        else if(draggedElementIndex == $gridStore.destinationIndex)
+            gridStore.updateDestination(targetElementIndex);
+    };
+    const handleDragStart = event => {
+        draggedElementIndex = index;
+    };
 
     $: className = `
         ${isStartingPosition ? 'start':''} 
@@ -21,6 +48,12 @@
 </script>
 
 <div 
+    bind:this={node}
+    on:dragend={handleDragEnd}
+    on:dragover={handleDragOver}
+    on:dragstart={handleDragStart}
+    on:dragleave={handleDragLeave}
+    draggable="{isStartingPosition || isDestination}"
     class="node {className}"  
     style="width: {size}px; height: {size}px">
 </div>
