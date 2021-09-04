@@ -1,3 +1,6 @@
+<script context="module">
+    import DragDropTouch from 'svelte-drag-drop-touch';
+</script>
 <script>
     import Navbar from "./components/Navbar.svelte";
     import Tutorial from "./components//Tutorial.svelte";

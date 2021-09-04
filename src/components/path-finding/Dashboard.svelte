@@ -118,8 +118,8 @@
         background-color: lime;
     }
     :global(.target-node) {
-        transform: scale(1.5);
-        border: 1px solid white;
+        transform: scale(2);
+        border: 1px dotted white;
         border-radius: 50%;
         z-index: 3;
     }
