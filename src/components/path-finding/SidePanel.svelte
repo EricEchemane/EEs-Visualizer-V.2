@@ -12,17 +12,11 @@
 <div class="not-btn">
     <select name="algorithm" id="algorithm-select" class="fullWidth">
         <option hidden>Choose Algorithm</option>
-        <option disabled>  </option>
         <option value="3"> A* Algorithm </option>
-        <option disabled>  </option>
         <option value="3"> Dijkstra's Algorithm </option>
-        <option disabled>  </option>
         <option value="1"> Greedy Algorithm </option>
-        <option disabled>  </option>
         <option value="1"> Breadth Search First </option>
-        <option disabled>  </option>
         <option value="2"> Depth Search First </option>
-        <option disabled>  </option>
     </select>
 </div>
 
@@ -30,17 +24,11 @@
 <div class="not-btn">
     <select name="maze/wall" id="maze/wall" class="fullWidth">
         <option hidden>Generate Obstacles</option>
-        <option disabled>  </option>
         <option value="3"> Recursive Division </option>
-        <option disabled>  </option>
         <option value="3"> Vertical Skew </option>
-        <option disabled>  </option>
         <option value="3"> Horizontal Skew </option>
-        <option disabled>  </option>
         <option value="3"> Random Walls </option>
-        <option disabled>  </option>
         <option value="3"> Random Weighted Nodes </option>
-        <option disabled>  </option>
     </select>
 </div>
 

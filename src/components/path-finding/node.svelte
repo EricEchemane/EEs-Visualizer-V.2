@@ -1,11 +1,10 @@
 <script context="module">
+    import { gridStore } from './stores/grid';
     let draggedElementIndex;
     let targetElementIndex;
 </script>
 
 <script>
-    import { gridStore } from './stores/grid';
-
     export let size; /* dimension as a square */
     export let index;
 

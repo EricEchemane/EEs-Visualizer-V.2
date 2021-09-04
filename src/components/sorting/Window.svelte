@@ -94,12 +94,10 @@
             title="Choose which sorting algorithm to use in this window. Current: {window.algo.name}">
             
             {#each SortingAlgortihms as algo (algo)}
-                <option disabled></option>
                 <option value={algo}>
                     {algo.name}
                 </option>
             {/each}
-            <option disabled></option>
         </select>
 
         <input

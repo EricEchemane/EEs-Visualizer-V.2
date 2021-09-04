@@ -29,7 +29,7 @@
         columnSize = gridInfo.rowSize; /* number of nodes in x axis */
         rowSize = gridInfo.rowsLength; /* number of nodes in y axis */
 
-        gridStore.set(0, ((columnSize * rowSize) - 1) - (columnSize * 2));
+        gridStore.set((columnSize * 2), ((columnSize * rowSize) - 1) - (columnSize * 2));
 
         /* this will cause to recalculate the grid 
         dimensions for better view on diff. viewport sizes */
