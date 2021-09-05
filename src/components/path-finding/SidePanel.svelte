@@ -91,10 +91,19 @@
 
 <!-- maze and patterns -->
 <div class="two-btns" >
-    <button disabled={playing} title="Square Division" on:click={() => {
-        clear();
-        square_division(xsize, ysize);
-    }}> Square Division </button>
+    <button 
+        class="small"
+        disabled={playing} 
+        title="Square Division" 
+        on:click={() => {
+            clear();
+            square_division(xsize, ysize);
+        }}> 
+        <!-- svelte-ignore a11y-invalid-attribute -->
+        <a href="#" style="width: 100%; height: 100%; display: block;"> 
+            Square Division
+        </a>
+    </button>
 </div>
 
 <!-- Find the Path! -->
@@ -170,6 +179,10 @@
     }
     button[color="accent"] > a {
         color: white;
+    }
+    button.small a {
+        color: var(--text1) !important;
+        font-size: .9rem;
     }
     button > a:hover {
         text-decoration: none;

@@ -8,7 +8,7 @@ export function square_division(xsize, ysize) {
     let unsub = wallNodes.subscribe(v => walls = v);
     unsub();
 
-    for(let y = 0; y < ysize; y+=6) {   
+    for(let y = 1; y < ysize; y+=6) {   
         for(let x = 1; x < xsize; x+=6) {
             const currentIndex = x + (xsize * y);
             generate(currentIndex, xsize, ysize);

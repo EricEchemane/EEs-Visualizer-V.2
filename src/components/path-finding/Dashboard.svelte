@@ -35,7 +35,7 @@
 
         PathFinding.setGridSize(columnSize,rowSize);
 
-        gridStore.set((columnSize * 4) + 1, (((columnSize * rowSize) - 1) - (columnSize * 4)) - 1);
+        gridStore.set((columnSize * 4) + 2, (((columnSize * rowSize) - 1) - (columnSize * 4)) - 2);
 
         /* this will cause to recalculate the grid 
         dimensions for better view on diff. viewport sizes */
