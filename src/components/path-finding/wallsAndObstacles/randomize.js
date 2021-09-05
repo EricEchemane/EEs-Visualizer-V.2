@@ -3,15 +3,16 @@ import { getRandomArbitrary } from '../../../modules/numberGenerator';
 
 let walls;
 
-export function square_division(xsize, ysize) {
+export function randomWalls(xsize, ysize) {
 
     let unsub = wallNodes.subscribe(v => walls = v);
     unsub();
+    const max = xsize * ysize;
 
-    for(let y = 1; y < ysize; y+=6) {   
-        for(let x = 1; x < xsize; x+=6) {
+    for(let y = 0; y < ysize; y+=4) {   
+        for(let x = 0; x < xsize; x+=4) {
             const currentIndex = x + (xsize * y);
-            generate(currentIndex, xsize, ysize);
+            if(currentIndex < max) generate(currentIndex, xsize, ysize);
         }
     }
     makeBorderWalls(xsize, ysize);
@@ -42,21 +43,21 @@ function generate(upperLeftCorner, xsize, ysize) {
     const random1 = getRandomArbitrary(1,4);
     const random2 = getRandomArbitrary(1,4);
 
+    // for(let x = 0; x < 5; x++) {
+    //     if(!vertical && x == random1) continue;
+    //     wallNodes.add(x + upperLeftCorner);
+    // }
     for(let x = 0; x < 5; x++) {
-        if(!vertical && x == random1) continue;
-        wallNodes.add(x + upperLeftCorner);
-    }
-    for(let x = 0; x < 5; x++) {
-        if(!vertical && x == random2) continue;
+        if( x == random2) continue;
         wallNodes.add(x + lowerLeftCorner);
     }
     
+    // for(let y = 1; y < 4; y++) {
+    //     if(vertical && y == random1) continue;
+    //     wallNodes.add(upperLeftCorner + (xsize * y));
+    // }
     for(let y = 1; y < 4; y++) {
-        if(vertical && y == random1) continue;
-        wallNodes.add(upperLeftCorner + (xsize * y));
-    }
-    for(let y = 1; y < 4; y++) {
-        if(vertical && y == random2) continue;
+        if( y == random1) continue;
         wallNodes.add(lowerRightCorner - (xsize * y));
     }
 
@@ -65,17 +66,9 @@ function generate(upperLeftCorner, xsize, ysize) {
     const ymiddle = upperLeftCorner + (xsize * 2);
 
     for(var x = 1; x < 4; x++) {
-        const skip = getRandomArbitrary(0,5);
-        if(skip == x) {
-            vertical ? wallNodes.add(xmiddle - xsize): wallNodes.add(xmiddle + (xsize * 5));
-            continue;
-        }
+        const skip = getRandomArbitrary(0,2);
+        if(skip == 1) continue;
         vertical ? wallNodes.add(xmiddle + (xsize * x)):wallNodes.add(ymiddle + x);
     }
-
-    // wallNodes.add(xmiddle - xsize);
-    // wallNodes.add(ymiddle - 1);
-    // wallNodes.add(xmiddle + (xsize * 5));
-    // wallNodes.add(ymiddle + 5);
 
 }

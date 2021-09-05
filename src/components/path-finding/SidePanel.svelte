@@ -13,7 +13,7 @@
     import { animate, makeBorderWalls, pause, resume } from './animation-logic';
     import { algorithms } from './algorithms/algorithms';
     /* Maze and Patterns */
-    import { square_division } from './wallsAndObstacles/randomized-dfs';
+    import { randomWalls } from './wallsAndObstacles/randomize';
 
     onMount(() => {
         fillTracks();
@@ -31,6 +31,7 @@
         wallNodes.clear();
         obstacles.clear();
         pathNodes.clear();
+        visitedNodes.clear();
     }
 
     const hideUserInputFeedback = () => setTimeout(UserInputFeedback.hide, 500);
@@ -56,6 +57,10 @@
     }
 
     const search = () => {
+        if(currentAlgo == 'none') {
+            alert('Select an algorithm first.');
+            return;
+        }
         playing = true;
         pathNodes.clear();
         visitedNodes.clear();
@@ -79,7 +84,7 @@
         id="algorithm-select" 
         class="fullWidth" 
         disabled={playing}>
-        <option hidden>Choose Algorithm</option>
+        <option hidden value="none">Choose Algorithm</option>
         
         {#each algorithms as algo (algo)}
             <option value={algo}> {algo.name} </option>
@@ -97,11 +102,11 @@
         title="Square Division" 
         on:click={() => {
             clear();
-            square_division(xsize, ysize);
+            randomWalls(xsize, ysize);
         }}> 
         <!-- svelte-ignore a11y-invalid-attribute -->
         <a href="#" style="width: 100%; height: 100%; display: block;"> 
-            Square Division
+            Random Walls
         </a>
     </button>
 </div>

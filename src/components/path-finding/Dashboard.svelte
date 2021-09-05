@@ -31,11 +31,11 @@
         columnSize = gridInfo.rowSize; /* number of nodes in x axis */
         rowSize = gridInfo.rowsLength; /* number of nodes in y axis */
 
-        makeBorderWalls(columnSize, rowSize);
-
+        
         PathFinding.setGridSize(columnSize,rowSize);
-
-        gridStore.set((columnSize * 4) + 2, (((columnSize * rowSize) - 1) - (columnSize * 4)) - 2);
+        
+        gridStore.set((columnSize * 4) + 6, (((columnSize * rowSize) - 1) - (columnSize * 4)) - 2);
+        makeBorderWalls(columnSize, rowSize);
 
         /* this will cause to recalculate the grid 
         dimensions for better view on diff. viewport sizes */
