@@ -12,6 +12,7 @@
     import { gridStore } from './stores/grid';
     import { animate, makeBorderWalls, pause, resume } from './animation-logic';
     import { algorithms } from './algorithms/algorithms';
+    /* Maze and Patterns */
     import { square_division } from './wallsAndObstacles/randomized-dfs';
 
     onMount(() => {
@@ -25,19 +26,14 @@
     let playing = false;
 
     let currentAlgo;
-    let currentObstaclesOrWalls;
+
+    const clear = () => {
+        wallNodes.clear();
+        obstacles.clear();
+        pathNodes.clear();
+    }
 
     const hideUserInputFeedback = () => setTimeout(UserInputFeedback.hide, 500);
-
-    const changeObstaclesOrWalls = () => {
-        clearAll();
-        if(currentObstaclesOrWalls == '0') square_division(xsize, ysize);
-        if(currentObstaclesOrWalls == '-1') {
-            wallNodes.clear(); 
-            obstacles.clear();
-            makeBorderWalls(xsize, ysize);
-        }
-    }
 
     const clearAll = () => {
         obstacles.clear();
@@ -91,23 +87,14 @@
     </select>
 </div>
 
+<p style="text-align: center;"> Generate Maze and Obstacles </p>
+
 <!-- maze and patterns -->
-<div class="not-btn">
-    <select 
-        bind:value={currentObstaclesOrWalls}
-        on:change={changeObstaclesOrWalls}
-        name="maze/wall" 
-        id="maze/wall" 
-        class="fullWidth" 
-        disabled={playing}>
-        <option hidden>Generate Walls</option>
-        <option value="0"> Squares Division </option>
-        <option value="-1"> Reset </option>
-        <!-- <option value=""> Vertical Skew </option>
-        <option value=""> Horizontal Skew </option>
-        <option value=""> Random Walls </option>
-        <option value=""> Random Obstacles </option> -->
-    </select>
+<div class="two-btns" >
+    <button disabled={playing} title="Square Division" on:click={() => {
+        clear();
+        square_division(xsize, ysize);
+    }}> Square Division </button>
 </div>
 
 <!-- Find the Path! -->
