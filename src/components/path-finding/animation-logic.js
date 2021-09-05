@@ -25,7 +25,7 @@ export function animate(_searchFrames, _pathFrames, _callback, search_startIndex
     pause();
 
     let speed;
-    PathFinding.subscribe(v => speed = 115 - (v.speed * 10));
+    PathFinding.subscribe(v => speed = 105 - (v.speed * 10));
 
     searchInterval = setInterval(() => {
         const index = searchFrames[search_currentIndex];
@@ -45,8 +45,8 @@ function animatePath(pathFrames, startIndex = 0) {
         const index = pathFrames[path_currentIndex];
         pathNodes.add(index);
         path_currentIndex++;
-        if(path_currentIndex == pathFrames.length) callback();
-    }, 30);
+        if(path_currentIndex >= pathFrames.length) callback();
+    }, 40);
 }
 
 export function pause() {
@@ -55,7 +55,7 @@ export function pause() {
 }
 
 export function resume() {
-    animate(searchFrames, pathFrames, search_currentIndex, path_currentIndex);
+    animate(searchFrames, pathFrames, callback ,search_currentIndex, path_currentIndex);
 }
 
 export function makeBorderWalls(xsize, ysize) {
