@@ -14,6 +14,7 @@
     import { algorithms } from './algorithms/algorithms';
     /* Maze and Patterns */
     import { randomWalls } from './wallsAndObstacles/randomize';
+    import { fourQuadrants } from './wallsAndObstacles/4quadrants';
 
     onMount(() => {
         fillTracks();
@@ -107,6 +108,20 @@
         <!-- svelte-ignore a11y-invalid-attribute -->
         <a href="#" style="width: 100%; height: 100%; display: block;"> 
             Random Walls
+        </a>
+    </button>
+    <button 
+        class="small"
+        disabled={playing} 
+        title="4 Quadrants" 
+        on:click={() => {
+            clear();
+            makeBorderWalls(xsize, ysize);
+            fourQuadrants(0, xsize, ysize, xsize);
+        }}> 
+        <!-- svelte-ignore a11y-invalid-attribute -->
+        <a href="#" style="width: 100%; height: 100%; display: block;"> 
+            4 Quadrants
         </a>
     </button>
 </div>

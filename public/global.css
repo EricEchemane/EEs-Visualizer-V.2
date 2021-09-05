@@ -762,7 +762,7 @@ a.activeRoute {
     background: radial-gradient(yellow, orange, orange);
     border: 1px solid orange ;
     will-change: transform;
-    animation: visit 1.5s ease;
+    animation: scale 1.5s ease;
     transition: 100ms ease;
 }
 
@@ -774,7 +774,7 @@ a.activeRoute {
     will-change: background-color;
 }
 
-@keyframes visit {
+@keyframes scale {
     from {
         transform: scale(.3);
     }

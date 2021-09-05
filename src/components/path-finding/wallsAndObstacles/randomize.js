@@ -61,14 +61,15 @@ function generate(upperLeftCorner, xsize, ysize) {
         wallNodes.add(lowerRightCorner - (xsize * y));
     }
 
-    
     const xmiddle = upperLeftCorner + 2;
     const ymiddle = upperLeftCorner + (xsize * 2);
 
     for(var x = 1; x < 4; x++) {
         const skip = getRandomArbitrary(0,2);
         if(skip == 1) continue;
-        vertical ? wallNodes.add(xmiddle + (xsize * x)):wallNodes.add(ymiddle + x);
+        vertical 
+            ? wallNodes.add(xmiddle + (xsize * x))
+            : wallNodes.add(ymiddle + x);
     }
 
 }
