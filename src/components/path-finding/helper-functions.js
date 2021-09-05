@@ -27,5 +27,6 @@ export class Node {
     constructor(_indexNumber) {
         this.indexNumber = _indexNumber;
         this.parent = undefined;
+        this.distance = Number.POSITIVE_INFINITY
     }
 }

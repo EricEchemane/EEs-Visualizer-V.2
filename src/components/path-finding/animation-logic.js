@@ -46,7 +46,7 @@ function animatePath(pathFrames, startIndex = 0) {
         pathNodes.add(index);
         path_currentIndex++;
         if(path_currentIndex >= pathFrames.length) callback();
-    }, 40);
+    }, 20);
 }
 
 export function pause() {

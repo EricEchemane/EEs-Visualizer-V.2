@@ -4,7 +4,7 @@ function create() {
     const { subscribe, set, update } = writable({
         xsize: 0,
         ysize: 0,
-        speed: 9.5
+        speed: 10,
     });
     return {
         subscribe,

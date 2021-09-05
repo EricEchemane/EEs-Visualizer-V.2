@@ -7,27 +7,56 @@ let start;
 let destination;
 let walls;
 let obstacles;
-let isBreadth = true;
+let isBreadth;
 let columnSize;
 let visited;
 
-export function x_SearchFirst(
-    _arrayLength,
-    _columnSize,
+export function depthFirstSearch (
+    xsize,
+    ysize,
     startIndex,
     destinationIndex,
     _wallNodes, /* Set of indeces of walls */
     _obstacles, /* Set of indeces of obstacles */
-    breadth = true /* if false, depth first search */
 ) {
-    
-    arrayLength = _arrayLength;
-    columnSize = _columnSize;
+    arrayLength = xsize * ysize;
+    columnSize = xsize;
     start = startIndex;
     destination = destinationIndex;
     walls = _wallNodes;
     obstacles = _obstacles;
-    isBreadth = breadth;
+    isBreadth = false;
+
+    searchAnimationFrames = [];
+    pathAnimationFrames = [];
+
+    let startNode = search();
+
+    while(startNode != undefined) {
+        pathAnimationFrames.push(startNode.indexNumber);
+        startNode = startNode.parent;
+    }
+
+    pathAnimationFrames.reverse();
+    return { searchAnimationFrames, pathAnimationFrames };
+}
+
+export function breadthFirstSearch(
+    xsize,
+    ysize,
+    startIndex,
+    destinationIndex,
+    _wallNodes, /* Set of indeces of walls */
+    _obstacles, /* Set of indeces of obstacles */
+) {
+    
+    arrayLength = xsize * ysize;
+    columnSize = xsize;
+    start = startIndex;
+    destination = destinationIndex;
+    walls = _wallNodes;
+    obstacles = _obstacles;
+    isBreadth = true;
 
     searchAnimationFrames = [];
     pathAnimationFrames = [];

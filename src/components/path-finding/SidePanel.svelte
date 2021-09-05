@@ -8,10 +8,11 @@
     import { pathNodes } from './stores/path';
     import { visitedNodes } from './stores/visited';
 
-    import { x_SearchFirst } from './algorithms/x-first-search';
     import { PathFinding } from './stores/path-finding';
     import { gridStore } from './stores/grid';
     import { animate, makeBorderWalls, pause, resume } from './animation-logic';
+    import { algorithms } from './algorithms/algorithms';
+    import { square_division } from './wallsAndObstacles/randomized-dfs';
 
     onMount(() => {
         fillTracks();
@@ -23,7 +24,20 @@
     let paused = true;
     let playing = false;
 
+    let currentAlgo;
+    let currentObstaclesOrWalls;
+
     const hideUserInputFeedback = () => setTimeout(UserInputFeedback.hide, 500);
+
+    const changeObstaclesOrWalls = () => {
+        clearAll();
+        if(currentObstaclesOrWalls == '0') square_division(xsize, ysize);
+        if(currentObstaclesOrWalls == '-1') {
+            wallNodes.clear(); 
+            obstacles.clear();
+            makeBorderWalls(xsize, ysize);
+        }
+    }
 
     const clearAll = () => {
         obstacles.clear();
@@ -49,12 +63,13 @@
         playing = true;
         pathNodes.clear();
         visitedNodes.clear();
-        const { searchAnimationFrames, pathAnimationFrames } = x_SearchFirst(
-            xsize * ysize, 
-            xsize, 
+        const { searchAnimationFrames, pathAnimationFrames } = currentAlgo.algo(
+            xsize,
+            ysize, 
             $gridStore.startIndex, 
             $gridStore.destinationIndex,
-            $wallNodes, $obstacles,
+            $wallNodes, 
+            $obstacles,
         )
         animate(searchAnimationFrames, pathAnimationFrames, stop);
     }
@@ -62,25 +77,36 @@
 
 <!-- choose algrotihm -->
 <div class="not-btn">
-    <select name="algorithm" id="algorithm-select" class="fullWidth" disabled={playing}>
+    <select 
+        bind:value={currentAlgo}
+        name="algorithm" 
+        id="algorithm-select" 
+        class="fullWidth" 
+        disabled={playing}>
         <option hidden>Choose Algorithm</option>
-        <option value="3"> A* Algorithm </option>
-        <option value="3"> Dijkstra's Algorithm </option>
-        <option value="1"> Greedy Algorithm </option>
-        <option value="1"> Breadth Search First </option>
-        <option value="2"> Depth Search First </option>
+        
+        {#each algorithms as algo (algo)}
+            <option value={algo}> {algo.name} </option>
+        {/each}
     </select>
 </div>
 
 <!-- maze and patterns -->
 <div class="not-btn">
-    <select name="maze/wall" id="maze/wall" class="fullWidth" disabled={playing}>
-        <option hidden>Generate Obstacles</option>
-        <option value="3"> Recursive Division </option>
-        <option value="3"> Vertical Skew </option>
-        <option value="3"> Horizontal Skew </option>
-        <option value="3"> Random Walls </option>
-        <option value="3"> Random Weighted Nodes </option>
+    <select 
+        bind:value={currentObstaclesOrWalls}
+        on:change={changeObstaclesOrWalls}
+        name="maze/wall" 
+        id="maze/wall" 
+        class="fullWidth" 
+        disabled={playing}>
+        <option hidden>Generate Walls</option>
+        <option value="0"> Squares Division </option>
+        <option value="-1"> Reset </option>
+        <!-- <option value=""> Vertical Skew </option>
+        <option value=""> Horizontal Skew </option>
+        <option value=""> Random Walls </option>
+        <option value=""> Random Obstacles </option> -->
     </select>
 </div>
 
