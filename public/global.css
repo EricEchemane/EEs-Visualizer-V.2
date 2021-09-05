@@ -760,13 +760,17 @@ a.activeRoute {
 .visited {
     background: radial-gradient(yellow, orange, orange);
     border: 1px solid orange !important;
+    will-change: transform;
     animation: scale 1.5s ease;
+    transition: 100ms ease;
 }
 
 .path {
     background-color: var(--brand);
     border: 1px solid var(--brand);
     animation: path 1.5s ease;
+    transition: 100ms ease;
+    will-change: background-color;
 }
 
 @keyframes scale {

@@ -1,42 +1,62 @@
-let searchTimeouts;
-let pathTimeouts;
+let searchInterval;
+let pathInterval;
+let searchFrames;
+let pathFrames;
+let callback;
+
+let search_currentIndex = 0;
+let path_currentIndex = 0;
 
 import { wallNodes } from './stores/walls';
 import { visitedNodes } from './stores/visited';
 import { pathNodes } from './stores/path';
 import { PathFinding } from './stores/path-finding';
 
-export function animate(searchFrames, pathFrames) {
+export function animate(_searchFrames, _pathFrames, _callback, search_startIndex = 0, path_startIndex = 0) {
 
-    searchTimeouts = [];
-    pathTimeouts = [];
+    searchFrames = _searchFrames;
+    pathFrames = _pathFrames;
+
+    callback = _callback; /* call when animations are finsihed */
+
+    search_currentIndex = search_startIndex;
+    path_currentIndex = path_startIndex;
+
+    pause();
+
     let speed;
     PathFinding.subscribe(v => speed = 115 - (v.speed * 10));
 
-    searchFrames.forEach((index, i) => {
-
-        let timeout = setTimeout(() => {
-            visitedNodes.add(index);
-            if(i + 1 == searchFrames.length) {
-                animatePath(pathFrames);
-                visitedNodes.clear();
-            }
-        }, speed * i);
-
-        searchTimeouts.push(timeout);
-    });
+    searchInterval = setInterval(() => {
+        const index = searchFrames[search_currentIndex];
+        visitedNodes.add(index);
+        search_currentIndex++;
+        if(search_currentIndex >= searchFrames.length) {
+            clearInterval(searchInterval);
+            visitedNodes.clear();
+            animatePath(pathFrames, path_currentIndex);
+        }
+    }, speed);
 }
 
-function animatePath(pathFrames) {
-    pathFrames.forEach((index, i) => {
-        let timeout = setTimeout(() => {
-            pathNodes.add(index);
-        }, 30 * i);
-
-        pathTimeouts.push(timeout);
-    })
+function animatePath(pathFrames, startIndex = 0) {
+    path_currentIndex = startIndex;
+    pathInterval = setInterval(() => {
+        const index = pathFrames[path_currentIndex];
+        pathNodes.add(index);
+        path_currentIndex++;
+        if(path_currentIndex == pathFrames.length) callback();
+    }, 30);
 }
 
+export function pause() {
+    clearInterval(searchInterval);
+    clearInterval(pathInterval);
+}
+
+export function resume() {
+    animate(searchFrames, pathFrames, search_currentIndex, path_currentIndex);
+}
 
 export function makeBorderWalls(xsize, ysize) {
     const bottomBorder = (xsize * (ysize - 1));

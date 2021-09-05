@@ -39,6 +39,7 @@ export function x_SearchFirst(
         startNode = startNode.parent;
     }
 
+    pathAnimationFrames.reverse();
     return { searchAnimationFrames, pathAnimationFrames };
 }
 

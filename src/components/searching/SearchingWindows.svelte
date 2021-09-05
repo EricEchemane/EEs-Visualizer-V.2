@@ -1,6 +1,5 @@
 <script>
     import { Searching } from '../../stores/searching';
-    import { fade } from 'svelte/transition';
     import { SearchResult } from './searching-animations-logic';
 
     export let window;
@@ -14,7 +13,7 @@
 
 </script>
 
-<section in:fade={{ duration: 1000, delay: 200 }}>
+<section>
     <div class="header">
         <h4> {window.name} </h4>
         <p> { $SearchResult[window.name]?.status == 'not-found' ? 'Not Found':'' } </p>

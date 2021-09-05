@@ -11,7 +11,7 @@
     import { x_SearchFirst } from './algorithms/x-first-search';
     import { PathFinding } from './stores/path-finding';
     import { gridStore } from './stores/grid';
-    import { animate, makeBorderWalls } from './animation-logic';
+    import { animate, makeBorderWalls, pause, resume } from './animation-logic';
 
     onMount(() => {
         fillTracks();
@@ -19,6 +19,9 @@
 
     $: xsize = $PathFinding.xsize;
     $: ysize = $PathFinding.ysize;
+
+    let paused = true;
+    let playing = false;
 
     const hideUserInputFeedback = () => setTimeout(UserInputFeedback.hide, 500);
 
@@ -30,23 +33,36 @@
         makeBorderWalls(xsize, ysize);
     }
 
-    const sampleSearch = () => {
+    const togglePause = () => {
+        if(paused) pause();
+        else resume();
+        paused = !paused;
+    }
+
+    const stop = () => {
+        paused = true;
+        playing = false;
+        pause();
+    }
+
+    const search = () => {
+        playing = true;
         pathNodes.clear();
         visitedNodes.clear();
         const { searchAnimationFrames, pathAnimationFrames } = x_SearchFirst(
             xsize * ysize, 
             xsize, 
-            $gridStore.destinationIndex,
             $gridStore.startIndex, 
+            $gridStore.destinationIndex,
             $wallNodes, $obstacles,
         )
-        animate(searchAnimationFrames, pathAnimationFrames);
+        animate(searchAnimationFrames, pathAnimationFrames, stop);
     }
 </script>
 
 <!-- choose algrotihm -->
 <div class="not-btn">
-    <select name="algorithm" id="algorithm-select" class="fullWidth">
+    <select name="algorithm" id="algorithm-select" class="fullWidth" disabled={playing}>
         <option hidden>Choose Algorithm</option>
         <option value="3"> A* Algorithm </option>
         <option value="3"> Dijkstra's Algorithm </option>
@@ -58,7 +74,7 @@
 
 <!-- maze and patterns -->
 <div class="not-btn">
-    <select name="maze/wall" id="maze/wall" class="fullWidth">
+    <select name="maze/wall" id="maze/wall" class="fullWidth" disabled={playing}>
         <option hidden>Generate Obstacles</option>
         <option value="3"> Recursive Division </option>
         <option value="3"> Vertical Skew </option>
@@ -69,7 +85,7 @@
 </div>
 
 <!-- Find the Path! -->
-<button color="accent" class="btns" on:click={sampleSearch}> 
+<button color="accent" class="btns" on:click={search} disabled={playing}> 
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#" style="width: 100%; height: 100%; display: block;"> 
         Find the path! 
@@ -80,25 +96,34 @@
     <!-- clear walls -->
     <button 
         color="primary" 
+        disabled={playing}
         on:click={() => {wallNodes.clear(); makeBorderWalls(xsize, ysize)}}> 
         Clear Walls
     </button>
     <!-- clear obstacles -->
-    <button color="primary" on:click={obstacles.clear}> 
+    <button color="primary" on:click={obstacles.clear} disabled={playing}> 
         Clear Obstacles
     </button>
 </div>
 
 <div class="two-btns">
     <!-- Clear All -->
-    <button color="primary" on:click={clearAll} > Clear All </button>
+    <button color="primary" on:click={clearAll} disabled={playing}> Clear All </button>
     <!-- Clear path -->
-    <button color="primary" on:click={pathNodes.clear}> Clear Path </button>
+    <button color="primary" on:click={pathNodes.clear} disabled={playing}> Clear Path </button>
 </div>
 
 <div class="two-btns">    
-    <button color="accent"> Pause </button>
-    <button color="accent"> Stop </button>
+    <button 
+        on:click={togglePause} 
+        disabled={!playing}
+        color="{!paused ? 'primary':'accent'}" >
+        {!paused ? 'Play':'Pause'}
+    </button>
+    <button 
+        on:click={stop}
+        color="accent" 
+        disabled={!playing}> Stop </button>
 </div>
 
 <!-- Speed -->
@@ -110,6 +135,7 @@
         on:change={hideUserInputFeedback}
         on:blur={hideUserInputFeedback}
         bind:value={$PathFinding.speed}
+        disabled={playing}
         id="path-finding-speed"
         color="primary"
         min="1"
