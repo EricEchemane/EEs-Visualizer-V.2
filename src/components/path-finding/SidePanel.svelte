@@ -13,7 +13,6 @@
     import { animate, makeBorderWalls, pause, resume } from './animation-logic';
     import { algorithms } from './algorithms/algorithms';
     /* Maze and Patterns */
-    import { fourQuadrants } from './maze-algorithms/4quadrants';
     import { recursive_division } from './maze-algorithms/recursive-division';
 
     onMount(() => {
@@ -97,21 +96,6 @@
 
 <!-- maze and patterns -->
 <div class="two-btns" >
-
-    <button 
-        class="small"
-        disabled={playing} 
-        title="4 Quadrants" 
-        on:click={() => {
-            clear();
-            makeBorderWalls(xsize, ysize);
-            fourQuadrants(0, xsize, ysize, xsize);
-        }}> 
-        <!-- svelte-ignore a11y-invalid-attribute -->
-        <a href="#" style="width: 100%; height: 100%; display: block;"> 
-            Quadrant Division
-        </a>
-    </button>
     <button 
         class="small"
         disabled={playing} 

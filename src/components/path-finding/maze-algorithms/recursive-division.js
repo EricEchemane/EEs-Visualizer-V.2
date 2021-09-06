@@ -1,12 +1,15 @@
 import { getRandomArbitrary } from '../../../modules/numberGenerator';
+import displayWalls from './maze-animation';
 import { wallNodes } from '../stores/walls';
 
 const vertical = '|';
 const horizontal = '__';
 let gridWidth;
+let walls;
 
 export function recursive_division(xsize, ysize) {
     gridWidth = xsize;
+    walls = [];
     /* 
     1. Get the boundary indeces {
         colStart, colEnd, height
@@ -20,6 +23,7 @@ export function recursive_division(xsize, ysize) {
 
    /* I need to adjust some of these parameters to adjust from the border walls */
    divide(1 + xsize, 1 + xsize + (xsize - 3), ysize - 2);
+   displayWalls(walls);
 }
 
 function divide(colstart, colend, height) {
@@ -90,13 +94,17 @@ function draw_V_walls(startIndex, bisectLength) {
     let doorIndex = randomOddNumber(bisectLength);
     for(let y = 0; y < bisectLength; y++) {
         let index = startIndex + (y * gridWidth);
-        doorIndex == y ? wallNodes.remove(index) : wallNodes.add(index);
+        doorIndex == y 
+            ? walls.push({type: 'remove', index: index}) 
+            : walls.push({type: 'add', index: index});
     }
 }
 function draw_H_walls(startIndex, bisectLength) {
     let doorIndex = randomOddNumber(bisectLength);
     for(let x = 0; x < bisectLength; x++) {
         let index = startIndex + x;
-        doorIndex == x ? wallNodes.remove(index) : wallNodes.add(index);
+        doorIndex == x 
+            ? walls.push({type: 'remove', index: index}) 
+            : walls.push({type: 'add', index: index});
     }
 }
