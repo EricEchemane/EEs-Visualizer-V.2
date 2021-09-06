@@ -24,6 +24,7 @@
 
     let paused = true;
     let playing = false;
+    let disableAll = false;
 
     let currentAlgo;
 
@@ -74,6 +75,7 @@
         )
         animate(searchAnimationFrames, pathAnimationFrames, stop);
     }
+    const toggleDisableAll = () => disableAll = !disableAll;
 </script>
 
 <!-- choose algrotihm -->
@@ -83,7 +85,7 @@
         name="algorithm" 
         id="algorithm-select" 
         class="fullWidth" 
-        disabled={playing}>
+        disabled={playing || disableAll}>
         <option hidden value="none">Choose Algorithm</option>
         
         {#each algorithms as algo (algo)}
@@ -98,7 +100,7 @@
 <div class="two-btns" >
     <button 
         class="small"
-        disabled={playing} 
+        disabled={playing || disableAll} 
         title="Recursive Division" 
         on:click={() => {
             clear();
@@ -112,7 +114,7 @@
     </button>
 </div>
 <!-- Find the Path! -->
-<button color="accent" class="btns" on:click={search} disabled={playing}> 
+<button color="accent" class="btns" on:click={search} disabled={playing || disableAll}> 
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#" style="width: 100%; height: 100%; display: block;"> 
         Find the path! 
@@ -123,34 +125,34 @@
     <!-- clear walls -->
     <button 
         color="primary" 
-        disabled={playing}
+        disabled={playing || disableAll}
         on:click={() => {wallNodes.clear(); makeBorderWalls(xsize, ysize)}}> 
         Clear Walls
     </button>
     <!-- clear obstacles -->
-    <button color="primary" on:click={obstacles.clear} disabled={playing}> 
+    <button color="primary" on:click={obstacles.clear} disabled={playing || disableAll}> 
         Clear Obstacles
     </button>
 </div>
 
 <div class="two-btns">
     <!-- Clear All -->
-    <button color="primary" on:click={clearAll} disabled={playing}> Clear All </button>
+    <button color="primary" on:click={clearAll} disabled={playing || disableAll}> Clear All </button>
     <!-- Clear path -->
-    <button color="primary" on:click={pathNodes.clear} disabled={playing}> Clear Path </button>
+    <button color="primary" on:click={pathNodes.clear} disabled={playing || disableAll}> Clear Path </button>
 </div>
 
 <div class="two-btns">    
     <button 
         on:click={togglePause} 
-        disabled={!playing}
+        disabled={!playing || disableAll}
         color="{!paused ? 'primary':'accent'}" >
         {!paused ? 'Play':'Pause'}
     </button>
     <button 
         on:click={stop}
         color="accent" 
-        disabled={!playing}> Stop </button>
+        disabled={!playing || disableAll}> Stop </button>
 </div>
 
 <!-- Speed -->
@@ -162,7 +164,7 @@
         on:change={hideUserInputFeedback}
         on:blur={hideUserInputFeedback}
         bind:value={$PathFinding.speed}
-        disabled={playing}
+        disabled={playing || disableAll}
         id="path-finding-speed"
         color="primary"
         min="1"
@@ -171,6 +173,8 @@
         role="slider"
         type="range">
 </div>
+
+<button hidden on:click={toggleDisableAll} id="pfp-disable-all" />
 
 <style>
     button {

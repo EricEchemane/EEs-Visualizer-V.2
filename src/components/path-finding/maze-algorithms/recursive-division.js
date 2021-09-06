@@ -1,6 +1,5 @@
 import { getRandomArbitrary } from '../../../modules/numberGenerator';
 import displayWalls from './maze-animation';
-import { wallNodes } from '../stores/walls';
 
 const vertical = '|';
 const horizontal = '__';

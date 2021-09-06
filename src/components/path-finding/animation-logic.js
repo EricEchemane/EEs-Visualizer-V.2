@@ -33,7 +33,6 @@ export function animate(_searchFrames, _pathFrames, _callback, search_startIndex
         search_currentIndex++;
         if(search_currentIndex >= searchFrames.length) {
             clearInterval(searchInterval);
-            visitedNodes.clear();
             animatePath(pathFrames, path_currentIndex);
         }
     }, speed);

@@ -21,6 +21,7 @@
     let rowSize; /* number of nodes in y axis */
 
     let nodes; /* node elements */
+    let disableGrid = false;
 
     onMount(() => {
         ActiveVisualizer.set("path-finding");
@@ -50,6 +51,8 @@
     });
 
     const reload = () => window.location.reload();
+
+    const toggleDisableGrid = () => disableGrid = !disableGrid;
     
     const generateGrid = () => {
         gridWidth = gridContainer.clientWidth;
@@ -83,7 +86,7 @@
         </div>
     </div>
 
-    <div class="grid" bind:this={gridContainer}>
+    <div class="grid {disableGrid ? 'disable':''}" bind:this={gridContainer}>
         {#each grid as rows, y (rows)}
             {#each rows as row, x (row)}
                 <Node size={nodeSize} index={(columnSize * y) + x} />
@@ -91,6 +94,8 @@
         {/each}
     </div>
 </main>
+
+<button hidden id="pfd-disable-grid" on:click={toggleDisableGrid} />
 
 <style>
     #legend {
@@ -125,5 +130,9 @@
         width: 20px;
         height: 20px;
         border: 1px solid var(--surface4);
+    }
+    .disable {
+        pointer-events: none;
+        cursor: not-allowed;
     }
 </style>

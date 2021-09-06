@@ -768,11 +768,10 @@ a.activeRoute {
 }
 
 .path {
+    background-image: none !important;
     background-color: var(--brand);
     border: 1px solid var(--brand);
     animation: path 1.5s ease;
-    transition: 100ms ease;
-    will-change: background-color;
 }
 
 @keyframes scale {
@@ -787,9 +786,11 @@ a.activeRoute {
 @keyframes path {
     from {
         background-color: var(--accent);
+        border: 1px solid var(--accent);
     }
     to {
         background-color: var(--brand);
+        border: 1px solid var(--brand);
     }
 }
 @keyframes pop {
