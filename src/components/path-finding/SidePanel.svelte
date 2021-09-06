@@ -13,8 +13,8 @@
     import { animate, makeBorderWalls, pause, resume } from './animation-logic';
     import { algorithms } from './algorithms/algorithms';
     /* Maze and Patterns */
-    import { randomWalls } from './wallsAndObstacles/randomize';
     import { fourQuadrants } from './wallsAndObstacles/4quadrants';
+    import { recursive_division } from './wallsAndObstacles/recursive-division';
 
     onMount(() => {
         fillTracks();
@@ -97,19 +97,7 @@
 
 <!-- maze and patterns -->
 <div class="two-btns" >
-    <button 
-        class="small"
-        disabled={playing} 
-        title="Square Division" 
-        on:click={() => {
-            clear();
-            randomWalls(xsize, ysize);
-        }}> 
-        <!-- svelte-ignore a11y-invalid-attribute -->
-        <a href="#" style="width: 100%; height: 100%; display: block;"> 
-            Random Walls
-        </a>
-    </button>
+
     <button 
         class="small"
         disabled={playing} 
@@ -121,11 +109,24 @@
         }}> 
         <!-- svelte-ignore a11y-invalid-attribute -->
         <a href="#" style="width: 100%; height: 100%; display: block;"> 
-            4 Quadrants
+            Quadrant Division
+        </a>
+    </button>
+    <button 
+        class="small"
+        disabled={playing} 
+        title="Recursive Division" 
+        on:click={() => {
+            clear();
+            makeBorderWalls(xsize, ysize);
+            recursive_division(xsize, ysize);
+        }}> 
+        <!-- svelte-ignore a11y-invalid-attribute -->
+        <a href="#" style="width: 100%; height: 100%; display: block;"> 
+            Recursive Division
         </a>
     </button>
 </div>
-
 <!-- Find the Path! -->
 <button color="accent" class="btns" on:click={search} disabled={playing}> 
     <!-- svelte-ignore a11y-invalid-attribute -->
@@ -202,7 +203,10 @@
     }
     button.small a {
         color: var(--text1) !important;
-        font-size: .9rem;
+        font-size: .8rem;
+        /* text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden; */
     }
     button > a:hover {
         text-decoration: none;
