@@ -13,8 +13,8 @@
     import { animate, makeBorderWalls, pause, resume } from './animation-logic';
     import { algorithms } from './algorithms/algorithms';
     /* Maze and Patterns */
-    import { fourQuadrants } from './wallsAndObstacles/4quadrants';
-    import { recursive_division } from './wallsAndObstacles/recursive-division';
+    import { fourQuadrants } from './maze-algorithms/4quadrants';
+    import { recursive_division } from './maze-algorithms/recursive-division';
 
     onMount(() => {
         fillTracks();
@@ -93,7 +93,7 @@
     </select>
 </div>
 
-<p style="text-align: center;"> Generate Maze and Obstacles </p>
+<p style="text-align: center;"> Maze and Obstacles </p>
 
 <!-- maze and patterns -->
 <div class="two-btns" >
