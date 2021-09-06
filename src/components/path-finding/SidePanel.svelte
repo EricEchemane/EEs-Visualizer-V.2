@@ -1,3 +1,8 @@
+<script context="module">
+    import { writable } from 'svelte/store';
+    export const PathFrames = writable({});
+</script>
+
 <script>
     import { UserInputFeedback } from '../../stores/user-input-feedback';
     import { fillTracks } from "../../modules/slider";
@@ -27,6 +32,19 @@
     let disableAll = false;
 
     let currentAlgo;
+
+    const populateFrames = () => {
+        if(!currentAlgo || !currentAlgo.algo) return;
+        const { pathAnimationFrames } = currentAlgo.algo(
+            xsize,
+            ysize, 
+            $gridStore.startIndex, 
+            $gridStore.destinationIndex,
+            $wallNodes, 
+            $obstacles,
+        )
+        PathFrames.set(pathAnimationFrames);
+    }
 
     const clear = () => {
         wallNodes.clear();
@@ -175,6 +193,7 @@
 </div>
 
 <button hidden on:click={toggleDisableAll} id="pfp-disable-all" />
+<button hidden on:click={populateFrames} id="populate-frames" />
 
 <style>
     button {

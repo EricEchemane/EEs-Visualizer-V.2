@@ -8,7 +8,7 @@
     
     import Node from './node.svelte';
 
-    let nodeSize = 20;
+    let nodeSize = 25;
 
     let gridContainer;
     /* Dimensions of gridContainer */
@@ -66,23 +66,31 @@
     <div class="header flex-center">
         <div class="flex-center">
             <div class="_node"/>
-            Node
+            Unvisited Node
         </div>
         <div class="flex-center">
+            <div class="_node visited"/>
+            Visited Node
+        </div>
+        <div class="flex-center" title="Click and drag to add walls.">
             <div class="_node wall"></div>
             Wall
         </div>
-        <div class="flex-center">
+        <div class="flex-center" title="Click and drag and press 'w' to add weights.">
             <div class="_node obstacle"></div>
-            Obstacle
+            Weighted Node
         </div>
-        <div class="flex-center">
+        <div class="flex-center" title="click and drag the icon to reposition this node.">
             <div class="_node start"/>
             Start Node
         </div>
-        <div class="flex-center">
+        <div class="flex-center" title="click and drag the icon to reposition this node.">
             <div class="_node destination"/>
             Destination Node
+        </div>
+        <div class="flex-center">
+            <div class="_node path"/>
+            Path Node
         </div>
     </div>
 

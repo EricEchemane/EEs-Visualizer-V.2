@@ -755,9 +755,11 @@ a.activeRoute {
     animation: pop 1s ease;
 }
 .obstacle {
-    background: url(./assets/obstacle.svg) no-repeat;
+    background: url(./assets/weight.png) no-repeat;
     background-size: 100%;
     background-position: center;
+    will-change: transform, brightness;
+    animation: pop 1s ease;
 }
 
 .visited {
@@ -788,11 +790,11 @@ a.activeRoute {
 @keyframes path {
     from {
         background-color: var(--accent);
-        border: 1px solid var(--accent);
+        /* border: 1px solid var(--accent); */
     }
     to {
         background-color: var(--brand);
-        border: 1px solid var(--brand);
+        /* border: 1px solid var(--brand); */
     }
 }
 @keyframes pop {

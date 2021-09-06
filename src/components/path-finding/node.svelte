@@ -4,14 +4,31 @@
     import { obstacles } from './stores/obstacle';
     import { visitedNodes } from './stores/visited';
     import { pathNodes } from './stores/path';
+    import { PathFrames } from './SidePanel.svelte';
 
     let draggedElementIndex;
     let targetElementIndex;
     let mouseIsDown = false;
     let keydown = '';
-
+    
     window.onkeydown = event => keydown = event.key;
     window.onkeyup = () => keydown = '';
+    
+    const populateFrames = () => {
+        let frames;
+        document.getElementById('populate-frames').click();
+        const unsub = PathFrames.subscribe(value => frames = value);
+        unsub();
+        animatePath(frames);
+    }
+    const animatePath = frames => {
+        try {
+            pathNodes.clear();
+            frames.forEach(index => pathNodes.add(index));
+        } catch (error) {
+            alert('Select an algorithm first.');
+        }
+    }
 </script>
 
 <script>
@@ -31,14 +48,16 @@
     const toggle = event => {
         if(isStartingPosition || isDestination) return;
 
-        if(keydown == 'o') {
+        if(keydown == 'w' || keydown == 'W') {
             wallNodes.remove(index);
             isObstacle ? obstacles.remove(index) : obstacles.add(index);
+            populateFrames();
             return;
         }
 
         obstacles.remove(index)
         isWall ? wallNodes.remove(index) : wallNodes.add(index);
+        populateFrames();
     }
     const handleDragLeave = event => {
         node.classList.remove('target-node');
@@ -57,6 +76,7 @@
             gridStore.updateStartIndex(targetElementIndex);
         else if(draggedElementIndex == $gridStore.destinationIndex)
             gridStore.updateDestination(targetElementIndex);
+        populateFrames();
     };
     const handleDragStart = event => {
         if(!(isStartingPosition || isDestination)) {

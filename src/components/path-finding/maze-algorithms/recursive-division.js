@@ -28,7 +28,7 @@ export function recursive_division(xsize, ysize) {
 function divide(colstart, colend, height) {
     const width = colend - colstart + 1;
 
-    if(width < 4 || height < 4) return;
+    if(width < 3 || height < 3) return;
 
     const orientation = checkOrientation(width, height);
 
