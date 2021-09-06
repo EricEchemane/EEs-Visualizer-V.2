@@ -26,7 +26,7 @@
             pathNodes.clear();
             frames.forEach(index => pathNodes.add(index));
         } catch (error) {
-            alert('Select an algorithm first.');
+            return;
         }
     }
 </script>
@@ -87,8 +87,17 @@
         draggedElementIndex = index;
     };
     const handleMouseOver = event => {
-        if(!mouseIsDown) return;
-        toggle();
+        if(!mouseIsDown || isStartingPosition || isDestination) return;
+        visitedNodes.remove(index);
+        if(keydown == 'w' || keydown == 'W') {
+            wallNodes.remove(index);
+            obstacles.add(index);
+            populateFrames();
+            return;
+        }
+        obstacles.remove(index);
+        wallNodes.add(index);
+        populateFrames();
     }
 
     $: className = `
