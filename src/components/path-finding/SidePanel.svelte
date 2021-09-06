@@ -1,6 +1,6 @@
 <script context="module">
     import { writable } from 'svelte/store';
-    export const PathFrames = writable({});
+    export const PathFrames = writable([]);
 </script>
 
 <script>
@@ -56,6 +56,8 @@
     const hideUserInputFeedback = () => setTimeout(UserInputFeedback.hide, 500);
 
     const clearAll = () => {
+        currentAlgo = 'none';
+        PathFrames.set([]);
         obstacles.clear();
         wallNodes.clear();
         visitedNodes.clear();

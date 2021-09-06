@@ -89,14 +89,16 @@
     const handleMouseOver = event => {
         if(!mouseIsDown || isStartingPosition || isDestination) return;
         visitedNodes.remove(index);
-        if(keydown == 'w' || keydown == 'W') {
+
+        if (keydown == 't' || keydown == 'T') toggle();
+        else if(keydown == 'w' || keydown == 'W') {
             wallNodes.remove(index);
             obstacles.add(index);
-            populateFrames();
-            return;
         }
-        obstacles.remove(index);
-        wallNodes.add(index);
+        else {
+            obstacles.remove(index);
+            wallNodes.add(index);
+        }
         populateFrames();
     }
 
