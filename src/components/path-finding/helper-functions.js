@@ -14,13 +14,12 @@ export function getInitialGrid(gridWidth, gridHeight, nodeSize) {
     return {grid, rowSize, rowsLength};
 }
 
-export function getSorroundingIndeces(index, columnSize) {
-    return {
-        up: index - columnSize,
-        down: index + columnSize,
-        left: index - 1,
-        right: index + 1
-    }
+export function getSorroundingIndeces(index, columnSize, asArray = false) {
+    let up = index - columnSize;
+    let down = index + columnSize;
+    let left = index - 1;
+    let right = index + 1;
+    return asArray ? [up, down,right, left] : { up, down, left, right };
 }
 
 export class Node {

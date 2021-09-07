@@ -47,14 +47,13 @@
 
     const toggle = event => {
         if(isStartingPosition || isDestination) return;
-
+        visitedNodes.remove(index);
         if(keydown == 'w' || keydown == 'W') {
             wallNodes.remove(index);
             isObstacle ? obstacles.remove(index) : obstacles.add(index);
             populateFrames();
             return;
         }
-
         obstacles.remove(index)
         isWall ? wallNodes.remove(index) : wallNodes.add(index);
         populateFrames();

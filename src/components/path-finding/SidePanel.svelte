@@ -17,8 +17,10 @@
     import { gridStore } from './stores/grid';
     import { animate, makeBorderWalls, pause, resume } from './animation-logic';
     import { algorithms } from './algorithms/algorithms';
-    /* Maze and Patterns */
+
+    /* Maze and Patterns algorithms */
     import { recursive_division } from './maze-algorithms/recursive-division';
+    import { randomDFS } from './maze-algorithms/random-dfs';
 
     onMount(() => {
         fillTracks();
@@ -130,6 +132,20 @@
         <!-- svelte-ignore a11y-invalid-attribute -->
         <a href="#" style="width: 100%; height: 100%; display: block;"> 
             Recursive Division
+        </a>
+    </button>
+    <button 
+        class="small"
+        disabled={playing || disableAll} 
+        title="Random Depth-first Search" 
+        on:click={() => {
+            clear();
+            makeBorderWalls(xsize, ysize);
+            randomDFS(xsize, ysize);
+        }}> 
+        <!-- svelte-ignore a11y-invalid-attribute -->
+        <a href="#" style="width: 100%; height: 100%; display: block;"> 
+            Random DFS
         </a>
     </button>
 </div>
