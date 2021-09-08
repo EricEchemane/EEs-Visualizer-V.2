@@ -1,13 +1,13 @@
 import { getRandomArbitrary } from '../../../modules/numberGenerator';
 import { wallNodes } from '../stores/walls';
 import { getSorroundingIndeces } from '../helper-functions';
-import displayWalls from './maze-animation';
+import displayWalls, { displayObstacles } from './maze-animation';
 
 let walls; /* a Set cotaining the indeces of walls */
 let gridWidth;
 let wallsArray;
 
-export function randomDFS(xsize, ysize) {
+export function randomDFS(xsize, ysize, forWalls = true) {
     /* If you dont do 'walls = value' and not 'walls = new Set(value)' 
     the 'walls' will become reactive to changes and it will break the animations. */
     const unsub = wallNodes.subscribe(value => walls = new Set(value));
@@ -59,7 +59,7 @@ export function randomDFS(xsize, ysize) {
         randomIndex != -1 ? stack.push(indeces[randomIndex]) : stack.pop();
     }
 
-    displayWalls(wallsArray);
+    forWalls ? displayWalls(wallsArray) : displayObstacles(wallsArray);
 }
 
 function deadEnd(_index, except) {

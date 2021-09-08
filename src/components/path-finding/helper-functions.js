@@ -26,6 +26,18 @@ export class Node {
     constructor(_indexNumber) {
         this.indexNumber = _indexNumber;
         this.parent = undefined;
-        this.distance = Number.POSITIVE_INFINITY
     }
+}
+
+export class WeightedNode extends Node{
+    constructor(_indexNumber) {
+        super(_indexNumber);
+        this.distance = Number.POSITIVE_INFINITY;
+        this.visited = false;
+        this.isObstacle = false;
+    }
+    updateDistance(newDistance) {
+        this.distance = newDistance;
+    }
+    visit() { this.visited = true }
 }

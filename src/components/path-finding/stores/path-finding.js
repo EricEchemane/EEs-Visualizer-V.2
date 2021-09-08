@@ -5,6 +5,7 @@ function create() {
         xsize: 0,
         ysize: 0,
         speed: 10,
+        currentAlgo: 'none'
     });
     return {
         subscribe,

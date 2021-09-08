@@ -33,11 +33,9 @@
     let playing = false;
     let disableAll = false;
 
-    let currentAlgo;
-
     const populateFrames = () => {
-        if(!currentAlgo || !currentAlgo.algo) return;
-        const { pathAnimationFrames } = currentAlgo.algo(
+        if(!$PathFinding.currentAlgo || !$PathFinding.currentAlgo.algo) return;
+        const { pathAnimationFrames } = $PathFinding.currentAlgo.algo(
             xsize,
             ysize, 
             $gridStore.startIndex, 
@@ -58,7 +56,7 @@
     const hideUserInputFeedback = () => setTimeout(UserInputFeedback.hide, 500);
 
     const clearAll = () => {
-        currentAlgo = 'none';
+        PathFinding.update(prev => ({...prev, currentAlgo: 'none'}));
         PathFrames.set([]);
         obstacles.clear();
         wallNodes.clear();
@@ -80,14 +78,14 @@
     }
 
     const search = () => {
-        if(currentAlgo == 'none') {
+        if($PathFinding.currentAlgo == 'none') {
             alert('Select an algorithm first.');
             return;
         }
         playing = true;
         pathNodes.clear();
         visitedNodes.clear();
-        const { searchAnimationFrames, pathAnimationFrames } = currentAlgo.algo(
+        const { searchAnimationFrames, pathAnimationFrames } = $PathFinding.currentAlgo.algo(
             xsize,
             ysize, 
             $gridStore.startIndex, 
@@ -103,7 +101,7 @@
 <!-- choose algrotihm -->
 <div class="not-btn">
     <select 
-        bind:value={currentAlgo}
+        bind:value={$PathFinding.currentAlgo}
         name="algorithm" 
         id="algorithm-select" 
         class="fullWidth" 
@@ -149,11 +147,32 @@
         </a>
     </button>
 </div>
-<!-- Find the Path! -->
-<button color="accent" class="btns" on:click={search} disabled={playing || disableAll}> 
+
+<button 
+    class="small btns"
+    disabled={playing || disableAll} 
+    title="Random Depth-first Search for Obstacles" 
+    on:click={() => {
+        clear();
+        makeBorderWalls(xsize, ysize);
+        if($PathFinding.currentAlgo.isWeighted) randomDFS(xsize, ysize, false);
+        else alert('Weighted nodes only works with Weighted Algorithms');
+    }}> 
     <!-- svelte-ignore a11y-invalid-attribute -->
     <a href="#" style="width: 100%; height: 100%; display: block;"> 
-        Find the path! 
+        Random Weighted Nodes
+    </a>
+</button>
+
+<!-- Find the Path! -->
+<button 
+    on:click={search} 
+    disabled={playing || disableAll || $PathFinding.currentAlgo == 'none'}
+    color="accent" class="btns">
+     
+    <!-- svelte-ignore a11y-invalid-attribute -->
+    <a href="#" style="width: 100%; height: 100%; display: block;"> 
+        {$PathFinding.currentAlgo == 'none' ? 'Pick an algorihtm first.':'Find the path!'}
     </a>
 </button>
 

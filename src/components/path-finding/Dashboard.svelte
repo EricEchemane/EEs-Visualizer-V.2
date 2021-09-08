@@ -3,6 +3,8 @@
     import { ActiveVisualizer } from '../../stores/active-visualizer';
     import { getInitialGrid } from './helper-functions';
     import { gridStore } from './stores/grid';
+    import { pathNodes } from './stores/path';
+    import { visitedNodes } from './stores/visited';
     import { PathFinding } from './stores/path-finding';
     import { makeBorderWalls } from './animation-logic';
     
@@ -25,6 +27,8 @@
 
     onMount(() => {
         ActiveVisualizer.set("path-finding");
+        pathNodes.clear();
+        visitedNodes.clear();
 
         const gridInfo = generateGrid();
 

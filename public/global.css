@@ -706,7 +706,7 @@ a.activeRoute {
     position: relative;
 }
 .destination, .start {
-    background-color: var(--text1) !important;
+    background-color: var(--text1);
     border-radius: 50%;
     animation: breath 2s infinite ease;
     z-index: 2;
@@ -717,7 +717,7 @@ a.activeRoute {
     content: '';
     position: absolute;
     border-radius: 50%;
-    background-color: var(--surface1) !important;
+    background-color: var(--surface1);
     top: 2px;
     bottom: 2px;
     left: 2px;
@@ -727,7 +727,7 @@ a.activeRoute {
     content: '';
     position: absolute;
     border-radius: 50%;
-    background-color: var(--text1) !important;
+    background-color: var(--text1);
     top: 6px;
     bottom: 6px;
     right: 6px;
@@ -764,18 +764,36 @@ a.activeRoute {
 
 .visited {
     background: radial-gradient(yellow, orange, orange);
-    border: 1px solid orange ;
+    border: 1px solid orange;
     will-change: transform, brightness, background;
     animation: scale 2s ease, pop 2s ease;
     transition: 100ms ease;
 }
 
 .path {
-    background-image: none !important;
+    background-image: none;
     background-color: var(--brand);
     border: 1px solid var(--brand);
     animation: path 1.5s ease;
     will-change: background;
+}
+
+.visited-obstacle {
+    background: url(./assets/weight.png) no-repeat;
+    background-color: orange;
+    border: 1px solid orange;
+    background-size: 100%;
+    background-position: center;
+    animation: pop 1s ease;
+}
+
+.path-obstacle {
+    background: url(./assets/weight.png) no-repeat;
+    background-color: var(--brand);
+    border: 1px solid var(--brand);
+    background-size: 100%;
+    background-position: center;
+    animation: path 1.5s ease;
 }
 
 @keyframes scale {

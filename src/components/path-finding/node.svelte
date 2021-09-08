@@ -4,6 +4,7 @@
     import { obstacles } from './stores/obstacle';
     import { visitedNodes } from './stores/visited';
     import { pathNodes } from './stores/path';
+    import { PathFinding } from './stores/path-finding';
     import { PathFrames } from './SidePanel.svelte';
 
     let draggedElementIndex;
@@ -19,9 +20,9 @@
         document.getElementById('populate-frames').click();
         const unsub = PathFrames.subscribe(value => frames = value);
         unsub();
-        animatePath(frames);
+        drawPath(frames);
     }
-    const animatePath = frames => {
+    const drawPath = frames => {
         try {
             pathNodes.clear();
             frames.forEach(index => pathNodes.add(index));
@@ -42,18 +43,20 @@
     $: isObstacle = $obstacles.has(index);
     $: isPath = $pathNodes.has(index);
     $: isVisited = $visitedNodes.has(index);
+    $: isWeighted = $PathFinding.currentAlgo.isWeighted;
 
     let node;
 
     const toggle = event => {
         if(isStartingPosition || isDestination) return;
-        visitedNodes.remove(index);
         if(keydown == 'w' || keydown == 'W') {
+            if(!isWeighted) return;
             wallNodes.remove(index);
             isObstacle ? obstacles.remove(index) : obstacles.add(index);
             populateFrames();
             return;
         }
+        visitedNodes.remove(index);
         obstacles.remove(index)
         isWall ? wallNodes.remove(index) : wallNodes.add(index);
         populateFrames();
@@ -87,14 +90,23 @@
     };
     const handleMouseOver = event => {
         if(!mouseIsDown || isStartingPosition || isDestination) return;
-        visitedNodes.remove(index);
 
-        if (keydown == 't' || keydown == 'T') toggle();
-        else if(keydown == 'w' || keydown == 'W') {
+        if (keydown == 't' || keydown == 'T') {
+            visitedNodes.remove(index);
+            toggle();
+        }
+        else if(keydown == 'w') {
+            if(!isWeighted) return;
             wallNodes.remove(index);
             obstacles.add(index);
         }
+        else if (keydown == 'W') {
+            if(!isWeighted) return;
+            wallNodes.remove(index);
+            isObstacle ? obstacles.remove(index) : obstacles.add(index);
+        }
         else {
+            visitedNodes.remove(index);
             obstacles.remove(index);
             wallNodes.add(index);
         }
@@ -105,9 +117,11 @@
         ${isStartingPosition ? 'start':''} 
         ${isDestination ? 'destination':''} 
         ${isWall ? 'wall':''} 
-        ${isObstacle ? 'obstacle':''} 
+        ${isObstacle && isWeighted ? 'obstacle':''} 
         ${isPath ? 'path':''} 
         ${isVisited ? 'visited':''} 
+        ${ isWeighted && isVisited && isObstacle ? 'visited-obstacle':'' }
+        ${ isWeighted && isPath && isObstacle ? 'path-obstacle':'' }
     `;
 </script>
 
