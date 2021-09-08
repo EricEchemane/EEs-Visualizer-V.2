@@ -24,6 +24,11 @@
 
     onMount(() => {
         fillTracks();
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            const dp = new Dropdown(dropdown);
+            dp.element.addEventListener('change', selectAlgo);
+        });
     });
 
     $: xsize = $PathFinding.xsize;
@@ -32,7 +37,22 @@
     let paused = true;
     let playing = false;
     let disableAll = false;
+    let algoPicker;
 
+    $: if(algoPicker){
+        if($PathFinding.currentAlgo == 'none') {
+            algoPicker.textContent = 'Choose an algorithm';
+        }
+    }
+
+    const selectAlgo = event => {
+        const value = event.target.value;
+        algorithms.forEach(algo => {
+            if(algo.name == value){
+                PathFinding.update(prev => ({...prev, currentAlgo: algo}));
+            }
+        });
+    }
     const populateFrames = () => {
         if(!$PathFinding.currentAlgo || !$PathFinding.currentAlgo.algo) return;
         const { pathAnimationFrames } = $PathFinding.currentAlgo.algo(
@@ -100,18 +120,33 @@
 
 <!-- choose algrotihm -->
 <div class="not-btn">
-    <select 
-        bind:value={$PathFinding.currentAlgo}
-        name="algorithm" 
-        id="algorithm-select" 
-        class="fullWidth" 
-        disabled={playing || disableAll}>
-        <option hidden value="none">Choose Algorithm</option>
-        
-        {#each algorithms as algo (algo)}
-            <option value={algo}> {algo.name} </option>
-        {/each}
-    </select>
+    <div class="dropdown fullWidth" data-type="object">
+        <button 
+            bind:this={algoPicker}
+            class="dropdown-toggler" 
+            type="button" 
+            aria-haspopup="true"> 
+            Choose an algorithm
+        </button>
+        <ul class="dropdown-menu" role="listbox" aria-expanded="false">
+            <ul role="group" name="optgroup">
+                <label for="optgroup"> Weighted Algortihms </label>   
+                {#each algorithms as algo (algo)} 
+                    {#if algo.isWeighted}
+                        <li role="option">{algo.name}</li>
+                    {/if}
+                {/each} 
+            </ul>
+            <ul role="group" name="optgroup">
+                <label for="optgroup"> Unweighted Algortihms </label>    
+                {#each algorithms as algo (algo)} 
+                    {#if !algo.isWeighted}
+                        <li role="option" value={algo}>{algo.name}</li>
+                    {/if}
+                {/each} 
+            </ul>
+        </ul>
+    </div>
 </div>
 
 <p style="text-align: center;"> Maze and Obstacles </p>

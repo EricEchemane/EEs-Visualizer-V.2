@@ -591,6 +591,86 @@ a[role="button"][color="accent"]:hover {
     background-color: var(--accent);
 }
 
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+}
+.dropdown-toggler {
+    appearance: none;
+    outline: none;
+    border: none !important;
+    width: 100%;
+    text-align: left;
+    padding: .5rem 2rem .5rem 1rem !important;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.dropdown-toggler::after {
+    content: '';
+    position: absolute;
+    border: 6px solid transparent;
+    border-top-color: inherit;
+    right: 1rem;
+    top: calc(50% + 3px);
+    transform: translateY(-50%);
+}
+.dropdown-toggler.active::after {
+    border-color: transparent;
+    border-bottom-color: inherit;
+    top: calc(50% - 3px);
+}
+
+.dropdown-menu {
+    background-color: var(--surface2);
+    color: inherit;
+    box-shadow: 0 4px 24px 4px rgba(0, 0, 0, 0.4);
+    list-style: none;
+    border-radius: 0 0 .3rem .3rem;
+    width: 100%;
+    max-height: 250px;
+    overflow: auto;
+    scroll-behavior: smooth;
+    position: absolute;
+    z-index: 100;
+    top: calc(100% + .3rem);
+    display: none;
+}
+.dropdown-menu[aria-expanded="true"] {
+    display: block;
+}
+.dropdown-menu ul[role="group"] > label {
+    font-weight: normal;
+    display: block;
+    padding: .75rem 1rem;
+    font-size: 1rem;
+    pointer-events: none !important;
+    cursor: none !important;
+    color: var(--text1);
+}
+.dropdown-menu ul[role="group"] > li {
+    padding-left: 2rem;
+}
+.dropdown-menu li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: .75rem 1rem;
+    font-weight: normal;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: var(--surface3);
+}
+
+.dropdown-menu li:hover {
+    background-color: var(--surface1);
+}
+
 a[role="button"] {
     text-align: center;
 }
@@ -833,3 +913,4 @@ a.activeRoute {
         filter: brightness(1);
     }
 }
+
