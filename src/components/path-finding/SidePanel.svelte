@@ -108,9 +108,20 @@
         disabled={playing || disableAll}>
         <option hidden value="none">Choose Algorithm</option>
         
-        {#each algorithms as algo (algo)}
-            <option value={algo}> {algo.name} </option>
-        {/each}
+        <optgroup label="Weighted Algorithms">
+            {#each algorithms as algo (algo)}
+                {#if algo.isWeighted}
+                    <option value={algo}> {algo.name} </option>
+                {/if}
+            {/each}
+        </optgroup>
+        <optgroup label="Unweighted Algorithms">
+            {#each algorithms as algo (algo)}
+                {#if !algo.isWeighted}
+                    <option value={algo}> {algo.name} </option>
+                {/if}
+            {/each}
+        </optgroup>
     </select>
 </div>
 
