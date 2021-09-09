@@ -1,5 +1,10 @@
 <script>
+    import { onMount } from 'svelte';
+    import { ActiveVisualizer } from '../../stores/active-visualizer';
 
+    onMount(() => {
+        ActiveVisualizer.set("");
+    });
 </script>
 <main>
     <header>
@@ -12,19 +17,24 @@
         <div class="floor"></div>
     </section>
 
-    <article>
-        <h1 center> What is this ? </h1>
-        <p center>
+    <article id="about-this-app">
+        <h1> About this App </h1>
+        <p>
             EEs Visualizer is a tool for visualizing Fundamental Algorithms in Sorting, Searching, and Path Finding. This involves comparison between different algorithms and visulization of how each of them works. You can compare the algorithms' speed or how one is better than others. There are cool animations for visualizing algorithms. You can customize each of the visualizers' settings and inputs according to your preferences. Input some data, visualize how it works, and analyze base on the results.
-        </p>
-        <p center>
-            <a href="#tutorials"> Learn more in Tutorials Section. </a>
         </p>
     </article>
 
     <br>
-    <article>
-        <h1 class="title"> Tutorials </h1>
+
+    <article id="sorting-tutorial">
+        <h1> Sorting Visualizer Tutorial </h1>
+        <p>
+            If you want you can go ahead and click on sorting tab. The inputs and controls are pretty straight forward and fun at the same time. Else, you can watch the <a href="#sorting-video"> video below. </a>
+        </p>
+        <h3> What is Sorting Visualizer ? </h3>
+        <p>
+            Sorting visualizer allows you to compare sorting algorithms by their speed. Watch how each algorithm perform and how they manage to sort the input array. A table is generated after all algorithms are finished.
+        </p>
     </article>
 </main>
 
@@ -36,7 +46,7 @@
         perspective: 17rem;
         perspective-origin: 50% 1rem;
         overflow: hidden;
-        top: -6rem;
+        top: -4rem;
         z-index: -1;
     }
     .floor {
@@ -74,14 +84,22 @@
     }
     article, section {
         margin: 1rem 0;
+        padding: 1rem;
     }
-    article a {
+    a {
         color: dodgerblue;
     }
     article h1 {
         margin: 1rem 0;
     }
-    *[center] {
-        text-align: center;
+    article h3 {
+        margin: 1.5rem 0;
+    }
+    article:target {
+        animation: notice 4s ease;
+    }
+    @keyframes notice {
+        from { background-color: var(--surface3); }
+        to { background-color: inherit; }
     }
 </style>
