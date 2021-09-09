@@ -127,7 +127,7 @@
 </script>
 
 <!-- choose algrotihm -->
-<div class="dropdown" style="width: calc(100% - 1rem); left: .5rem;" bind:this={algoDropdown}>
+<div class="dropdown" style="width: calc(100% - 1rem); left: .5rem; top: .5rem" bind:this={algoDropdown}>
     <button disabled={playing || disableAll} 
             on:click={toggleAlgorithmsDropdown}
             type="submit" 
@@ -158,7 +158,7 @@
     {/if }
 </div>
 
-<p style="text-align: center; margin-top: .5rem;"> Maze and Obstacles </p>
+<p style="text-align: center; margin-top: 1rem;"> Maze and Obstacles </p>
 
 <!-- maze and patterns -->
 <div class="two-btns" >

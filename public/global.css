@@ -836,7 +836,7 @@ a.activeRoute {
 .obstacle {
     background: url(./assets/weight.png) no-repeat;
     background-size: 100%;
-    background-position: -1px center !important;
+    background-position: center !important;
     animation: pop 500ms ease;
 }
 
