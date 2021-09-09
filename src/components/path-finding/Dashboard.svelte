@@ -98,7 +98,9 @@
         </div>
     </div>
 
-    <div class="grid {disableGrid ? 'disable':''}" bind:this={gridContainer}>
+    <div 
+        style="grid-template-columns: repeat({columnSize},{nodeSize}px );"
+        class="grid {disableGrid ? 'disable':''}" bind:this={gridContainer}>
         {#each grid as rows, y (rows)}
             {#each rows as row, x (row)}
                 <Node size={nodeSize} index={(columnSize * y) + x} />
@@ -123,12 +125,10 @@
         gap: 1.5rem;
     }
     .grid {
-        display: flex;
+        display: grid;
         flex-wrap: wrap;
         margin-top: 2rem;
         height: 65vh;
-        gap: 0;
-        border-spacing: 0;
     }
     main {
         padding: 1rem;

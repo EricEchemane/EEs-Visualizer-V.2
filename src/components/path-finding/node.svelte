@@ -50,7 +50,6 @@
     const toggle = event => {
         if(isStartingPosition || isDestination) return;
         if(keydown == 'w' || keydown == 'W') {
-            if(!isWeighted) return;
             wallNodes.remove(index);
             isObstacle ? obstacles.remove(index) : obstacles.add(index);
             populateFrames();
@@ -96,12 +95,10 @@
             toggle();
         }
         else if(keydown == 'w') {
-            if(!isWeighted) return;
             wallNodes.remove(index);
             obstacles.add(index);
         }
         else if (keydown == 'W') {
-            if(!isWeighted) return;
             wallNodes.remove(index);
             isObstacle ? obstacles.remove(index) : obstacles.add(index);
         }
@@ -117,7 +114,7 @@
         ${isStartingPosition ? 'start':''} 
         ${isDestination ? 'destination':''} 
         ${isWall ? 'wall':''} 
-        ${isObstacle && isWeighted ? 'obstacle':''} 
+        ${isObstacle ? 'obstacle':''} 
         ${isPath ? 'path':''} 
         ${isVisited ? 'visited':''} 
         ${ isWeighted && isVisited && isObstacle ? 'visited-obstacle':'' }
@@ -136,6 +133,6 @@
     on:mousedown={() => mouseIsDown = true}
     on:mouseup={() => mouseIsDown = false}
     draggable={isStartingPosition || isDestination}
-    class="node {className}"  
+    class="node {className}"
     style="width: {size}px; height: {size}px">
 </div>

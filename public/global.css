@@ -769,19 +769,21 @@ a.activeRoute {
 
 @keyframes breath {
     0% {
-        transform: scale(1.3);
+        transform: scale(1);
     }
     50% {
-        transform: scale(1.5);
+        transform: scale(1.3);
     }
     100% {
-        transform: scale(1.3);
+        transform: scale(1);
     }
 }
 
 .node {
     border: 1px solid var(--surface4);
+    box-shadow: none;
     position: relative;
+    box-sizing: content-box;
 }
 .destination, .start {
     background-color: var(--text1);
@@ -829,21 +831,23 @@ a.activeRoute {
 }
 .wall {
     background-color: var(--surface4);
-    animation: pop 1s ease;
+    animation: pop 500ms ease;
 }
 .obstacle {
     background: url(./assets/weight.png) no-repeat;
     background-size: 100%;
-    background-position: center;
-    animation: pop 1s ease;
+    background-position: -1px center !important;
+    animation: pop 500ms ease;
 }
 
 .visited {
-    background: radial-gradient(yellow, orange, orange);
+    background: radial-gradient(yellow, orange);
+    /* background-color: orange; */
     border: 1px solid orange;
-    animation: scale 2s ease, pop 2s ease;
-    transition: 100ms ease;
-    will-change: background;
+    border-right: none;
+    animation: visit 1s ease;
+    transition: 200ms ease;
+    will-change: transform, filter;
 }
 
 .path {
@@ -851,32 +855,40 @@ a.activeRoute {
     background-color: var(--brand);
     border: 1px solid var(--brand);
     animation: path 1.5s ease;
-    will-change: background;
 }
 
 .visited-obstacle {
     background: url(./assets/weight.png) no-repeat;
     background-color: orange;
-    border: 1px solid orange;
     background-size: 100%;
     background-position: center;
     animation: pop 1s ease;
 }
 
 .path-obstacle {
+    --bcolor: hsl(var(--brand-hue), 67%, 45%);
     background: url(./assets/weight.png) no-repeat;
-    background-color: var(--brand);
-    border: 1px solid var(--brand);
+    background-color: var(--bcolor);
+    border: 1px solid var(--bcolor);
     background-size: 100%;
     background-position: center;
     animation: path 1.5s ease;
 }
 
-@keyframes scale {
-    from {
-        transform: scale(.3);
+@keyframes visit {
+    0% {
+        filter: brightness(.5);
+        transform: scale(.5);
     }
-    to {
+    50% {
+        filter: brightness(1.3);
+        transform: scale(1.1);
+    }
+    60% {
+        filter: brightness(1.5);
+    }
+    100% {
+        filter: brightness(1);
         transform: scale(1);
     }
 }
@@ -884,27 +896,17 @@ a.activeRoute {
 @keyframes path {
     from {
         background-color: var(--accent);
-        /* border: 1px solid var(--accent); */
     }
     to {
         background-color: var(--brand);
-        /* border: 1px solid var(--brand); */
     }
 }
 @keyframes pop {
-    0% {
-        transform: scale(.3);
+    from {
+        transform: scale(.5);
         filter: brightness(.3);
     }
-    40% {
-        transform: scale(1.1);
-        filter: brightness(1.2);
-    }
-    70% {
-        transform: scale(1.1);
-        filter: brightness(1.3);
-    }
-    100% {
+    to {
         transform: scale(1);
         filter: brightness(1);
     }
