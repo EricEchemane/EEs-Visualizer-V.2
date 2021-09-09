@@ -829,23 +829,21 @@ a.activeRoute {
 }
 .wall {
     background-color: var(--surface4);
-    will-change: transform, brightness;
     animation: pop 1s ease;
 }
 .obstacle {
     background: url(./assets/weight.png) no-repeat;
     background-size: 100%;
     background-position: center;
-    will-change: transform, brightness;
     animation: pop 1s ease;
 }
 
 .visited {
     background: radial-gradient(yellow, orange, orange);
     border: 1px solid orange;
-    will-change: transform, brightness, background;
     animation: scale 2s ease, pop 2s ease;
     transition: 100ms ease;
+    will-change: background;
 }
 
 .path {

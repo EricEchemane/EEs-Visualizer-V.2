@@ -97,6 +97,11 @@
         paused = true;
         playing = false;
         pause();
+        toggleDisableGrid();
+    }
+
+    const toggleDisableGrid = () => {
+        document.getElementById('pfd-disable-grid').click();
     }
 
     const search = () => {
@@ -115,6 +120,7 @@
             $wallNodes, 
             $obstacles,
         )
+        toggleDisableGrid();
         animate(searchAnimationFrames, pathAnimationFrames, stop);
     }
     const toggleDisableAll = () => disableAll = !disableAll;
