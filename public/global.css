@@ -706,7 +706,9 @@ h5,
 h6 {
     color: var(--text1);
 }
-
+p {
+    line-height: 175%;
+}
 /* =================== APP STYLING =========================== */
 .avatar {
     width: 2rem;

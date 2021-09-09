@@ -13,6 +13,8 @@
     import SearchingDashboard from './components/searching/SearchingDashboard.svelte';
     import PathFindingDashboard from './components/path-finding/Dashboard.svelte';
 
+    import MainTutorial from './components/tutorial/main.svelte';
+
     import UserInputFeedback from "./components/user-input-feedback.svelte";
     import { backdrop } from './stores/backdrop';
     import { DataTable as dt } from './stores/data-table';
@@ -47,6 +49,7 @@
             <Route path="sorting"><SortingDashboard /></Route>
             <Route path="searching"><SearchingDashboard /></Route>
             <Route path="path-finding"><PathFindingDashboard /></Route>
+            <Route path="/"><MainTutorial /></Route>
         </Router>
     </main>
 </div>

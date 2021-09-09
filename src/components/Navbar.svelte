@@ -28,7 +28,10 @@
                     Path Finding </a>
             </div>
         </Router>
-        <a href="https://github.com/ericechemane">
+        <a  target="_blank"
+            title="Eric Echemane"
+            name="Eric Echemane"
+            href="https://github.com/ericechemane">
             <img
                 src="./assets/me.png"
                 class="avatar"
