@@ -6,7 +6,7 @@
 <script>
     import { UserInputFeedback } from '../../stores/user-input-feedback';
     import { fillTracks } from "../../modules/slider";
-    import { onMount } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
 
     import { wallNodes } from './stores/walls';
     import { obstacles } from './stores/obstacle';
@@ -16,7 +16,7 @@
     import { PathFinding } from './stores/path-finding';
     import { gridStore } from './stores/grid';
     import { animate, makeBorderWalls, pause, resume } from './animation-logic';
-    import { algorithms } from './algorithms/algorithms';
+    import { algorithms, algorithmsAsObject } from './algorithms/algorithms';
 
     /* Maze and Patterns algorithms */
     import { recursive_division } from './maze-algorithms/recursive-division';
@@ -24,6 +24,11 @@
 
     onMount(() => {
         fillTracks();
+        document.addEventListener('click', handleDropdownClickout);
+    });
+
+    onDestroy(() => {
+        document.removeEventListener('click', handleDropdownClickout);
     });
 
     $: xsize = $PathFinding.xsize;
@@ -32,6 +37,23 @@
     let paused = true;
     let playing = false;
     let disableAll = false;
+    let showDropdown = false;
+    let algoDropdown;
+
+    const handleDropdownClickout = event => {
+        if(!algoDropdown.contains(event.target)) {
+            toggleAlgorithmsDropdown(false);
+        }
+    };
+
+    const toggleAlgorithmsDropdown = (show = null) => {
+        show == null ? showDropdown = !showDropdown : showDropdown = show;
+    };
+
+    const selectAlgorithm = (name) => {
+        toggleAlgorithmsDropdown();
+        PathFinding.update(prev => ({...prev, currentAlgo: algorithmsAsObject[name]}));
+    };
 
     const populateFrames = () => {
         if(!$PathFinding.currentAlgo || !$PathFinding.currentAlgo.algo) return;
@@ -99,38 +121,43 @@
 </script>
 
 <!-- choose algrotihm -->
-<div class="not-btn">
-    <select 
-        bind:value={$PathFinding.currentAlgo}
-        name="algorithm" 
-        id="algorithm-select" 
-        class="fullWidth" 
-        disabled={playing || disableAll}>
-        <option hidden value="none">Choose Algorithm</option>
-        
-        <optgroup label="Weighted Algorithms">
-            {#each algorithms as algo (algo)}
+<div class="dropdown" style="width: calc(100% - 1rem); left: .5rem;" bind:this={algoDropdown}>
+    <button disabled={playing || disableAll} 
+            on:click={toggleAlgorithmsDropdown}
+            type="submit" 
+            class="dropdown-toggler"> 
+            { $PathFinding.currentAlgo == 'none'
+              ? 'Choose an algorithm'
+              : $PathFinding.currentAlgo.name }
+    </button>
+    {#if showDropdown}
+        <ul class="dropdown-menu">
+            <ul role="group" name="option group">
+                <label for="option group"> Weighted Algorithm </label>
+                {#each algorithms as algo (algo)}
                 {#if algo.isWeighted}
-                    <option value={algo}> {algo.name} </option>
+                <li role="option" on:click={() => selectAlgorithm(algo.name)} > {algo.name} </li>
                 {/if}
-            {/each}
-        </optgroup>
-        <optgroup label="Unweighted Algorithms">
-            {#each algorithms as algo (algo)}
+                {/each}
+            </ul>
+            <ul role="group" name="option group">
+                <label for="option group"> Unweighted Algorithm </label>
+                {#each algorithms as algo (algo)}
                 {#if !algo.isWeighted}
-                    <option value={algo}> {algo.name} </option>
+                <li role="option" on:click={() => selectAlgorithm(algo.name)} > {algo.name} </li>
                 {/if}
-            {/each}
-        </optgroup>
-    </select>
+                {/each}
+            </ul>
+        </ul>
+    {/if }
 </div>
 
-<p style="text-align: center;"> Maze and Obstacles </p>
+<p style="text-align: center; margin-top: .5rem;"> Maze and Obstacles </p>
 
 <!-- maze and patterns -->
 <div class="two-btns" >
     <button 
-        class="small"
+    class="small"
         disabled={playing || disableAll} 
         title="Recursive Division" 
         on:click={() => {
@@ -278,9 +305,6 @@
     }
     .not-btn:hover {
         background-color: var(--surface3);
-    }
-    .fullWidth {
-        width: 100% !important;
     }
     .two-btns {
         padding: 0.7rem 0.5rem;

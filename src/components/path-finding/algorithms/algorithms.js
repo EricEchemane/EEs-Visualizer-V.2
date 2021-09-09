@@ -26,3 +26,21 @@ export const algorithms = [
         isWeighted: false
     },
 ];
+
+export const algorithmsAsObject = {
+    "Dijkstra's Algorithm": {
+        name: "Dijkstra's Algorithm",
+        algo: dijkstra,
+        isWeighted: true,
+    },
+    "Breadth Search First": {
+        name: "Breadth Search First",
+        algo: breadthFirstSearch,
+        isWeighted: false
+    },
+    "Depth Search First": {
+        name: "Depth Search First",
+        algo: depthFirstSearch,
+        isWeighted: false
+    }
+}

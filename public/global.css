@@ -666,6 +666,7 @@ a[role="button"][color="accent"]:hover {
 
 .dropdown-menu li:hover {
     background-color: var(--surface1);
+    color: var(--brand);
 }
 
 a[role="button"] {
