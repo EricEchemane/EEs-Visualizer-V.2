@@ -101,6 +101,10 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
 input[type="text"]:focus,
 input[type="number"]:focus {
     -webkit-box-shadow: 0 0 0 2px var(--brand);
@@ -490,6 +494,9 @@ option {
 
 button,
 a[role="button"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     width: auto;
     padding: 0.5rem !important;
     outline: none;
@@ -511,8 +518,7 @@ a[role="button"] {
     );
     background: linear-gradient(to bottom, var(--surface3), var(--surface2));
     cursor: pointer;
-    -webkit-box-shadow: 0 0 0 0.5px var(--text3);
-    box-shadow: 0 0 0 0.5px var(--text3);
+    border: 1px solid var(--surface4);
 }
 
 button:hover,

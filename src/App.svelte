@@ -3,7 +3,7 @@
 </script>
 <script>
     import Navbar from "./components/Navbar.svelte";
-    import Tutorial from "./components//Tutorial.svelte";
+    import Tutorial from "./components/tutorial/Tutorial.svelte";
 
     import SortingSidePanel from "./components/sorting/SidePanel.svelte";
     import SortingDashboard from "./components/sorting/Dashboard.svelte";
