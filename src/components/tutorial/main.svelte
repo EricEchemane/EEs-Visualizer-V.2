@@ -38,7 +38,7 @@
         </p>
         <video controls id="sorting-video" muted>
             <source src="./assets/videos/sorting.mp4" type="video/mp4">
-                <track kind="captions" >
+                <track kind="captions">
         </video>
     </article>
 
@@ -54,7 +54,7 @@
         </p>
         <video controls id="searching-video" muted>
             <source src="./assets/videos/searching.mp4" type="video/mp4">
-                <track kind="captions" >
+                <track kind="captions">
         </video>
     </article>
 
@@ -64,8 +64,8 @@
             Unlike the first two visualizers, there are some important controls you need to learn. I recommend watching the <a href="#path-finding-video"> video below. </a>
         </p>
         <video controls id="searching-video" muted>
-            <source src="./assets/videos/path-finding.mp4" type="video/mp4">
-                <track kind="captions" >
+            <source src="./assets/videos/path-finding-edited.mp4" type="video/mp4">
+                <track kind="captions">
         </video>
     </article>
 
@@ -160,7 +160,7 @@
             font-size: 2rem;
         }
         article, section {
-            padding: 0;
+            padding: 1rem 0;
         }
         article video {
             width: 100%;

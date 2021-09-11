@@ -14,7 +14,7 @@
 
         <br>
 
-        <p> Email me <a target="_blank" href="mailto:eechemane29@gmail.com"> here </a> for any contribution. </p>
+        <p> Email me <a href="mailto:eechemane29@gmail.com?subject:EEs-Visualizer-V.2%For%Contribution"> here </a> for any contribution. </p>
     </nav>
 </aside>
 
