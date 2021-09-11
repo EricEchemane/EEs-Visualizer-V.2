@@ -35,18 +35,24 @@
         <p>
             Sorting visualizer allows you to compare sorting algorithms by their speed. Watch how each algorithm perform and how they manage to sort the input array. A table is generated after all algorithms are finished.
         </p>
+        <video controls id="sorting-video" muted>
+            <source src="./assets/videos/sorting.mp4" type="video/mp4">
+                <track kind="captions" >
+        </video>
     </article>
 </main>
 
 <style>
 
     #landing-page-animation {
-        position: relative;
-        height: 20rem;
+        position: absolute;
+        width: calc(100% + 1rem);
+        height: 22rem;
         perspective: 17rem;
         perspective-origin: 50% 1rem;
         overflow: hidden;
-        top: -4rem;
+        top: -5rem;
+        left: -1rem;
         z-index: -1;
     }
     .floor {
@@ -58,7 +64,7 @@
         background-size: 5rem 5rem;
         transform: rotateX(80deg);
         animation: rotateScene 25s infinite linear;
-        box-shadow: inset 0 0 50px 50px var(--surface1);
+        box-shadow: inset 0 0 50px 85px var(--surface1);
     }
 
     @keyframes rotateScene {
@@ -67,33 +73,34 @@
     }
     
 
-    main {
-        padding: 1rem;
-    }
     header {
         margin-bottom: 2rem;
+        padding: 1rem;
     }
     .title{
-        font-size: 2rem;
+        font-size: 3rem;
         margin: .5rem 0;
-        text-align: center;
     }
     .sub-title {
         color: var(--text2);
-        text-align: center;
     }
     article, section {
-        margin: 1rem 0;
         padding: 1rem;
     }
     a {
         color: dodgerblue;
     }
     article h1 {
-        margin: 1rem 0;
+        margin: 1rem 0 .5rem 0;
     }
     article h3 {
-        margin: 1.5rem 0;
+        margin: 1rem 0 .5rem 0;
+        color: var(--text2);
+    }
+    article video {
+        width: 100%;
+        display: block;
+        margin: 2rem auto;
     }
     article:target {
         animation: notice 4s ease;
@@ -101,5 +108,27 @@
     @keyframes notice {
         from { background-color: var(--surface3); }
         to { background-color: inherit; }
+    }
+    @keyframes noticeText {
+        to { color: var(--brand); }
+    }
+    @media (max-width: 900px) {
+        header * {
+            text-align: center;
+        }
+        article:target {
+            animation: none;
+        }
+        article:target > h1 {
+            animation: noticeText 4s ease;
+        }
+    }
+    @media (max-width: 400px) {
+        .title {
+            font-size: 2rem;
+        }
+        article, section {
+            padding: 0;
+        }
     }
 </style>
