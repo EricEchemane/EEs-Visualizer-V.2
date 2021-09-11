@@ -7,6 +7,14 @@
         <a href="#sorting-tutorial"> Sorting Visualizer Tutorial </a>
         <a href="#searching-tutorial"> Searching Visualizer Tutorial </a>
         <a href="#path-finding-tutorial"> Path Finding Visualizer Tutorial </a>
+
+        <h3 class="header"> Give A Star </h3>
+        <a target="_blank" href="https://github.com/EricEchemane/EEs-Visualizer-V.2"> Source Code </a>
+        <a target="_blank" href="https://github.com/EricEchemane"> Eric Echemane </a>
+
+        <br>
+
+        <p> Email me <a target="_blank" href="mailto:eechemane29@gmail.com"> here </a> for any contribution. </p>
     </nav>
 </aside>
 
@@ -24,5 +32,9 @@
     nav a:hover {
         text-decoration: none;
         color: var(--brand);
+    }
+    p a {
+        display: inline;
+        color: dodgerblue;
     }
 </style>
