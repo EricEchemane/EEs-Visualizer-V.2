@@ -261,14 +261,13 @@
         on:input={
         () => UserInputFeedback.set(true, `Animation Speed: ${$PathFinding.speed}`)}
         on:change={hideUserInputFeedback}
-        on:blur={hideUserInputFeedback}
         bind:value={$PathFinding.speed}
         disabled={playing || disableAll}
         id="path-finding-speed"
         color="primary"
         min="1"
         max="10"
-        step="0.5"
+        step="1"
         role="slider"
         type="range">
 </div>

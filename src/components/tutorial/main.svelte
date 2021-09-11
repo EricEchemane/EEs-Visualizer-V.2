@@ -57,6 +57,21 @@
                 <track kind="captions" >
         </video>
     </article>
+
+    <article id="path-finding-tutorial">
+        <h1> Path Finding Visualizer Tutorial </h1>
+        <p>
+            Unlike the first two visualizers, there are some important controls you need to learn. I recommend watching the <a href="#path-finding-video"> video below. </a>
+        </p>
+        <video controls id="searching-video" muted>
+            <source src="./assets/videos/path-finding.mp4" type="video/mp4">
+                <track kind="captions" >
+        </video>
+    </article>
+
+    <article>
+        <h1 class="title" style="text-align: center;"> Happy Visualizing! </h1>
+    </article>
 </main>
 
 <style>
@@ -146,6 +161,11 @@
         }
         article, section {
             padding: 0;
+        }
+        article video {
+            width: 100%;
+            display: block;
+            margin: 2rem auto 3rem auto;
         }
     }
 </style>
