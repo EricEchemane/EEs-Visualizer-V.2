@@ -5,7 +5,7 @@
         
         <h3 class="header"> Tutorials </h3>
         <a href="#sorting-tutorial"> Sorting Visualizer Tutorial </a>
-        <a href="#-searching-tutorial"> Searching Visualizer Tutorial </a>
+        <a href="#searching-tutorial"> Searching Visualizer Tutorial </a>
         <a href="#path-finding-tutorial"> Path Finding Visualizer Tutorial </a>
     </nav>
 </aside>

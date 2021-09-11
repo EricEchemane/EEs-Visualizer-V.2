@@ -31,12 +31,29 @@
         <p>
             If you want you can go ahead and click on sorting tab. The inputs and controls are pretty straight forward and fun at the same time. Else, you can watch the <a href="#sorting-video"> video below. </a>
         </p>
+
         <h3> What is Sorting Visualizer ? </h3>
         <p>
             Sorting visualizer allows you to compare sorting algorithms by their speed. Watch how each algorithm perform and how they manage to sort the input array. A table is generated after all algorithms are finished.
         </p>
         <video controls id="sorting-video" muted>
             <source src="./assets/videos/sorting.mp4" type="video/mp4">
+                <track kind="captions" >
+        </video>
+    </article>
+
+    <article id="searching-tutorial">
+        <h1> Searching Visualizer Tutorial </h1>
+        <p>
+            Just like sorting visualizer the inputs and controls are pretty straight forward and fun. You can go ahead and try it now or you can watch the <a href="#searching-video"> video below. </a>
+        </p>
+
+        <h3> What is Searching Visualizer ? </h3>
+        <p>
+            Searching visualizer allows you to compare and analyize searching algorithms. Which one is faster? On what kind of situation should you use each of the algortihm? You'll find answers to these questions through this visualizer. Each algorithm will tell you how many operations or steps it took before it finds the search input or, if it didn't find the input, how much operations are done before completing the search. You'all understand their differences.
+        </p>
+        <video controls id="searching-video" muted>
+            <source src="./assets/videos/searching.mp4" type="video/mp4">
                 <track kind="captions" >
         </video>
     </article>
@@ -123,7 +140,7 @@
             animation: noticeText 4s ease;
         }
     }
-    @media (max-width: 400px) {
+    @media (max-width: 540px) {
         .title {
             font-size: 2rem;
         }
