@@ -4,9 +4,9 @@ Try the app [here.](https://ees-visualizer.netlify.app)
 
 ## Visualizers
 
-- Sorting Visualizer [here.](https://ees-visualizer.netlify.app/sorting)
-- Searching Visualizer [here.](https://ees-visualizer.netlify.app/searching)
-- Path Finding Visualizer [here.](https://ees-visualizer.netlify.app/path-finding)
+- [Sorting Visualizer](https://ees-visualizer.netlify.app/sorting)
+- [Searching Visualizer](https://ees-visualizer.netlify.app/searching)
+- [Path Finding Visualizer](https://ees-visualizer.netlify.app/path-finding)
 
 
 ### About the App
