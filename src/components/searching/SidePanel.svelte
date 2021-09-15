@@ -2,7 +2,7 @@
     import { onMount } from 'svelte';
     import { Searching } from '../../stores/searching';
     import { UserInputFeedback } from '../../stores/user-input-feedback';
-
+    import { getRandomArbitrary } from '../../modules/numberGenerator';
     import { fillTracks } from "../../modules/slider";
     import { 
         recieveAnimationData, revertColors, 
@@ -12,7 +12,13 @@
 
     onMount(() => {
         fillTracks();
+        getNewSearchItem();
     });
+
+    const getNewSearchItem = () => {
+        const randomSearchItemIndex = getRandomArbitrary(0, arraySize);
+        searchItem = $Searching.array[randomSearchItemIndex];
+    }
 
     const hideUserInputFeedback = (ms = 1000) => setTimeout(UserInputFeedback.hide, ms);
     const handleSizeChange = () => {
@@ -24,6 +30,7 @@
     const generateNewArray = () => {
         Searching.generateNewArray(arraySize);
         SearchResult.set({});
+        getNewSearchItem();
     }
     const togglePause = () => {
         paused = !paused;
@@ -74,7 +81,7 @@
 
 <!-- search for integer -->
 <div class="not-btn" title="Input an interger to search">
-    <label for="search-value">Enter an Integer</label>
+    <label for="search-value">Search an Integer</label>
     <input 
         bind:value={searchItem}
         on:keypress={(event) => {if(event.key == "Enter") search()} }
