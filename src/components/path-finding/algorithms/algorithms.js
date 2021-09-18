@@ -33,12 +33,12 @@ export const algorithmsAsObject = {
         algo: dijkstra,
         isWeighted: true,
     },
-    "Breadth Search First": {
+    "Breadth-first Search": {
         name: "Breadth-first Search",
         algo: breadthFirstSearch,
         isWeighted: false
     },
-    "Depth Search First": {
+    "Depth-first Search": {
         name: "Depth-first Search",
         algo: depthFirstSearch,
         isWeighted: false
