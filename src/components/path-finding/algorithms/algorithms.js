@@ -16,12 +16,12 @@ export const algorithms = [
     //     algo: () => {}
     // },
     {
-        name: "Breadth Search First",
+        name: "Breadth-first Search",
         algo: breadthFirstSearch,
         isWeighted: false
     },
     {
-        name: "Depth Search First",
+        name: "Depth-first Search",
         algo: depthFirstSearch,
         isWeighted: false
     },
