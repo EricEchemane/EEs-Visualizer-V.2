@@ -793,7 +793,9 @@ a.activeRoute {
     box-shadow: none;
     position: relative;
     box-sizing: content-box;
+    will-change: transform, filter, background;
 }
+
 .destination, .start {
     background-color: var(--text1);
     border-radius: 50%;
