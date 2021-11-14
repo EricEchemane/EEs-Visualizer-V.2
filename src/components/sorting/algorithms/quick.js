@@ -12,20 +12,20 @@ export function quickSort(array, _descending) {
     return animationFrames;
 }
 
-function partition_descending(left, right, PIVOT) {    
+function partition_descending(left, right, PIVOT) {
     while (left <= right) {
         /* here we will push the animation comparision
         example: animation.comparision.push([left, right])
         because we are comparing left and right */
-        while (arr[left] > PIVOT){
+        while (arr[left] > PIVOT) {
             animationFrames.push({ type: 'invert-color', value1: left, value2: PIVOT });
             animationFrames.push({ type: 'revert-color', value1: left, value2: PIVOT });
             left++;
         }
-        while (arr[right] < PIVOT){
+        while (arr[right] < PIVOT) {
             animationFrames.push({ type: 'invert-color', value1: right, value2: PIVOT });
             animationFrames.push({ type: 'revert-color', value1: right, value2: PIVOT });
-            right--; 
+            right--;
         }
         if (left <= right) {
             animationFrames.push({ type: 'invert-color', value1: left, value2: right });
@@ -35,7 +35,7 @@ function partition_descending(left, right, PIVOT) {
                 type: 'swap-height',
                 node1: { index: left, height: arr[right] },
                 node2: { index: right, height: arr[left] }
-            })
+            });
 
             // here I'm swapping left and right
             let temporary = arr[left];
@@ -49,7 +49,7 @@ function partition_descending(left, right, PIVOT) {
     return left;
 }
 
-function partition_ascending(left, right, PIVOT) {    
+function partition_ascending(left, right, PIVOT) {
     while (left <= right) {
         // here we will push the animation comparision
         // example: animationFrames.comparision.push([left, right])
@@ -59,13 +59,13 @@ function partition_ascending(left, right, PIVOT) {
             animationFrames.push({ type: 'revert-color', value1: left, value2: PIVOT });
             left++;
         }
-            
+
         while (arr[right] > PIVOT) {
             animationFrames.push({ type: 'invert-color', value1: right, value2: PIVOT });
             animationFrames.push({ type: 'revert-color', value1: right, value2: PIVOT });
-            right--; 
+            right--;
         }
-               
+
         if (left <= right) {
             animationFrames.push({ type: 'invert-color', value1: left, value2: right });
             animationFrames.push({ type: 'revert-color', value1: left, value2: right });
@@ -74,7 +74,7 @@ function partition_ascending(left, right, PIVOT) {
                 type: 'swap-height',
                 node1: { index: left, height: arr[right] },
                 node2: { index: right, height: arr[left] }
-            })
+            });
 
             // here I'm swapping left and aright
             let temporary = arr[left];
