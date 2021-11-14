@@ -3,7 +3,6 @@ let descending;
 let arr;
 
 export function bubbleSort(array, _descending) {
-
     descending = _descending;
     animationFrames = [];
     arr = [...array];
@@ -19,6 +18,9 @@ function sort() {
 
     for (let i = 0; i < size; i++) {
         for (let j = 0; j < size; j++) {
+
+            animationFrames.push({ type: 'invert-color', value1: j });
+            animationFrames.push({ type: 'revert-color', value1: j });
 
             if (descending) {
                 if (arr[i] > arr[j]) {
