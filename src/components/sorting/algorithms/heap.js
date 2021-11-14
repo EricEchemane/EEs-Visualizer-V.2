@@ -15,14 +15,11 @@ export function heapSort(array, _descending) {
 function sort() {
     let halfSize = arr.length / 2;
     halfSize = Math.floor(halfSize);
-    
+
     for (let x = halfSize; x >= 0; x--) {
         heapify(arr.length, x);
     }
-    for (let x = arr.length - 1; x > 0; x--)
-    {
-        animationFrames.push({ type: 'invert-color', value1: x, value2: 0 });
-        animationFrames.push({ type: 'revert-color', value1: x, value2: 0 });
+    for (let x = arr.length - 1; x > 0; x--) {
 
         animationFrames.push({
             type: 'swap-height',
@@ -51,7 +48,7 @@ function heapify(size, root) {
         animationFrames.push({ type: 'revert-color', value1: left, value2: root });
 
         if (!descending) {
-            if (arr[left] > arr[root]) {    
+            if (arr[left] > arr[root]) {
 
                 animationFrames.push({ type: 'invert-color', value1: left, value2: root });
                 animationFrames.push({ type: 'revert-color', value1: left, value2: root });
@@ -65,7 +62,7 @@ function heapify(size, root) {
                 const temp = arr[left];
                 arr[left] = arr[root];
                 arr[root] = temp;
-            }    
+            }
         }
         else {
             if (arr[left] < arr[root]) {
@@ -78,13 +75,13 @@ function heapify(size, root) {
                     node1: { index: left, height: arr[root] },
                     node2: { index: root, height: arr[left] },
                 });
-               
+
                 const temp = arr[left];
                 arr[left] = arr[root];
                 arr[root] = temp;
             }
         }
-            
+
     }
     if (right < size) {
         // comparision
@@ -92,7 +89,7 @@ function heapify(size, root) {
         animationFrames.push({ type: 'revert-color', value1: right, value2: root });
 
         if (!descending) {
-          
+
             if (arr[right] > arr[root]) {
 
                 animationFrames.push({ type: 'invert-color', value1: right, value2: root });
@@ -103,7 +100,7 @@ function heapify(size, root) {
                     node1: { index: right, height: arr[root] },
                     node2: { index: root, height: arr[right] },
                 });
-               
+
                 const temp = arr[right];
                 arr[right] = arr[root];
                 arr[root] = temp;
@@ -120,7 +117,7 @@ function heapify(size, root) {
                     node1: { index: right, height: arr[root] },
                     node2: { index: root, height: arr[right] },
                 });
-                
+
                 const temp = arr[right];
                 arr[right] = arr[root];
                 arr[root] = temp;
