@@ -1,4 +1,9 @@
-import { changeColor, changeHeight, swapHeight } from '../../modules/animation-functions';
+import {
+    changeColor,
+    changeHeight,
+    swapHeight,
+    changeColorOfTwoNodes
+} from '../../modules/animation-functions';
 import { AnimationObserver } from '../../stores/animations-observer';
 
 /* the array containing information about each window color and algo */
@@ -59,6 +64,8 @@ export function animate() {
                     swapHeight(barNodes[node1.index], barNodes[node2.index]);
             }
             else if (type == 'change-height' && node1) changeHeight(v2, node1);
+            else if (type == 'invert-color-of2' && node1) changeColorOfTwoNodes(color, node1, node2, true);
+            else if (type == 'revert-color-of2' && node1) changeColorOfTwoNodes(color, node1, node2, false);
             else {
                 const invert = type == 'invert-color';
                 if (node1) changeColor(color, node1, invert);

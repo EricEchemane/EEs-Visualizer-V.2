@@ -17,7 +17,7 @@ function create() {
                 resultSpeed: { total: 0, raw: "00:00:00" }
             },
             {
-                algo: algos[1],
+                algo: algos[6],
                 color: "#ff008c",
                 resultSpeed: { total: 0, raw: "00:00:00" }
             },
