@@ -5,6 +5,7 @@ Try it your self [EEs Visualizer v2.0](https://ees-visualizer.netlify.app)
 ## Visualizers
 
 - [Sorting Visualizer](https://ees-visualizer.netlify.app/sorting)
+[![Sorting Visualizer](./public/sorting_banner.png)](https://ees-visualizer.netlify.app/sorting)
 - [Searching Visualizer](https://ees-visualizer.netlify.app/searching)
 - [Path Finding Visualizer](https://ees-visualizer.netlify.app/path-finding)
 
