@@ -1,7 +1,7 @@
 ![image info](./public/ees_visualizer_banner.png)
-# EEs Visualizer v2.0
 
-Try the app [here.](https://ees-visualizer.netlify.app)
+
+Try it your self[# EEs Visualizer v2.0](https://ees-visualizer.netlify.app)
 
 ## Visualizers
 
