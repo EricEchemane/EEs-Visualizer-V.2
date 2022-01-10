@@ -26,6 +26,8 @@ EEs Visualizer is a tool for visualizing Fundamental Algorithms in Sorting, Sear
 
 ## Local usage
 
+![Local Usage](./public/local_usage.png)
+
 1. Clone this project: ```git clone https://github.com/EricEchemane/EEs-Visualizer-V.2.git```
 2. Install dependencies: ```cd ./EEs Visualizer v2.0 && npm install```
 3. Run locally: ```npm run dev```
