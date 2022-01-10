@@ -2,6 +2,8 @@
 
 #### An interactive visualization tool for fundamental algorithms in sorting, searching and path-finding.
 
+https://img.shields.io/github/last-commit/ericechemane/EEs-Visualizer-V.2?style=plastic
+
 Try it your self [EEs Visualizer v2.0](https://ees-visualizer.netlify.app)
 
 ## Visualizers
